@@ -14,7 +14,16 @@
         'sale_management',
         'sale_order_line_product_image',
     ],
-    'data': [],
+    'data': [
+        # data
+        'data/product_form_data.xml',
+        # security
+        'security/ir.model.access.csv',
+        # views
+        'views/product_form_view.xml',
+        'views/product_template_view.xml',
+        'views/ir_ui_menu.xml',
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,
