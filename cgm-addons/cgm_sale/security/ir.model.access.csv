@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_collection_all,cgm_sale.access_product_collection all,cgm_sale.model_product_collection,,1,0,0,0
+access_product_collection_user,cgm_sale.access_product_collection user,cgm_sale.model_product_collection,base.group_user,1,1,1,0
+access_product_collection_admin,cgm_sale.access_product_collection admin,cgm_sale.model_product_collection,base.group_system,1,1,1,1

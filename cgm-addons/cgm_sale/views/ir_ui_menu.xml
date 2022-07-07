@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <menuitem id="product_collection_menu"
+            name="Collections"
+            action="cgm_sale.product_collection_action"
+            parent="sale.prod_config_main"
+            sequence="2"/>
+</odoo>
