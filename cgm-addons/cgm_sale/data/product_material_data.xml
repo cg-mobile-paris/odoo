@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data noupdate="1">
+    <record id="pc_tpu" model="product.material">
+      <field name="name">PC/TPU</field>
+    </record>
+
+    <record id="leather" model="product.material">
+      <field name="name">Leather</field>
+    </record>
+
+    <record id="silicon" model="product.material">
+      <field name="name">Silicon</field>
+    </record>
+  </data>
+</odoo>

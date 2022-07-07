@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <menuitem name="Materials"
+            id="product_material_menu"
+            parent="sale.prod_config_main"
+            action="cgm_sale.product_material_action"
+            sequence="2"/>
+</odoo>
