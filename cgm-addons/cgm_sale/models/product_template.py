@@ -7,3 +7,4 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     form_id = fields.Many2one('product.form', 'Product Form')
+    material_id = fields.Many2one('product.material', 'Product Material')
