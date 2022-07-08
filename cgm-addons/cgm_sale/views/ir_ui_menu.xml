@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
   <menuitem id="product_form_menu"
-            name="Forms"
+            name="Product Forms"
             parent="sale.prod_config_main"
-            sequence="1"
-            action="cgm_sale.product_form_action"/>
+            sequence="10"
+            action="product_form_action"/>
+            
 </odoo>
