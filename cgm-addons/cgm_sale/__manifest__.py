@@ -16,12 +16,14 @@
     ],
     'data': [
         # data
+        'data/product_form_data.xml',
         'data/product_material_data.xml',
         # security
         'security/ir.model.access.csv',
         # views
-        'views/product_material_view.xml',
-        'views/product_template_view.xml',
+        'views/product_form_views.xml',
+        'views/product_material_views.xml',
+        'views/product_template_views.xml',
         'views/ir_ui_menu.xml',
     ],
     'application': False,

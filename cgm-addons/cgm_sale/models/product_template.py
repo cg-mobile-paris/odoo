@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+
 from odoo import models, fields
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    material_id = fields.Many2one('product.material', 'Material')
+    form_id = fields.Many2one('product.form', 'Product Form')
+    material_id = fields.Many2one('product.material', 'Product Material')
