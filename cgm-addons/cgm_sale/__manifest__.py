@@ -20,8 +20,8 @@
         # security
         'security/ir.model.access.csv',
         # views
-        'views/product_form_view.xml',
-        'views/product_template_view.xml',
+        'views/product_form_views.xml',
+        'views/product_template_views.xml',
         'views/ir_ui_menu.xml',
     ],
     'application': False,
