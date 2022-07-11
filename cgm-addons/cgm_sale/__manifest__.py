@@ -20,6 +20,7 @@
         'data/product_material_data.xml',
         'data/product_licence_data.xml',
         'data/product_category_data.xml',
+        'data/product_device_data.xml',
         # security
         'security/ir.model.access.csv',
         # views
@@ -29,6 +30,7 @@
         'views/product_collection_views.xml',
         'views/product_template_views.xml',
         'views/product_category_views.xml',
+        'views/product_device_views.xml',
         'views/ir_ui_menu.xml',
     ],
     'application': False,
