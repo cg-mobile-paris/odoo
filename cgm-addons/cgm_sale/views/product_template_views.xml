@@ -26,6 +26,12 @@
                 <field name="licence_id"/>
                 <field name="collection_id"/>
             </field>
+            <field name="categ_id" position="attributes">
+                <attribute name="string">Product Family</attribute>
+            </field>
+            <filter name="categ_id" position="attributes">
+                <attribute name="string">Product Family</attribute>
+            </filter>
             <xpath expr="//group" position="inside">
                 <filter string="Product Form" name="filter_product_form" context="{'group_by': 'form_id'}"/>
                 <filter string="Product Material" name="filter_product_material" context="{'group_by': 'material_id'}"/>

@@ -26,5 +26,11 @@
                   parent="sale.prod_config_main"
                   sequence="40"/>
 
+        <menuitem name="Product Families"
+                  id="product_category_menu"
+                  parent="sale.prod_config_main"
+                  action="product.product_category_action_form"
+                  sequence="50"/>
+
     </data>
 </odoo>
