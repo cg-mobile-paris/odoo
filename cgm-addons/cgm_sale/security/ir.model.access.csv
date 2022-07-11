@@ -12,6 +12,6 @@ access_product_licence_all,access_product_licence all,model_product_licence,,1,0
 access_product_licence_user,access_product_licence user,model_product_licence,base.group_user,1,1,1,0
 access_product_licence_admin,access_product_licence admin,model_product_licence,base.group_system,1,1,1,1
 
-access_product_collection_all,access_product_collection all,cgm_sale.model_product_collection,,1,0,0,0
-access_product_collection_user,access_product_collection user,cgm_sale.model_product_collection,base.group_user,1,1,1,0
-access_product_collection_admin,access_product_collection admin,cgm_sale.model_product_collection,base.group_system,1,1,1,1
+access_product_collection_all,access_product_collection all,model_product_collection,,1,0,0,0
+access_product_collection_user,access_product_collection user,model_product_collection,base.group_user,1,1,1,0
+access_product_collection_admin,access_product_collection admin,model_product_collection,base.group_system,1,1,1,1
