@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <data noupdate="0">
+    <data noupdate="0">
 
-    <menuitem id="product_form_menu"
-              name="Product Forms"
-              parent="sale.prod_config_main"
-              sequence="10"
-              action="product_form_action"/>
+        <menuitem id="product_form_menu"
+                  name="Product Forms"
+                  parent="sale.prod_config_main"
+                  sequence="10"
+                  action="product_form_action"/>
 
-    <menuitem name="Product Materials"
-              id="product_material_menu"
-              parent="sale.prod_config_main"
-              action="product_material_action"
-              sequence="20"/>
+        <menuitem name="Product Materials"
+                  id="product_material_menu"
+                  parent="sale.prod_config_main"
+                  action="product_material_action"
+                  sequence="20"/>
 
         <menuitem name="Product Licences"
                   id="product_licence_menu"
@@ -25,12 +25,12 @@
                   action="product_collection_action"
                   parent="sale.prod_config_main"
                   sequence="40"/>
-                  
+
         <menuitem name="Product Families"
-              id="product_category_menu"
-              parent="sale.prod_config_main"
-              action="product.product_category_action_form"
-              sequence="30"/>
+                  id="product_category_menu"
+                  parent="sale.prod_config_main"
+                  action="product.product_category_action_form"
+                  sequence="50"/>
 
     </data>
 </odoo>
