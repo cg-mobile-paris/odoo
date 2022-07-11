@@ -10,3 +10,4 @@ class ProductTemplate(models.Model):
     licence_id = fields.Many2one('product.licence', 'Product Licence')
     material_id = fields.Many2one('product.material', 'Product Material')    
     collection_id = fields.Many2one('product.collection', 'Collection')
+    brand_id = fields.Many2one('product.brand', 'Brand')

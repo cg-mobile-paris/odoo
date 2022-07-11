@@ -32,5 +32,11 @@
                   action="product.product_category_action_form"
                   sequence="50"/>
 
+        <menuitem name="Product Brands"
+                  id="product_brand_menu"
+                  parent="sale.prod_config_main"
+                  action="product_brand_action"
+                  sequence="60"/>
+
     </data>
 </odoo>

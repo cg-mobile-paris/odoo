@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="product_form_form_view" model="ir.ui.view">
-        <field name="name">product.form.form.view</field>
-        <field name="model">product.form</field>
+    <record id="product_brand_form_view" model="ir.ui.view">
+        <field name="name">product.brand.form.view</field>
+        <field name="model">product.brand</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Product Form">
+            <form string="Product Brand">
                 <sheet>
                     <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                     <field name="active" invisible="1"/>
@@ -28,12 +27,12 @@
         </field>
     </record>
 
-    <record id="product_form_tree_view" model="ir.ui.view">
-        <field name="name">product.form.tree.view</field>
-        <field name="model">product.form</field>
+    <record id="product_brand_tree_view" model="ir.ui.view">
+        <field name="name">product.brand.tree.view</field>
+        <field name="model">product.brand</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Product Forms">
+            <tree string="Product Brands">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="notes"/>
@@ -41,23 +40,22 @@
         </field>
     </record>
 
-    <record id="product_form_search_view" model="ir.ui.view">
-        <field name="name">product.form.search.view</field>
-        <field name="model">product.form</field>
+    <record id="product_brand_search_view" model="ir.ui.view">
+        <field name="name">product.brand.search.view</field>
+        <field name="model">product.brand</field>
         <field name="type">search</field>
         <field name="arch" type="xml">
-            <search string="Product Forms">
+            <search string="Product Brands">
                 <field name="name"/>
                 <field name="notes"/>
             </search>
         </field>
     </record>
 
-    <record id="product_form_action" model="ir.actions.act_window">
-        <field name="name">Product Forms</field>
-        <field name="res_model">product.form</field>
-        <field name="search_view_id" ref="product_form_search_view"/>
+    <record id="product_brand_action" model="ir.actions.act_window">
+        <field name="name">Product Brands</field>
+        <field name="res_model">product.brand</field>
+        <field name="search_view_id" ref="product_brand_search_view"/>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>
