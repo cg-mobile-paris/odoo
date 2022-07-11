@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="product_category_search_view_inh" model="ir.ui.view">
+    <field name="name">product.category.search.view.inh</field>
+    <field name="model">product.category</field>
+    <field name="type">search</field>
+    <field name="inherit_id" ref="product.product_category_search_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="attributes">
+        <attribute name="string">Product Families</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='parent_id']" position="attributes">
+        <attribute name="string">Parent Family</attribute>
+      </xpath>
+    </field>
+  </record>
+</odoo>

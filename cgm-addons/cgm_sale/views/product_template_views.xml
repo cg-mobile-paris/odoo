@@ -1,44 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="product_template_tree_view_inherit" model="ir.ui.view">
-        <field name="name">product.template.tree.view.inherit</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_tree_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//tree" postion="inside">
-                <field name="form_id" optional="hide"/>
-                <field name="material_id" optional="hide"/>
-            </xpath>
-        </field>
-    </record>
+  <record id="product_template_tree_view_inherit" model="ir.ui.view">
+    <field name="name">product.template.tree.view.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_tree_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//tree" postion="inside">
+        <field name="form_id" optional="hide"/>
+        <field name="material_id" optional="hide"/>
+      </xpath>
+    </field>
+  </record>
 
-    <record id="product_template_search_view_inherit" model="ir.ui.view">
-        <field name="name">product.template.search.view.inherit</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_search_view"/>
-        <field name="arch" type="xml">
-            <field name="categ_id" position="after">
-                <field name="form_id"/>
-                <field name="material_id"/>
-            </field>
-            <xpath expr="//group" position="inside">
-                <filter string="Product Form" name="filter_product_form" context="{'group_by': 'form_id'}"/>
-                <filter string="Product Material" name="filter_material" context="{'group_by': 'material_id'}"/>
-            </xpath>
-        </field>
-    </record>
+  <record id="product_template_search_view_inherit" model="ir.ui.view">
+    <field name="name">product.template.search.view.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_search_view"/>
+    <field name="arch" type="xml">
+      <field name="categ_id" position="after">
+        <field name="form_id"/>
+        <field name="material_id"/>
+      </field>
+      <xpath expr="//group" position="inside">
+        <filter string="Product Form" name="filter_product_form" context="{'group_by': 'form_id'}"/>
+        <filter string="Product Material" name="filter_material" context="{'group_by': 'material_id'}"/>
+      </xpath>
 
-    <record id="product_template_form_view_inherit" model="ir.ui.view">
-        <field name="name">product.template.form.view.inherit</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
-        <field name="arch" type="xml">
-            <field name="categ_id" position="after">
-                <field name="form_id"/>
-                <field name="material_id"/>
-            </field>
-        </field>
-    </record>
+      <xpath expr="//field[@name='categ_id']" position="attributes">
+        <attribute name="string">Product Family</attribute>
+      </xpath>
+
+      <xpath expr="//filter[@name='categ_id']" position="attributes">
+        <attribute name="string">Product Family</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="product_template_form_view_inherit" model="ir.ui.view">
+    <field name="name">product.template.form.view.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view"/>
+    <field name="arch" type="xml">
+      <field name="categ_id" position="after">
+        <field name="form_id"/>
+        <field name="material_id"/>
+      </field>
+
+      <xpath expr="//field[@name='categ_id']" position="attributes">
+        <attribute name="string">Family</attribute>
+      </xpath>
+    </field>
+  </record>
 
 </odoo>
