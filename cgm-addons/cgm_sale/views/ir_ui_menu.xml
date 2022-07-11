@@ -14,11 +14,23 @@
               action="product_material_action"
               sequence="20"/>
 
-    <menuitem name="Families"
+        <menuitem name="Product Licences"
+                  id="product_licence_menu"
+                  parent="sale.prod_config_main"
+                  action="product_licence_action"
+                  sequence="30"/>
+
+        <menuitem id="product_collection_menu"
+                  name="Product Collections"
+                  action="product_collection_action"
+                  parent="sale.prod_config_main"
+                  sequence="40"/>
+                  
+        <menuitem name="Product Families"
               id="product_category_menu"
               parent="sale.prod_config_main"
               action="product.product_category_action_form"
               sequence="30"/>
 
-  </data>
+    </data>
 </odoo>

@@ -7,3 +7,11 @@ access_product_form_admin,access_product_form admin,model_product_form,base.grou
 access_product_material_all,access_product_material all,model_product_material,,1,0,0,0
 access_product_material_user,access_product_material user,model_product_material,base.group_user,1,1,1,0
 access_product_material_admin,access_product_material admin,model_product_material,base.group_system,1,1,1,1
+
+access_product_licence_all,access_product_licence all,model_product_licence,,1,0,0,0
+access_product_licence_user,access_product_licence user,model_product_licence,base.group_user,1,1,1,0
+access_product_licence_admin,access_product_licence admin,model_product_licence,base.group_system,1,1,1,1
+
+access_product_collection_all,access_product_collection all,model_product_collection,,1,0,0,0
+access_product_collection_user,access_product_collection user,model_product_collection,base.group_user,1,1,1,0
+access_product_collection_admin,access_product_collection admin,model_product_collection,base.group_system,1,1,1,1
