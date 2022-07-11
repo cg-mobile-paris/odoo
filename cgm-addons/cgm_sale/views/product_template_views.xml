@@ -10,6 +10,7 @@
                 <field name="form_id" optional="hide"/>
                 <field name="material_id" optional="hide"/>
                 <field name="licence_id" optional="hide"/>
+                <field name="collection_id" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -23,11 +24,13 @@
                 <field name="form_id"/>
                 <field name="material_id"/>
                 <field name="licence_id"/>
+                <field name="collection_id"/>
             </field>
             <xpath expr="//group" position="inside">
                 <filter string="Product Form" name="filter_product_form" context="{'group_by': 'form_id'}"/>
                 <filter string="Product Material" name="filter_product_material" context="{'group_by': 'material_id'}"/>
                 <filter string="Product Licence" name="filter_product_licence" context="{'group_by': 'licence_id'}"/>
+                <filter string="Product Collection" name="filter_product_collection" context="{'group_by': 'collection_id'}"/>
             </xpath>
         </field>
     </record>
@@ -41,6 +44,7 @@
                 <field name="form_id"/>
                 <field name="material_id"/>
                 <field name="licence_id"/>
+                <field name="collection_id"/>
             </field>
         </field>
     </record>

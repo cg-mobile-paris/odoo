@@ -25,6 +25,7 @@
         'views/product_form_views.xml',
         'views/product_material_views.xml',
         'views/product_licence_views.xml',
+        'views/product_collection_view.xml',
         'views/product_template_views.xml',
         'views/ir_ui_menu.xml',
     ],
