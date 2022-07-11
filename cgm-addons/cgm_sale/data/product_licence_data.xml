@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-  <data noupdate="1">
-    <record id="guess" model="product.licence">
-      <field name="name">Guess</field>
-    </record>
+    <data noupdate="1">
 
-    <record id="Ferrari" model="product.licence">
-      <field name="name">Ferrari</field>
-    </record>
+        <record id="guess" model="product.licence">
+            <field name="name">Guess</field>
+        </record>
 
-    <record id="karl_lagerfeld" model="product.licence">
-      <field name="name">Karl Lagerfeld</field>
-    </record>
+        <record id="Ferrari" model="product.licence">
+            <field name="name">Ferrari</field>
+        </record>
 
-    <record id="mercedes" model="product.licence">
-      <field name="name">Mercedes</field>
-    </record>
+        <record id="karl_lagerfeld" model="product.licence">
+            <field name="name">Karl Lagerfeld</field>
+        </record>
 
-    <record id="bmw" model="product.licence">
-      <field name="name">BMW</field>
-    </record>
+        <record id="mercedes" model="product.licence">
+            <field name="name">Mercedes</field>
+        </record>
 
-    <record id="us_polo" model="product.licence">
-      <field name="name">US Polo</field>
-    </record>
+        <record id="bmw" model="product.licence">
+            <field name="name">BMW</field>
+        </record>
 
-    <record id="mini" model="product.licence">
-      <field name="name">Mini</field>
-    </record>
-  </data>
+        <record id="us_polo" model="product.licence">
+            <field name="name">US Polo</field>
+        </record>
+
+        <record id="mini" model="product.licence">
+            <field name="name">Mini</field>
+        </record>
+
+    </data>
 </odoo>
