@@ -31,12 +31,18 @@
                   parent="sale.prod_config_main"
                   action="product.product_category_action_form"
                   sequence="50"/>
-
+                  
         <menuitem name="Product Brands"
                   id="product_brand_menu"
                   parent="sale.prod_config_main"
                   action="product_brand_action"
                   sequence="60"/>
+                 
+        <menuitem name="Product Devices"
+                  id="product_device_menu"
+                  parent="sale.prod_config_main"
+                  action="product_device_action"
+                  sequence="70"/>
 
     </data>
 </odoo>

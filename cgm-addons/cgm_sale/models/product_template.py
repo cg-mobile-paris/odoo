@@ -9,5 +9,6 @@ class ProductTemplate(models.Model):
     form_id = fields.Many2one('product.form', 'Product Form')
     licence_id = fields.Many2one('product.licence', 'Product Licence')
     material_id = fields.Many2one('product.material', 'Product Material')    
-    collection_id = fields.Many2one('product.collection', 'Collection')
-    brand_id = fields.Many2one('product.brand', 'Brand')
+    collection_id = fields.Many2one('product.collection', 'Product Collection')
+    device_id = fields.Many2one('product.device', 'Product Device')
+    brand_id = fields.Many2one('product.brand', 'Product Brand')
