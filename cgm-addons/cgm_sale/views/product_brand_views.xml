@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="product_licence_form_view" model="ir.ui.view">
-        <field name="name">product.licence.form.view</field>
-        <field name="model">product.licence</field>
+    <record id="product_brand_form_view" model="ir.ui.view">
+        <field name="name">product.brand.form.view</field>
+        <field name="model">product.brand</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Product Licence">
+            <form string="Product Brand">
                 <sheet>
                     <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
-                    <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}' required="True"/>
                     <field name="active" invisible="1"/>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" required="1" placeholder="Name..."/>
+                            <field name="name" placeholder="Name..."/>
                         </h1>
                     </div>
                     <group>
@@ -29,12 +28,12 @@
         </field>
     </record>
 
-    <record id="product_licence_tree_view" model="ir.ui.view">
-        <field name="name">product.licence.tree.view</field>
-        <field name="model">product.licence</field>
+    <record id="product_brand_tree_view" model="ir.ui.view">
+        <field name="name">product.brand.tree.view</field>
+        <field name="model">product.brand</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Product Licences">
+            <tree string="Product Brands">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="notes"/>
@@ -42,21 +41,21 @@
         </field>
     </record>
 
-    <record id="product_licence_search_view" model="ir.ui.view">
-        <field name="name">product.licence.search.view</field>
-        <field name="model">product.licence</field>
+    <record id="product_brand_search_view" model="ir.ui.view">
+        <field name="name">product.brand.search.view</field>
+        <field name="model">product.brand</field>
         <field name="type">search</field>
         <field name="arch" type="xml">
-            <search>
+            <search string="Product Brands">
                 <field name="name"/>
                 <field name="notes"/>
             </search>
         </field>
     </record>
 
-    <record id="product_licence_action" model="ir.actions.act_window">
-        <field name="name">Product Licences</field>
-        <field name="res_model">product.licence</field>
+    <record id="product_brand_action" model="ir.actions.act_window">
+        <field name="name">Product Brands</field>
+        <field name="res_model">product.brand</field>
         <field name="view_mode">tree,form</field>
     </record>
 
