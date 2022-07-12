@@ -29,36 +29,35 @@
         </field>
     </record>
 
-  <record id="product_licence_tree_view" model="ir.ui.view">
-    <field name="name">product.licence.tree.view</field>
-    <field name="model">product.licence</field>
-    <field name="type">tree</field>
-    <field name="arch" type="xml">
-      <tree string="Product Licences">
-        <field name="sequence" widget="handle"/>
-        <field name="name"/>
-        <field name="notes"/>
-      </tree>
-    </field>
-  </record>
+    <record id="product_licence_tree_view" model="ir.ui.view">
+        <field name="name">product.licence.tree.view</field>
+        <field name="model">product.licence</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Product Licences">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
 
-  <record id="product_licence_search_view" model="ir.ui.view">
-    <field name="name">product.licence.search.view</field>
-    <field name="model">product.licence</field>
-    <field name="type">search</field>
-    <field name="arch" type="xml">
-      <search>
-        <field name="name"/>
-        <field name="notes"/>
-      </search>
-    </field>
-  </record>
+    <record id="product_licence_search_view" model="ir.ui.view">
+        <field name="name">product.licence.search.view</field>
+        <field name="model">product.licence</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="notes"/>
+            </search>
+        </field>
+    </record>
 
-  <record id="product_licence_action" model="ir.actions.act_window">
-    <field name="name">Licences</field>
-    <field name="res_model">product.licence</field>
-    <field name="search_view_id" ref="product_licence_search_view"/>
-    <field name="view_mode">tree,form</field>
-  </record>
->>>>>>> c37e855 ([IMPL] CGM-267 : Product Feature Brand)
+    <record id="product_licence_action" model="ir.actions.act_window">
+        <field name="name">Product Licences</field>
+        <field name="res_model">product.licence</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
 </odoo>
