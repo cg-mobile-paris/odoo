@@ -19,3 +19,7 @@ access_product_collection_admin,access_product_collection admin,model_product_co
 access_product_device_all,access_product_device all,model_product_device,,1,0,0,0
 access_product_device_user,access_product_device user,model_product_device,base.group_user,1,1,1,0
 access_product_device_admin,access_product_device admin,model_product_device,base.group_system,1,1,1,1
+
+access_product_brand_all,access_product_brand all,model_product_brand,,1,0,0,0
+access_product_brand_user,access_product_brand user,model_product_brand,base.group_user,1,1,1,0
+access_product_brand_admin,access_product_brand admin,model_product_brand,base.group_system,1,1,1,1

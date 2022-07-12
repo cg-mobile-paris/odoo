@@ -56,7 +56,6 @@
     <record id="product_form_action" model="ir.actions.act_window">
         <field name="name">Product Forms</field>
         <field name="res_model">product.form</field>
-        <field name="search_view_id" ref="cgm_sale.product_form_search_view"/>
         <field name="view_mode">tree,form</field>
     </record>
 
