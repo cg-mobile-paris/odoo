@@ -10,9 +10,9 @@
                 <field name="form_id" optional="hide"/>
                 <field name="material_id" optional="hide"/>
                 <field name="licence_id" optional="hide"/>
+                <field name="brand_id" optional="hide"/>
                 <field name="collection_id" optional="hide"/>
                 <field name="device_id" optional="hide"/>
-                <field name="brand_id" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -26,9 +26,9 @@
                 <field name="form_id"/>
                 <field name="material_id"/>
                 <field name="licence_id"/>
+                 <field name="brand_id"/>
                 <field name="collection_id"/>
                 <field name="device_id"/>
-                <field name="brand_id"/>
             </field>
             <field name="categ_id" position="attributes">
                 <attribute name="string">Product Family</attribute>
@@ -47,19 +47,46 @@
         </field>
     </record>
 
-    <record id="product_template_form_view_inherit" model="ir.ui.view">
-        <field name="name">product.template.form.view.inherit</field>
+    <record id="product_template_only_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.only.form.view.inherit</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="priority">100</field>
         <field name="arch" type="xml">
-            <field name="categ_id" position="after">
-                <field name="form_id"/>
-                <field name="material_id"/>
-                <field name="licence_id"/>
-                <field name="collection_id"/>
-                <field name="device_id"/>
-                <field name="brand_id"/>
-            </field>
+            <field name="default_code" position="replace"/>
+            <field name="barcode" position="replace"/>
+            <field name="categ_id" position="replace"/>
+
+            <xpath expr="//page[@name='general_information']//group" position="inside">
+                <group>
+                    <field name="default_code"/>
+                    <field name="barcode"/>
+                    <field name="product_type_product"/>
+                    <field name="royalties_margins"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='general_information']//group" position="inside">
+                <group>
+                    <field name="categ_id"/>
+                    <field name="form_id"/>
+                    <field name="material_id"/>
+                    <field name="licence_id"/>
+                    <field name="collection_id"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">SKU Code</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='barcode']" position="attributes">
+                <attribute name="string">Code EAN</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='categ_id']" position="attributes">
+                <attribute name="string">Family</attribute>
+            </xpath>
         </field>
     </record>
 
