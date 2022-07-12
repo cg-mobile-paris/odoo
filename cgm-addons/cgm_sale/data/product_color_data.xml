@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="black" model="product.color">
+            <field name="name">Black</field>
+            <field name="color">#000000</field>
+        </record>
+
+        <record id="blue" model="product.color">
+            <field name="name">Blue</field>
+            <field name="color">#0000FF</field>
+        </record>
+
+        <record id="kaki" model="product.color">
+            <field name="name">Kaki</field>
+            <field name="color">#F0E68C</field>
+        </record>
+
+        <record id="grey" model="product.color">
+            <field name="name">Grey</field>
+            <field name="color">#808080</field>
+        </record>
+    </data>
+</odoo>

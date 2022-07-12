@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from odoo import models, fields
 
 PRODUCT_TYPE = [('export_service', 'Export Service'), ('goods', 'Goods')]
@@ -17,6 +18,7 @@ class ProductTemplate(models.Model):
     product_type_product = fields.Selection(PRODUCT_TYPE, 'Product Type')
     royalties_margins = fields.Selection(ROYALTIES_MARGINS, 'Royalties & Margins')
     upc_code = fields.Char('UPC Code')
+    color_id = fields.Many2one('product.color', 'Product Color')
 
     _sql_constraints = [
         ('unique_default_code', 'UNIQUE (default_code)', 'An item with the same SKU Code already exists in the system.')

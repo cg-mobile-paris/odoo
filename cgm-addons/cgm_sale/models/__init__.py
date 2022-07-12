@@ -7,3 +7,4 @@ from . import product_collection
 from . import product_template
 from . import product_device
 from . import product_brand
+from . import product_color
