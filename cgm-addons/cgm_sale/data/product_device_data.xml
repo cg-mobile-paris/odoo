@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="iphone_13_mini" model="product.device">
+            <field name="name">IPHONE 13 MINI</field>
+        </record>
+
+        <record id="iphone_13" model="product.device">
+            <field name="name">IPHONE 13</field>
+        </record>
+
+        <record id="iphone_13_pro" model="product.device">
+            <field name="name">IPHONE 13 PRO</field>
+        </record>
+
+        <record id="iphone_13_pro_max" model="product.device">
+            <field name="name">IPHONE 13 PRO MAX</field>
+        </record>
+    </data>
+</odoo>

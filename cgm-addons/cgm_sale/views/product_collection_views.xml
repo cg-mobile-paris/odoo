@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="product_collection_form_view" model="ir.ui.view">
+        <field name="name">product.collection.form.view</field>
+        <field name="model">product.collection</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Product Collection">
+                <sheet>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}'/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Name..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <label string="Dates" for="date_start"/>
+                        <div class="o_row">
+                            <field name="date_start" widget="daterange" options='{"related_end_date": "date_end"}'/>
+                            <span>to</span>
+                            <field name="date_end" widget="daterange" options='{"related_start_date": "date_start"}'/>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="notes" placeholder="Write your notes here" nolabel="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter" name="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                    <field name="activity_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_collection_tree_view" model="ir.ui.view">
+        <field name="name">product.collection.tree.view</field>
+        <field name="model">product.collection</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Product Collections">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_collection_search_view" model="ir.ui.view">
+        <field name="name">product.collection.search.view</field>
+        <field name="model">product.collection</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="notes"/>
+                <separator/>
+                <filter string="Date start" name="filter_date_start" date="date_start" default_period="this_year"/>
+                <filter string="Date end" name="filter_date_end" date="date_end" default_period="this_year"/>
+                <separator/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="product_collection_action" model="ir.actions.act_window">
+        <field name="name">Collections</field>
+        <field name="res_model">product.collection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
