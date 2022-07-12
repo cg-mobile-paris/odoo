@@ -13,7 +13,12 @@
         'stock',
         'cgm_base',
     ],
-    'data': [],
+    'data': [
+        # security
+        # data
+        # views
+        'views/stock_account_views.xml',
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,
