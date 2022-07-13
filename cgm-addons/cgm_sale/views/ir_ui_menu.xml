@@ -44,5 +44,11 @@
                   action="product_device_action"
                   sequence="70"/>
 
+        <menuitem name="Product Colors"
+                  id="product_color_menu"
+                  parent="sale.prod_config_main"
+                  action="product_color_action"
+                  sequence="80"/>
+
     </data>
 </odoo>
