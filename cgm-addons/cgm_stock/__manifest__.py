@@ -17,7 +17,6 @@
         # security
         # data
         # views
-        'views/stock_account_views.xml',
     ],
     'application': False,
     'installable': True,
