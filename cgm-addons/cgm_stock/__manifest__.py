@@ -13,7 +13,11 @@
         'stock',
         'cgm_base',
     ],
-    'data': [],
+    'data': [
+        # security
+        # data
+        # views
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,

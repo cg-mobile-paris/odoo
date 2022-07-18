@@ -13,7 +13,11 @@
         'cgm_base',
         'purchase',
     ],
-    'data': [],
+    'data': [
+        # data
+        # security
+        # views
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,
