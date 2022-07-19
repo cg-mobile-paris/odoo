@@ -15,7 +15,7 @@ class ProductTemplate(models.Model):
     collection_id = fields.Many2one('product.collection', 'Product Collection')
     device_id = fields.Many2one('product.device', 'Product Device')
     brand_id = fields.Many2one('product.brand', 'Product Brand')
-    product_type_product = fields.Selection(PRODUCT_TYPE, 'Product Type')
+    product_type_product = fields.Selection(PRODUCT_TYPE, 'CGM Product Type')
     royalties_margins = fields.Selection(ROYALTIES_MARGINS, 'Royalties & Margins')
     upc_code = fields.Char('UPC Code')
     color_id = fields.Many2one('product.color', 'Product Color')
