@@ -28,7 +28,7 @@
                 <attribute name="string">SKU Code</attribute>
             </field>
             <field name="barcode" position="attributes">
-                <attribute name="string">EAN code</attribute>
+                <attribute name="string">EAN Code</attribute>
             </field>
             <field name="categ_id" position="attributes">
                 <attribute name="string">Family</attribute>
