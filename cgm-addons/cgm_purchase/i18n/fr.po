@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-19 08:12+0000\n"
-"PO-Revision-Date: 2022-07-19 08:12+0000\n"
+"POT-Creation-Date: 2022-07-19 14:13+0000\n"
+"PO-Revision-Date: 2022-07-19 14:13+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: cgm_purchase
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.state_of_needs_form_view
-msgid "<span class=\"o_form_label\">State of needs</span>"
-msgstr "<span class=\"o_form_label\">État des besoins</span>"
-
-#. module: cgm_purchase
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.state_of_needs_form_view
-msgid "Cancel"
-msgstr "Annuler"
-
-#. module: cgm_purchase
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.state_of_needs_form_view
-msgid "Confirm"
-msgstr "Confirmer"
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "<span class=\"o_form_label\">Need State</span>"
+msgstr "<span class=\"o_form_label\">État de besoin</span>"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__device_ids
@@ -36,14 +26,26 @@ msgid "Devices"
 msgstr "Devices"
 
 #. module: cgm_purchase
+#: code:addons/cgm_purchase/models/purchase_order.py:0
+#, python-format
+msgid "Indefinite"
+msgstr "Indéfini"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__licence_id
 msgid "Licence"
 msgstr "Licence"
 
 #. module: cgm_purchase
-#: model:ir.model,name:cgm_purchase.model_product_product
-msgid "Product"
-msgstr "Article"
+#: model:ir.actions.act_window,name:cgm_purchase.purchase_order_action
+#: model:ir.ui.menu,name:cgm_purchase.need_state_menu
+msgid "Need States"
+msgstr "États de besoin"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "Print Need State"
+msgstr "Imprimer état de besoin"
 
 #. module: cgm_purchase
 #: model:ir.model,name:cgm_purchase.model_purchase_order
@@ -51,19 +53,12 @@ msgid "Purchase Order"
 msgstr "Commande fournisseur"
 
 #. module: cgm_purchase
-#: model:ir.model,name:cgm_purchase.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Ligne de commande d'achat"
-
-#. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__type__quotation
 msgid "Request for quotation"
 msgstr "Demande de prix"
 
 #. module: cgm_purchase
-#: model:ir.actions.act_window,name:cgm_purchase.state_of_needs_action
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__type__state_of_needs
-#: model:ir.ui.menu,name:cgm_purchase.state_of_needs_menu
 msgid "State of needs"
 msgstr "État des besoins"
 

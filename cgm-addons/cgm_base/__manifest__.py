@@ -9,9 +9,7 @@
     'license': 'AGPL-3',
     'website': 'https://arkeup.com',
     'description': '',
-    'depends': [
-        'web_domain_field',
-    ],
+    'depends': [],
     'data': [],
     'application': False,
     'installable': True,

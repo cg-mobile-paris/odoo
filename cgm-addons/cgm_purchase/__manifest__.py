@@ -10,7 +10,6 @@
     'website': 'https://arkeup.com',
     'description': '',
     'depends': [
-        'cgm_base',
         'purchase',
         'cgm_sale',
     ],
