@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="purchase_order_form_view_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.view.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="priority" eval="1000"/>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <div class="oe_title">
+                    <span class="o_form_label">Need State</span>
+                    <h1>
+                        <field name="priority" widget="priority" class="mr-3"/>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div>
+            </xpath>
+
+            <button name="print_quotation" position="attributes">
+                <attribute name="string">Print Need State</attribute>
+            </button>
+
+            <field name="partner_ref" position="after">
+                <field name="licence_id" attrs="{'readonly': [('state', 'in', ['purchase', 'done', 'cancel'])]}"/>
+                <field name="device_ids" widget="many2many_tags" force_save="1"/>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="purchase_order_tree_view_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.tree.view.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="priority" eval="1000"/>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="/tree" position="attributes">
+                <attribute name="js_class"/>
+            </xpath>
+            <field name="partner_id" position="after">
+                <field name="licence_id"/>
+                <field name="device_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_action" model="ir.actions.act_window">
+        <field name="name">Need States</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type', '=', 'state_of_needs')]</field>
+        <field name="context">{'default_type': 'state_of_needs', 'show_fields': 0}</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'tree', 'view_id': ref('cgm_purchase.purchase_order_tree_view_inherit')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('cgm_purchase.purchase_order_form_view_inherit')})]"/>
+    </record>
+
+</odoo>

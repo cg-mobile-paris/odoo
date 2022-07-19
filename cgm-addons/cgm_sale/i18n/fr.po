@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-13 12:20+0000\n"
-"PO-Revision-Date: 2022-07-13 12:20+0000\n"
+"POT-Creation-Date: 2022-07-19 14:18+0000\n"
+"PO-Revision-Date: 2022-07-19 14:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,8 @@ msgid "Activity Type Icon"
 msgstr "Icône de type d'activité"
 
 #. module: cgm_sale
-#: model:ir.model.constraint,message:cgm_sale.constraint_product_template_unique_default_code
+#: code:addons/cgm_sale/models/product_template.py:0
+#, python-format
 msgid "An item with the same SKU Code already exists in the system."
 msgstr "Attention ! Un article avec le même SKU Code existe déjà dans le système."
 
@@ -109,7 +110,7 @@ msgstr "Compte des pièces jointes"
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_only_form_view_inherit
 msgid "Code EAN"
-msgstr "Code EAN"
+msgstr "EAN Code"
 
 #. module: cgm_sale
 #: model:ir.actions.act_window,name:cgm_sale.product_collection_action
@@ -693,6 +694,11 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_licence__product_ids
+msgid "Products"
+msgstr "Articles"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_product__product_type_product
 #: model:ir.model.fields,field_description:cgm_sale.field_product_template__product_type_product
 msgid "Product Type"
@@ -771,12 +777,6 @@ msgstr ""
 #: model:ir.model.fields,help:cgm_sale.field_product_material__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr "Type d'activité d'exception enregistrée"
-
-#. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_product_product__upc_code
-#: model:ir.model.fields,field_description:cgm_sale.field_product_template__upc_code
-msgid "UPC Code"
-msgstr "UPC Code"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__message_unread

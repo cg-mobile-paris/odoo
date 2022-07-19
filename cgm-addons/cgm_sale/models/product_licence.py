@@ -11,4 +11,4 @@ class ProductLicence(models.Model):
     name = fields.Char('Name', required=True)
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
-
+    product_ids = fields.One2many('product.product', 'licence_id', 'Products', required=False)

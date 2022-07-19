@@ -10,13 +10,16 @@
     'website': 'https://arkeup.com',
     'description': '',
     'depends': [
-        'cgm_base',
         'purchase',
+        'cgm_sale',
+        'purchase_order_line_product_image',
     ],
     'data': [
-        # data
         # security
+        # data
         # views
+        'views/purchase_order_views.xml',
+        'views/ir_ui_menu.xml',
     ],
     'application': False,
     'installable': True,
