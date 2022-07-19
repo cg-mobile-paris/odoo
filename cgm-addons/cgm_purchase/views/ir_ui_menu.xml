@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <menuitem id="need_state_menu"
+                  name="Need States"
+                  sequence="0"
+                  action="purchase_order_action"
+                  parent="purchase.menu_purchase_root"/>
+
+    </data>
+</odoo>
