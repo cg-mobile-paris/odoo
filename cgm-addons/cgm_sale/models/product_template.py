@@ -13,7 +13,7 @@ class ProductTemplate(models.Model):
     collection_id = fields.Many2one('product.collection', 'Product Collection')
     device_id = fields.Many2one('product.device', 'Product Device')
     brand_id = fields.Many2one('product.brand', 'Product Brand')
-    product_type_product = fields.Selection([('export_service', 'Export Service'), ('goods', 'Goods')], 'Product Type')
+    product_type_product = fields.Selection([('export_service', 'Export Service'), ('goods', 'Goods')], 'CGM Product Type')
     royalties_margins = fields.Selection([('yn', 'YN'), ('yy', 'YY'), ('nn', 'NN'), ('ny', 'NY')], 'Royalties & Margins')
     color_id = fields.Many2one('product.color', 'Product Color')
 
