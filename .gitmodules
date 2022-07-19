@@ -1,4 +1,0 @@
-[submodule "OCA/web"]
-	path = OCA/web
-	url = https://github.com/rven/web.git
-	branch = 15.0-mig-web_domain_field
