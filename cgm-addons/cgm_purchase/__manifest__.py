@@ -12,6 +12,7 @@
     'depends': [
         'cgm_base',
         'purchase',
+        'purchase_order_line_product_image',
     ],
     'data': [
         # data
