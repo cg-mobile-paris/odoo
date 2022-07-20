@@ -27,6 +27,12 @@
                 <field name="device_ids" widget="many2many_tags" force_save="1"/>
             </field>
 
+            <field name="price_subtotal" position="after">
+                <field name="qty_available" optional="hide"/>
+                <field name="qty_expected" optional="hide"/>
+                <field name="virtual_available" optional="hide"/>
+            </field>
+
         </field>
     </record>
 
