@@ -20,5 +20,5 @@ class ProductTemplate(models.Model):
     @api.constrains('default_code')
     def _check_unique_default_code(self):
         for record in self:
-            if self.search([('default_code', '=', record.default_code), ('id', '!=', record.id)], limit=1):
+            if self.search([('default_code', '!=', False), ('default_code', '=', record.default_code), ('id', '!=', record.id)], limit=1):
                 raise ValidationError(_('An item with the same SKU Code already exists in the system.'))
