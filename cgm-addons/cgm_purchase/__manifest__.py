@@ -17,6 +17,8 @@
     'data': [
         # security
         # data
+        # report
+        'report/purchase_quotation_templates.xml',
         # views
         'views/purchase_order_views.xml',
         'views/ir_ui_menu.xml',

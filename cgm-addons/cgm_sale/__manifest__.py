@@ -25,6 +25,8 @@
         'data/product_color_data.xml',
         # security
         'security/ir.model.access.csv',
+        # report
+        'report/sale_report_templates.xml',
         # views
         'views/product_form_views.xml',
         'views/product_material_views.xml',
