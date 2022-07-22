@@ -460,6 +460,7 @@ msgstr "Non RY & Oui marge"
 #: model:ir.model.fields,field_description:cgm_sale.field_product_form__name
 #: model:ir.model.fields,field_description:cgm_sale.field_product_licence__name
 #: model:ir.model.fields,field_description:cgm_sale.field_product_material__name
+#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_report_saleorder_document
 msgid "Name"
 msgstr "Nom"
 
