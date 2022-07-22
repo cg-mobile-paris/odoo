@@ -19,6 +19,8 @@
         # data
         # report
         'report/purchase_quotation_templates.xml',
+        'report/purchase_templates.xml',
+        'report/purchase_reports.xml',
         # views
         'views/purchase_order_views.xml',
         'views/ir_ui_menu.xml',
