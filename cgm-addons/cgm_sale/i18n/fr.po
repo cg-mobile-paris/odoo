@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 13:50+0000\n"
-"PO-Revision-Date: 2022-07-25 13:50+0000\n"
+"POT-Creation-Date: 2022-07-25 15:11+0000\n"
+"PO-Revision-Date: 2022-07-25 15:11+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_state
-msgid "<span class=\"o_stat_text\">Quotations / Orders</span>"
-msgstr "<span class=\"o_stat_text\">Devis / Commandes</span>"
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "<span class=\"o_stat_text\">Quotations / Bons de commande</span>"
+msgstr ""
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_collection_form_view
@@ -424,6 +424,11 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__licence_id
+msgid "Licence"
+msgstr "Licence"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__message_main_attachment_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__message_main_attachment_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_color__message_main_attachment_id
@@ -739,16 +744,9 @@ msgid "Quotation Template"
 msgstr "Modèle de devis"
 
 #. module: cgm_sale
-#: code:addons/cgm_sale/models/sale_order_template.py:0
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__order_ids
-#, python-format
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__sale_order_ids
 msgid "Quotations / Orders"
-msgstr "Devis / Commandes"
-
-#. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__order_ids_count
-msgid "Quotations / Orders Count"
-msgstr "Devis / Commandes nombres"
+msgstr "Devis / Bons de commande"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__activity_user_id
@@ -786,6 +784,16 @@ msgid "SMS Delivery error"
 msgstr "Erreur d'envoi SMS"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__sale_order_count
+msgid "Sale Order Count"
+msgstr "Nombre de devis/bons de commande"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__sale_order_template
+msgid "Sale Order Template"
+msgstr "Modèle de devis"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__sequence
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__sequence
 #: model:ir.model.fields,field_description:cgm_sale.field_product_color__sequence
@@ -798,7 +806,7 @@ msgstr "Séquence"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__state
-msgid "Status"
+msgid "State"
 msgstr "Statut"
 
 #. module: cgm_sale
@@ -821,15 +829,15 @@ msgstr ""
 "Planifiée : activités futures"
 
 #. module: cgm_sale
-#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__state
-msgid "Stock state"
-msgstr "État des stocks"
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__stock_state
+msgid "Stock State"
+msgstr "État de stock"
 
 #. module: cgm_sale
 #: model:ir.actions.act_window,name:cgm_sale.stock_state_action
 #: model:ir.ui.menu,name:cgm_sale.stock_state_menu
-msgid "Stock states"
-msgstr "États des stocks"
+msgid "Stock States"
+msgstr "États de stock"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type
@@ -910,8 +918,3 @@ msgstr "Oui RY & Non Marge"
 #: model:ir.model.fields.selection,name:cgm_sale.selection__product_template__royalties_margins__yy
 msgid "YY"
 msgstr "Oui RY & Oui Marge"
-
-#. module: cgm_sale
-#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__template
-msgid "quotation template"
-msgstr "Modèle de devis"

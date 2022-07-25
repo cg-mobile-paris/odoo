@@ -2,34 +2,31 @@
 
 from odoo import models, fields, api, _
 
-TYPE = [('template', 'quotation template'), ('state', 'Stock state')]
-STATE = [('draft', 'Draft'), ('progress', 'In progress'), ('done', 'Done')]
-
 
 class SaleOrderTemplate(models.Model):
     _inherit = 'sale.order.template'
 
-    licence_id = fields.Many2one('product.licence', 'Licence')
-    type = fields.Selection(TYPE, 'Type', default='template')
-    partner_ids = fields.Many2many('res.partner', 'customer_n_template', 'customer', 'template', 'Customers')
-    state = fields.Selection(STATE, 'Status', default='draft')
-    order_ids = fields.One2many('sale.order', 'sale_order_template_id', 'Quotations / Orders')
-    order_ids_count = fields.Integer('Quotations / Orders Count', compute='_compute_order_ids')
+    licence_id = fields.Many2one('product.licence', 'Licence', index=True)
+    type = fields.Selection([('sale_order_template', 'Sale Order Template'), ('stock_state', 'Stock State')], 'Type',
+                            default='sale_order_template')
+    partner_ids = fields.Many2many('res.partner', 'sale_order_template_res_partner_rel', 'template_id', 'partner_id', 'Customers')
+    state = fields.Selection([('draft', 'Draft'), ('progress', 'In progress'), ('done', 'Done')], 'State', default='draft')
+    sale_order_ids = fields.One2many('sale.order', 'sale_order_template_id', 'Quotations / Orders')
+    sale_order_count = fields.Integer('Sale Order Count', compute='_compute_sale_order_count', store=True)
 
-    @api.depends('order_ids')
-    def _compute_order_ids(self):
-        for rec in self:
-            rec.order_ids_count = len(rec.order_ids)
+    @api.depends('sale_order_ids')
+    def _compute_sale_order_count(self):
+        for record in self:
+            record.sale_order_count = len(record.sale_order_ids)
 
-    def action_view_orders_n_quotations(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': _('Quotations / Orders'),
-            'res_model': 'sale.order',
-            'view_type': 'list',
-            'view_mode': 'list',
-            'views': [[self.env.ref('sale.view_order_tree').id, 'list'],
-                      [False, 'form']],
-            'domain': [('id', 'in', self.order_ids.ids)],
-            'context': {'default_sale_order_template_id': self.id}
-        }
+    def action_view_sale_orders(self):
+        self.ensure_one()
+        action = self.env.ref('sale.action_quotations_with_onboarding', raise_if_not_found=False)
+        if not action:
+            return False
+        action = action.read()[0]
+        action.update({
+            'domain': [('id', 'in', self.sale_order_ids.ids)],
+            'context': {'default_sale_order_template_id': self.id, 'search_default_my_quotation': 0}
+        })
+        return action

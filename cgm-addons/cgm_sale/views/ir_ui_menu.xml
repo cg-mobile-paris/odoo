@@ -50,7 +50,7 @@
                   action="product_color_action"
                   sequence="80"/>
 
-        <menuitem name="Stock states"
+        <menuitem name="Stock States"
                   id="stock_state_menu"
                   parent="sale.sale_menu_root"
                   action="stock_state_action"
