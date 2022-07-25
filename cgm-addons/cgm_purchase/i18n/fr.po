@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-19 14:13+0000\n"
-"PO-Revision-Date: 2022-07-19 14:13+0000\n"
+"POT-Creation-Date: 2022-07-21 13:18+0000\n"
+"PO-Revision-Date: 2022-07-21 13:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,69 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: cgm_purchase
+#: model:ir.actions.report,print_report_name:cgm_purchase.report_purchase_quotation
+msgid "'State of Needs - %s' % (object.name)"
+msgstr "'État des besoins - %s' % (object.name)"
+
+#. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
 msgid "<span class=\"o_form_label\">Need State</span>"
 msgstr "<span class=\"o_form_label\">État de besoin</span>"
+
+
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>EAN Code</strong>"
+msgstr "<strong>EAN Code</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>FOB HK</strong>"
+msgstr "<strong>FOB HK</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>Name</strong>"
+msgstr "<strong>Nom</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+
+msgid "<strong>Qty Available</strong>"
+msgstr "<strong>Qté Disponible</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>Qty Expected</strong>"
+msgstr "Qté Attendue"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>Qty Ordered</strong>"
+msgstr "<strong>Qté à commander</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>Qty Projected</strong>"
+msgstr "<strong>Qté Projetée</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "<strong>SKU Code</strong>"
+msgstr ""
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchasequotation_document
+msgid "<strong>Name</strong>"
+msgstr "<strong>Nom</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchasequotation_document
+msgid "<strong>SKU Code</strong>"
+msgstr "<strong>SKU Code</strong>"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__qty_available
@@ -67,6 +127,7 @@ msgstr "Indéfini"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__licence_id
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
 msgid "Licence"
 msgstr "Licence"
 
@@ -92,9 +153,20 @@ msgid "Purchase Order"
 msgstr "Commande fournisseur"
 
 #. module: cgm_purchase
+#: model:ir.model,name:cgm_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__type__quotation
 msgid "Request for quotation"
 msgstr "Demande de prix"
+
+#. module: cgm_purchase
+#: model:ir.actions.report,name:cgm_purchase.report_purchase_quotation
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
+msgid "State of Needs"
+msgstr "État des besoins"
 
 #. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__type__state_of_needs
