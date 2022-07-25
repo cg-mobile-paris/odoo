@@ -18,7 +18,7 @@ msgstr ""
 #. module: cgm_purchase
 #: model:ir.actions.report,print_report_name:cgm_purchase.report_purchase_quotation
 msgid "'State of Needs - %s' % (object.name)"
-msgstr "État des besoins - %s' % (object.name)"
+msgstr "'État des besoins - %s' % (object.name)"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit

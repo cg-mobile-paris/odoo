@@ -2,10 +2,6 @@
 <odoo>
     <template id="cgm_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
         <!-- th -->
-        <xpath expr="//th[@name='th_description']//strong" position="replace">
-            <strong>Name</strong>
-        </xpath>
-
         <xpath expr="//th[@name='th_description']" position="before">
             <th><strong>SKU Code</strong></th>
         </xpath>
@@ -22,10 +18,6 @@
 
     <template id="cgm_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
         <!-- th -->
-        <xpath expr="//th[@name='th_description']//strong" position="replace">
-            <strong>Name</strong>
-        </xpath>
-
         <xpath expr="//th[@name='th_description']" position="before">
             <th><strong>SKU Code</strong></th>
         </xpath>
