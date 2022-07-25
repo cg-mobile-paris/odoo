@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-19 14:56+0000\n"
-"PO-Revision-Date: 2022-07-19 14:56+0000\n"
+"POT-Creation-Date: 2022-07-25 13:50+0000\n"
+"PO-Revision-Date: 2022-07-25 13:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_state
+msgid "<span class=\"o_stat_text\">Quotations / Orders</span>"
+msgstr "<span class=\"o_stat_text\">Devis / Commandes</span>"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_collection_form_view
@@ -152,6 +157,11 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__partner_ids
+msgid "Customers"
+msgstr "Clients"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__date_end
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_collection_search_view
 msgid "Date end"
@@ -188,6 +198,16 @@ msgstr "Devices"
 #: model:ir.model.fields,field_description:cgm_sale.field_product_material__display_name
 msgid "Display Name"
 msgstr "Afficher Nom"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__done
+msgid "Done"
+msgstr "Terminé"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__draft
+msgid "Draft"
+msgstr "Brouillon"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_only_form_view_inherit
@@ -353,6 +373,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:cgm_sale.field_product_licence__image_512
 msgid "Image 512"
 msgstr ""
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__progress
+msgid "In progress"
+msgstr "En cours"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__message_is_follower
@@ -709,6 +734,23 @@ msgid "Products"
 msgstr "Articles"
 
 #. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_sale_order_template
+msgid "Quotation Template"
+msgstr "Modèle de devis"
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__order_ids
+#, python-format
+msgid "Quotations / Orders"
+msgstr "Devis / Commandes"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__order_ids_count
+msgid "Quotations / Orders Count"
+msgstr "Devis / Commandes nombres"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__activity_user_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__activity_user_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_color__activity_user_id
@@ -726,6 +768,7 @@ msgid "Royalties & Margins"
 msgstr "Royalties & Marges"
 
 #. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_only_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_tree_view_inherit
 msgid "SKU Code"
@@ -754,6 +797,11 @@ msgid "Sequence"
 msgstr "Séquence"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__state
+msgid "Status"
+msgstr "Statut"
+
+#. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_product_brand__activity_state
 #: model:ir.model.fields,help:cgm_sale.field_product_collection__activity_state
 #: model:ir.model.fields,help:cgm_sale.field_product_color__activity_state
@@ -771,6 +819,22 @@ msgstr ""
 "En retard : la date d'échéance est déjà dépassée\n"
 "Aujourd'hui : la date d'activité est aujourd'hui\n"
 "Planifiée : activités futures"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__state
+msgid "Stock state"
+msgstr "État des stocks"
+
+#. module: cgm_sale
+#: model:ir.actions.act_window,name:cgm_sale.stock_state_action
+#: model:ir.ui.menu,name:cgm_sale.stock_state_menu
+msgid "Stock states"
+msgstr "États des stocks"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type
+msgid "Type"
+msgstr "Type"
 
 #. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_product_brand__activity_exception_decoration
@@ -846,3 +910,8 @@ msgstr "Oui RY & Non Marge"
 #: model:ir.model.fields.selection,name:cgm_sale.selection__product_template__royalties_margins__yy
 msgid "YY"
 msgstr "Oui RY & Oui Marge"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__template
+msgid "quotation template"
+msgstr "Modèle de devis"
