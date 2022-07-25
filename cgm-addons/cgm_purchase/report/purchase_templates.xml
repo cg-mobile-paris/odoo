@@ -12,14 +12,6 @@
         </xpath>
 
         <!-- th -->
-        <xpath expr="//th[@name='th_description']//strong" position="replace">
-            <strong>Name</strong>
-        </xpath>
-
-        <xpath expr="//th[@name='th_description']" position="before">
-            <th><strong>SKU Code</strong></th>
-        </xpath>
-
         <xpath expr="//th[@name='th_expected_date']" position="replace">
         </xpath>
 
@@ -39,14 +31,6 @@
         </xpath>
 
         <!-- td -->
-        <xpath expr="//td[@id='product']" position="before">
-            <td><span t-field="order_line.product_id.default_code"/> </td>
-        </xpath>
-
-        <xpath expr="//span[@t-field='order_line.name']" position="attributes">
-            <attribute name="t-field">order_line.product_id.name</attribute>
-        </xpath>
-
         <xpath expr="//span[@t-field='order_line.date_planned']//.." position="replace">
         </xpath>
 
