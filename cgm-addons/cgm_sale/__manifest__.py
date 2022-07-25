@@ -37,6 +37,7 @@
         'views/product_device_views.xml',
         'views/product_brand_views.xml',
         'views/product_color_views.xml',
+        'views/sale_order_template_views.xml',
         'views/ir_ui_menu.xml',
     ],
     'application': False,
