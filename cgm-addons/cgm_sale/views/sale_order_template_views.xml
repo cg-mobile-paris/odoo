@@ -8,7 +8,7 @@
         <field name="priority">100</field>
         <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
         <field name="arch" type="xml">
-
+        
             <xpath expr="//div[hasclass('oe_title')]" position="replace">
                 <div class="oe_title">
                     <span class="o_form_label">Name</span>
@@ -72,8 +72,8 @@
         <field name="view_mode">tree,form</field>
         <field name="view_ids"
                eval="[(5, 0, 0),
-                          (0, 0, {'view_mode': 'tree', 'view_id': ref('sale_order_template_view_tree_inherit')}),
-                          (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_template_view_form_inherit')})]"/>
+                      (0, 0, {'view_mode': 'tree', 'view_id': ref('sale_order_template_view_tree_inherit')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_template_view_form_inherit')})]"/>
         <field name="domain">[('type', '=', 'stock_state')]</field>
         <field name="context">{'default_type': 'stock_state'}</field>
     </record>
