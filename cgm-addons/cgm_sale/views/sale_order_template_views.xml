@@ -8,6 +8,15 @@
         <field name="priority">100</field>
         <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
         <field name="arch" type="xml">
+        
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <div class="oe_title">
+                    <span class="o_form_label">Name</span>
+                    <h1>
+                        <field name="name" placeholder="e.g. Stock State Guess 2022-07-25"/>
+                    </h1>
+                </div>
+            </xpath>
 
             <field name="active" position="after">
                 <field name="licence_id" required="1"/>
@@ -25,12 +34,12 @@
             </xpath>
 
             <div name="button_box" position="inside">
-                <button class="oe_stat_button" name="action_view_sale_orders" type="object" icon="fa-database">
+                <button class="oe_stat_button" name="action_view_sale_orders" type="object" icon="fa-usd">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">
                             <field name="sale_order_count"/>
                         </span>
-                        <span class="o_stat_text">Quotations / Sale Orders</span>
+                        <span class="o_stat_text">Quotations/SO</span>
                     </div>
                 </button>
             </div>
@@ -50,6 +59,10 @@
                 <field name="state"/>
             </field>
 
+            <field name="name" position="attributes">
+                <attribute name="string">Name</attribute>
+            </field>
+
         </field>
     </record>
 
@@ -58,9 +71,9 @@
         <field name="res_model">sale.order.template</field>
         <field name="view_mode">tree,form</field>
         <field name="view_ids"
-                   eval="[(5, 0, 0),
-                          (0, 0, {'view_mode': 'tree', 'view_id': ref('sale_order_template_view_tree_inherit')}),
-                          (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_template_view_form_inherit')})]"/>
+               eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'tree', 'view_id': ref('sale_order_template_view_tree_inherit')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_template_view_form_inherit')})]"/>
         <field name="domain">[('type', '=', 'stock_state')]</field>
         <field name="context">{'default_type': 'stock_state'}</field>
     </record>
