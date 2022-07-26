@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class SaleOrderTemplate(models.Model):
@@ -10,7 +11,8 @@ class SaleOrderTemplate(models.Model):
     type = fields.Selection([('sale_order_template', 'Sale Order Template'), ('stock_state', 'Stock State')], 'Type',
                             default='sale_order_template')
     partner_ids = fields.Many2many('res.partner', 'sale_order_template_res_partner_rel', 'template_id', 'partner_id', 'Customers')
-    state = fields.Selection([('draft', 'Draft'), ('progress', 'In progress'), ('done', 'Done')], 'State', default='draft')
+    state = fields.Selection([('draft', 'Draft'), ('verified', 'Verified'), ('generated', 'Generated'), ('sent', 'Sent'), ('done', 'Done'),
+                              ('cancel', 'Cancel')], 'State', default='draft')
     sale_order_ids = fields.One2many('sale.order', 'sale_order_template_id', 'Quotations / Orders')
     sale_order_count = fields.Integer('Sale Order Count', compute='_compute_sale_order_count', store=True)
     pricelist_id = fields.Many2one('product.pricelist', string='Price List', required=False)
@@ -84,3 +86,54 @@ class SaleOrderTemplate(models.Model):
         if not self.pricelist_id:
             return {}
         self.update({'partner_ids': [(6, 0, self.pricelist_id.partner_ids.ids)]})
+
+    def verify_stock_qty(self):
+        self.ensure_one()
+        for line in self.sale_order_template_line_ids: line.write({'product_uom_qty': line.product_id.qty_available})
+        self.write({'state': 'verified'})
+
+    def generate_quotations(self):
+        self.ensure_one()
+        if not self.partner_ids:
+            raise ValidationError(_('There is no customers'))
+
+        def create_values(partner_id):
+            return {'partner_id': partner_id.id, 'sale_order_template_id': self.id}
+
+        sale_order_ids = self.env["sale.order"].create(list(map(create_values, self.partner_ids)))
+        # call onchange
+        any(s.onchange_sale_order_template_id() for s in sale_order_ids)
+        self.write({'state': 'generated'})
+
+    def send_quotations(self):
+        self.ensure_one()
+        if not self.sale_order_ids:
+            raise ValidationError(_('There is nor Quotations/SO'))
+        for sale_order_id in self.sale_order_ids:
+            mail_compose_id = sale_order_id.quotation_create()
+            mail_compose_id._action_send_mail()
+        self.write({'state': 'sent'})
+
+    def print_quotations(self):
+        if not self.sale_order_ids:
+            raise ValidationError(_('There is nor Quotations/SO'))
+        report_id = self.env.ref('cgm_sale.action_report_stock_state')
+        return report_id.report_action(self.sale_order_ids.ids, config=False)
+
+    def cancel_quotations(self):
+        if not self.sale_order_ids:
+            raise ValidationError(_('There is nor Quotations/SO'))
+        self.sale_order_ids.action_cancel()
+        self.write({'state': 'cancel'})
+
+    def validate_quotations(self):
+        if not self.sale_order_ids:
+            raise ValidationError(_('There is nor Quotations/SO'))
+        self.sale_order_ids.action_confirm()
+        self.write({'state': 'done'})
+
+    def draft_quotations(self):
+        if not self.sale_order_ids:
+            raise ValidationError(_('There is nor Quotations/SO'))
+        self.sale_order_ids.action_draft()
+        self.write({'state': 'draft'})
