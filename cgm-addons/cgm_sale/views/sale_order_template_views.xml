@@ -20,10 +20,12 @@
 
             <field name="active" position="after">
                 <field name="licence_id" required="1"/>
-                <field name="partner_ids" widget="many2many_tags"/>
+                <field name="pricelist_id" options="{'no_create': True, 'no_edit': True}"/>
+                <field name="partner_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
             </field>
 
             <field name="company_id" position="before">
+                <field name="date"/>
                 <field name="type" required="1"/>
             </field>
 
@@ -55,7 +57,9 @@
         <field name="arch" type="xml">
 
             <field name="name" position="after">
+                <field name="date"/>
                 <field name="licence_id"/>
+                <field name="pricelist_id"/>
                 <field name="state"/>
             </field>
 
@@ -72,9 +76,13 @@
         <field name="arch" type="xml">
             <search string="Search Quotation Template">
                 <field name="name"/>
+                <field name="date"/>
                 <field name="licence_id"/>
+                <field name="pricelist_id"/>
                 <group expand="0" string="Group By">
                     <filter string="Licence" name="filter_product_licence" context="{'group_by': 'licence_id'}"/>
+                    <filter string="Pricelist" name="filter_product_pricelist" context="{'group_by': 'pricelist_id'}"/>
+                    <filter string="Date" name="filter_by_date" context="{'group_by': 'date'}"/>
                 </group>
             </search>
         </field>

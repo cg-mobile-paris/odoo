@@ -24,7 +24,7 @@
 
             <field name="partner_ref" position="after">
                 <field name="licence_id" attrs="{'readonly': [('state', 'in', ['purchase', 'done', 'cancel'])]}"/>
-                <field name="device_ids" widget="many2many_tags" force_save="1"/>
+                <field name="device_ids" widget="many2many_tags" force_save="1" options="{'color_field': 'color', 'no_create_edit': True}"/>
             </field>
 
             <field name="price_subtotal" position="after">
