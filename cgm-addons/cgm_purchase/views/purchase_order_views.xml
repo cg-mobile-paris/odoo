@@ -13,25 +13,87 @@
                     <span class="o_form_label">Need State</span>
                     <h1>
                         <field name="priority" widget="priority" class="mr-3"/>
-                        <field name="name" readonly="1"/>
+                        <field name="cgm_name" readonly="0" required="1" placeholder="e.g. State Need GUESS 2022-07-25"/>
                     </h1>
                 </div>
             </xpath>
 
-            <button name="print_quotation" position="attributes">
-                <attribute name="string">Print Need State</attribute>
-            </button>
-
             <field name="partner_ref" position="after">
                 <field name="licence_id" attrs="{'readonly': [('state', 'in', ['purchase', 'done', 'cancel'])]}"/>
-                <field name="device_ids" widget="many2many_tags" force_save="1" options="{'color_field': 'color', 'no_create_edit': True}"/>
             </field>
-
             <field name="price_subtotal" position="after">
                 <field name="qty_available" optional="hide"/>
                 <field name="qty_expected" optional="hide"/>
                 <field name="virtual_available" optional="hide"/>
             </field>
+            <field name="partner_ref" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_planned" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="state" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="effective_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_order" position="attributes">
+                <attribute name="string">Date</attribute>
+                <attribute name="attrs">{}</attribute>
+            </field>
+            <field name="state" position="after">
+                <field name="cgm_state" widget="statusbar" statusbar_visible="draft,sent,po_generated,done" readonly="1"/>
+            </field>
+
+            <xpath expr="//label[@for='date_planned']" position="replace"/>
+            <xpath expr="//label[@for='receipt_reminder_email']" position="replace"/>
+
+            <div name="reminder" position="replace"/>
+            <div name="date_planned_div" position="replace"/>
+
+            <button name="print_quotation" position="after">
+                <button name="button_send_by_mail" string="Send By Mail" type="object" class="oe_highlight" groups="base.group_user"
+                        data-hotkey="k" attrs="{'invisible':[('cgm_state', '!=', 'draft')]}"/>
+                <button name="print_state_need" string="Print State Need" type="object" class="oe_highlight" groups="base.group_user"
+                        data-hotkey="k" attrs="{'invisible':[('cgm_state', '!=', 'draft')]}"/>
+            </button>
+            <button name="button_confirm" position="after">
+                <button name="button_generate_purchase_order" string="Generate PO" type="object" class="oe_highlight" groups="base.group_user"
+                        data-hotkey="v" attrs="{'invisible':[('cgm_state', '!=', 'sent')]}"/>
+                <button name="button_validate" string="Validate" type="object" class="oe_highlight" groups="base.group_user"
+                        data-hotkey="y" attrs="{'invisible':[('cgm_state', '!=', 'po_generated')]}"/>
+                <button name="button_view_purchase_order" string="View PO" type="object" class="oe_highlight" groups="base.group_user"
+                        data-hotkey="p" attrs="{'invisible':[('cgm_state', 'not in', ['po_generated', 'done'])]}"/>
+            </button>
+
+            <button name="action_view_invoice" position="after">
+                <button name="action_view_purchase_order" type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                        attrs="{'invisible':[('cgm_state', 'not in', ['po_generated', 'done'])]}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">1
+                            <br/>
+                            PO
+                        </span>
+                    </div>
+                </button>
+            </button>
+
+            <button name="action_rfq_send" position="replace"/>
+            <button name="action_rfq_send" position="replace"/>
+            <button name="action_rfq_send" position="replace"/>
+            <button name="print_quotation" position="replace"/>
+            <button name="button_confirm" position="replace"/>
+            <button name="button_confirm" position="replace"/>
+            <button name="action_create_invoice" position="replace"/>
+            <button name="action_create_invoice" position="replace"/>
+            <button name="button_unlock" position="replace"/>
+            <button name="confirm_reminder_mail" position="replace"/>
+            <button name="button_done" position="replace"/>
+            <button name="action_view_picking" position="replace"/>
+            <button name="action_view_picking" position="replace"/>
+            <button name="action_view_sale_orders" position="replace"/>
+            <button name="action_view_invoice" position="replace"/>
 
         </field>
     </record>
@@ -48,7 +110,30 @@
             </xpath>
             <field name="partner_id" position="after">
                 <field name="licence_id"/>
-                <field name="device_ids" widget="many2many_tags"/>
+            </field>
+            <field name="activity_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+             <field name="state" position="before">
+                 <field name="cgm_state" widget="badge" decoration-success="cgm_state == 'done'" decoration-info="cgm_state == 'po_generated'"/>
+             </field>
+            <field name="state" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_approve" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_planned" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="name" position="before">
+                <field name="cgm_name"/>
             </field>
         </field>
     </record>
@@ -58,11 +143,30 @@
         <field name="res_model">purchase.order</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('type', '=', 'state_of_needs')]</field>
-        <field name="context">{'default_type': 'state_of_needs', 'show_fields': 0}</field>
+        <field name="context">{'default_type': 'state_of_needs', 'show_fields': 0, 'come_from_state_need_action': True}</field>
         <field name="view_ids"
                eval="[(5, 0, 0),
                       (0, 0, {'view_mode': 'tree', 'view_id': ref('cgm_purchase.purchase_order_tree_view_inherit')}),
                       (0, 0, {'view_mode': 'form', 'view_id': ref('cgm_purchase.purchase_order_form_view_inherit')})]"/>
+    </record>
+
+    <record id="purchase_form_action" model="ir.actions.act_window">
+        <field name="name">Purchase Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="purchase.purchase_order_form"/>
+        <field name="domain">[('state','in',('purchase', 'done'))]</field>
+        <field name="search_view_id" ref="purchase.purchase_order_view_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No purchase order found. Let's create one!
+            </p>
+            <p>
+                Once you ordered your products to your supplier, confirm your request for quotation and it will turn into a purchase order.
+            </p>
+        </field>
     </record>
 
 </odoo>
