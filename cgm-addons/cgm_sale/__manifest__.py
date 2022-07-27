@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         # report
         'report/sale_report_templates.xml',
+        'report/sale_report.xml',
         # views
         'views/product_form_views.xml',
         'views/product_material_views.xml',
