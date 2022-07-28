@@ -31,14 +31,14 @@
 
             <xpath expr="//sheet" position="before">
                 <header>
-                    <button string="Verify stock" type="object" name="verify_stock_qty" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button string="Generate stock states" type="object" name="generate_quotations" attrs="{'invisible': [('state', '!=', 'verified')]}"/>
-                    <button string="Send quotations" type="object" name="send_quotations" attrs="{'invisible': [('state', '!=', 'generated')]}"/>
-                    <button string="Print quotations" type="object" name="print_quotations" attrs="{'invisible': [('state', '!=', 'generated')]}"/>
-                    <button string="Cancel" type="object" name="cancel_quotations"/>
-                    <button string="Validate" type="object" name="validate_quotations"/>
-                    <button string="Draft" type="object" name="draft_quotations" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
-                    <field name="state" widget="statusbar"/>
+                    <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="button_generate_quotation" string="Generate Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'checked')]}"/>
+                    <button name="button_send_quotation" string="Send Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'generated')]}"/>
+                    <button name="button_print_quotation" string="Print Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['generated', 'sent'])]}"/>
+                    <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'sent')]}"/>
+                    <button name="button_cancel" string="Cancel" type="object"/>
+                    <button name="button_draft" string="Reset To Draft" type="object" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,checked,generated,sent,done" readonly="1"/>
                 </header>
             </xpath>
 
