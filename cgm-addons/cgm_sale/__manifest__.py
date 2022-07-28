@@ -26,8 +26,10 @@
         # security
         'security/ir.model.access.csv',
         # report
-        'report/sale_report_templates.xml',
+        'report/stock_state_template.xml',
         'report/sale_report.xml',
+        # data
+        'data/mail_template_data.xml',
         # views
         'views/product_form_views.xml',
         'views/product_material_views.xml',

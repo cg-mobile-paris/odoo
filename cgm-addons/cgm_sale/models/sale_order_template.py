@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class SaleOrderTemplate(models.Model):
@@ -9,8 +10,10 @@ class SaleOrderTemplate(models.Model):
     licence_id = fields.Many2one('product.licence', 'Licence', index=True)
     type = fields.Selection([('sale_order_template', 'Sale Order Template'), ('stock_state', 'Stock State')], 'Type',
                             default='sale_order_template')
-    partner_ids = fields.Many2many('res.partner', 'sale_order_template_res_partner_rel', 'template_id', 'partner_id', 'Customers')
-    state = fields.Selection([('draft', 'Draft'), ('progress', 'In progress'), ('done', 'Done')], 'State', default='draft')
+    partner_ids = fields.Many2many('res.partner', 'sale_order_template_res_partner_rel', 'template_id', 'partner_id', 'Customers',
+                                   domain=[('parent_id', '=', False)])
+    state = fields.Selection([('draft', 'Draft'), ('checked', 'Checked'), ('generated', 'Generated'), ('sent', 'Sent'), ('done', 'Done'),
+                              ('cancel', 'Cancel')], 'State', default='draft')
     sale_order_ids = fields.One2many('sale.order', 'sale_order_template_id', 'Quotations / Orders')
     sale_order_count = fields.Integer('Sale Order Count', compute='_compute_sale_order_count', store=True)
     pricelist_id = fields.Many2one('product.pricelist', string='Price List', required=False)
@@ -83,4 +86,95 @@ class SaleOrderTemplate(models.Model):
         """
         if not self.pricelist_id:
             return {}
-        self.update({'partner_ids': [(6, 0, self.pricelist_id.partner_ids.ids)]})
+        partners = self.pricelist_id.partner_ids.filtered(lambda p: not p.parent_id)
+        self.update({'partner_ids': [(6, 0, partners.ids)]})
+
+    def button_check_stock(self):
+        """
+        Check the available quantity of all products
+        :return:
+        """
+        self.ensure_one()
+        for line in self.sale_order_template_line_ids:
+            line.write({'product_uom_qty': line.product_id.qty_available})
+        self.write({'state': 'checked'})
+        return True
+
+    def button_generate_quotation(self):
+        """
+        Generate quotation for all partners
+        :return:
+        """
+        self.ensure_one()
+        if not self.partner_ids:
+            raise ValidationError(_('No customer is associated with the selected price list. \n'
+                                    'Please check the configuration of customers or select another price list.'))
+
+        order_obj = self.env['sale.order']
+        for partner in self.partner_ids:
+            order = order_obj.create({'partner_id': partner.id, 'sale_order_template_id': self.id, 'pricelist_id': self.pricelist_id.id})
+            order.onchange_sale_order_template_id()
+
+        self.write({'state': 'generated'})
+        return True
+
+    def button_send_quotation(self):
+        """
+        Send quotation to partners
+        :return:
+        """
+        self.ensure_one()
+        orders = self.sale_order_ids.filtered(lambda so: so.state != 'cancel')
+        if not orders:
+            raise ValidationError(_('There is no quotation generated for this stock state.'))
+        for order in orders:
+            mail_compose = order._prepare_mail_compose()
+            mail_compose._action_send_mail()
+        self.write({'state': 'sent'})
+        return True
+
+    def button_print_quotation(self):
+        """
+        Print all quotations
+        :return:
+        """
+        self.ensure_one()
+        orders = self.sale_order_ids.filtered(lambda so: so.state != 'cancel')
+        if not orders:
+            raise ValidationError(_('There is no quotation generated for this stock state.'))
+        action_report = self.env.ref('cgm_sale.action_report_stock_state', raise_if_not_found=False)
+        if not action_report:
+            raise ValidationError(_('There is no report'))
+        return action_report.report_action(orders.ids, config=False)
+
+    def button_cancel(self):
+        """
+        Cancel this stock need
+        :return:
+        """
+        self.ensure_one()
+        orders = self.sale_order_ids.filtered(lambda so: so.state != 'cancel')
+        if not orders:
+            raise ValidationError(_('There is no quotation generated for this stock state.'))
+        for order in orders:
+            order.action_cancel()
+        self.write({'state': 'cancel'})
+        return True
+
+    def button_confirm(self):
+        """
+        Confirm this stock need and all quotations
+        :return:
+        """
+        self.ensure_one()
+        self.write({'state': 'done'})
+        return True
+
+    def button_draft(self):
+        """
+        Reset to draft
+        :return:
+        """
+        self.ensure_one()
+        self.write({'state': 'draft'})
+        return True
