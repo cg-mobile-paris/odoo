@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-26 12:00+0000\n"
-"PO-Revision-Date: 2022-07-26 12:00+0000\n"
+"POT-Creation-Date: 2022-07-28 16:42+0000\n"
+"PO-Revision-Date: 2022-07-28 16:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,41 @@ msgstr ""
 #: model:ir.actions.report,print_report_name:cgm_sale.action_report_stock_state
 msgid "'Stock State - %s' % (object.name)"
 msgstr "'État de stock - %s' % (object.name)"
+
+#. module: cgm_sale
+#: model:mail.template,body_html:cgm_sale.email_template_stock_state
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear <t t-out=\"object.partner_id.name or ''\"/>,\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Your stock state is ready for review.\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Do not hesitate to contact us if you have any questions.\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Regards,\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Cher(e) <t t-out=\"object.partner_id.name or ''\"/>,\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Veuillez trouver en attaché l'état de stock.\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        N'hésitez pas à nous contacter si vous avez des questions.\n"
+"                        <br/>\n"
+"			  <br/>\n"
+"			  Cordialement,"
+"                    </p>\n"
+"                </div>\n"
+"            "
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -39,6 +74,16 @@ msgstr "<span>État de stock</span>"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_collection_form_view
 msgid "<span>to</span>"
 msgstr "<span>à</span>"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Date : </strong>"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
+msgid "<strong>Your Contact:</strong>"
+msgstr "<strong>Votre Contact : </strong>"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__message_needaction
@@ -108,6 +153,12 @@ msgstr "Icône de type d'activité"
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/product_template.py:0
 #, python-format
+msgid "An item with the same EAN Code already exists in the system."
+msgstr "Un article avec le même EAN Code existe déjà."
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/product_template.py:0
+#, python-format
 msgid "An item with the same SKU Code already exists in the system."
 msgstr ""
 "Attention ! Un article avec le même SKU Code existe déjà dans le système."
@@ -129,15 +180,26 @@ msgid "Attachment Count"
 msgstr "Compte des pièces jointes"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid "Barcode"
-msgstr "Code-barres"
-
-#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_product__product_type_product
 #: model:ir.model.fields,field_description:cgm_sale.field_product_template__product_type_product
 msgid "CGM Product Type"
 msgstr "CGM Type d’article"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__cancel
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Check Stock"
+msgstr "Vérifier le stock"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__checked
+msgid "Checked"
+msgstr "Vérifié"
 
 #. module: cgm_sale
 #: model:ir.actions.act_window,name:cgm_sale.product_collection_action
@@ -153,6 +215,11 @@ msgstr "Couleur"
 #: model:ir.actions.act_window,name:cgm_sale.product_color_action
 msgid "Colors"
 msgstr "Couleurs"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Confirm"
+msgstr "Confirmer"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__create_uid
@@ -182,6 +249,12 @@ msgid "Customers"
 msgstr "Clients"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__date
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
+msgid "Date"
+msgstr "Date"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__date_end
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_collection_search_view
 msgid "Date end"
@@ -200,8 +273,14 @@ msgstr ""
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid "Desired Quantity"
-msgstr "Qté désirée"
+msgid ""
+"Desired\n"
+"                    <br/>\n"
+"                    Quantity"
+msgstr ""
+"Quantité\n"
+"                    <br/>\n"
+"                    Désirée"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_search_view_inherit
@@ -236,6 +315,16 @@ msgstr "Brouillon"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
+msgid ""
+"EAN\n"
+"                    <br/>\n"
+"                    Code"
+msgstr ""
+"EAN\n"
+"                    <br/>\n"
+"                    Code"
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_only_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_tree_view_inherit
 msgid "EAN Code"
@@ -286,9 +375,24 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Icône Font Awesome e.g. fa-tasks"
 
 #. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Generate Quotations"
+msgstr "Générer les états de stock"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__generated
+msgid "Generated"
+msgstr "Etat généré"
+
+#. module: cgm_sale
 #: model:ir.model.fields.selection,name:cgm_sale.selection__product_template__product_type_product__goods
 msgid "Goods"
 msgstr "Marchandises"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
+msgid "Group By"
+msgstr "Grouper par"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__has_message
@@ -401,9 +505,10 @@ msgid "Image 512"
 msgstr ""
 
 #. module: cgm_sale
-#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__progress
-msgid "In progress"
-msgstr "En cours"
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#, python-format
+msgid "Indefinite"
+msgstr "Non définie"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__message_is_follower
@@ -451,6 +556,7 @@ msgstr "Dernière mise à jour le"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__licence_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
 msgid "Licence"
 msgstr "Licence"
 
@@ -516,7 +622,6 @@ msgstr "Non RY & Oui marge"
 #: model:ir.model.fields,field_description:cgm_sale.field_product_form__name
 #: model:ir.model.fields,field_description:cgm_sale.field_product_licence__name
 #: model:ir.model.fields,field_description:cgm_sale.field_product_material__name
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_tree_inherit
 msgid "Name"
 msgstr "Nom"
@@ -563,6 +668,16 @@ msgstr "Résumé d'activité suivant"
 #: model:ir.model.fields,field_description:cgm_sale.field_product_material__activity_type_id
 msgid "Next Activity Type"
 msgstr "Type d'activités à venir"
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#, python-format
+msgid ""
+"No customer is associated with the selected price list. \n"
+"Please check the configuration of customers or select another price list."
+msgstr ""
+"Aucun client n'est associé à la liste de prix sélectionnée. \n"
+"Veuillez vérifier le paramétrage des fiches clients ou sélectionner une autre liste de prix."
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__notes
@@ -633,6 +748,32 @@ msgstr "Nombre de messages non lus"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_category_search_view_inherit
 msgid "Parent Family"
 msgstr "Famille parente"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_pricelist__partner_ids
+msgid "Partners"
+msgstr "Partenaires"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__pricelist_id
+msgid "Price List"
+msgstr "Liste de prix"
+
+#. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_product_pricelist
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
+msgid "Pricelist"
+msgstr "Liste de prix"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Print Quotations"
+msgstr "Imprimer les états de stock"
+
+#. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_product_product
+msgid "Product"
+msgstr "Article"
 
 #. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_product_brand
@@ -776,6 +917,11 @@ msgid "Quotations / Orders"
 msgstr "Devis / Bons de commande"
 
 #. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Reset To Draft"
+msgstr "Remettre en brouillon"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__activity_user_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__activity_user_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_color__activity_user_id
@@ -793,7 +939,17 @@ msgid "Royalties & Margins"
 msgstr "Royalties & Marges"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
+msgid ""
+"SKU\n"
+"                    <br/>\n"
+"                    Code"
+msgstr ""
+"SKU\n"
+"                    <br/>\n"
+"                    Code"
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_only_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_template_tree_view_inherit
 msgid "SKU Code"
@@ -819,6 +975,26 @@ msgstr "Nombre de devis/bons de commande"
 #: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__sale_order_template
 msgid "Sale Order Template"
 msgstr "Modèle de devis"
+
+#. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
+msgid "Search Quotation Template"
+msgstr ""
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Send Quotations"
+msgstr "Envoyer les états de stock"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__sent
+msgid "Sent"
+msgstr "Envoyé"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__sequence
@@ -862,10 +1038,29 @@ msgid "Stock State"
 msgstr "État de stock"
 
 #. module: cgm_sale
+#: model:mail.template,name:cgm_sale.email_template_stock_state
+msgid "Stock State : Send by email"
+msgstr "État de stock : Envoyer par mail"
+
+#. module: cgm_sale
 #: model:ir.actions.act_window,name:cgm_sale.stock_state_action
 #: model:ir.ui.menu,name:cgm_sale.stock_state_menu
 msgid "Stock States"
 msgstr "États de stock"
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#, python-format
+msgid "There is no quotation generated for this stock state."
+msgstr "Il n'y a pas de Devis/BC généré pour cet état de stock."
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order_template.py:0
+#, python-format
+msgid "There is no report"
+msgstr "Il n'y a pas de rapport d'état de stock."
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type
@@ -951,3 +1146,17 @@ msgstr "Oui RY & Oui Marge"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "e.g. Stock State Guess 2022-07-25"
 msgstr "Exemple : État de stock GUESS 25/07/2022"
+
+#. module: cgm_sale
+#: model:mail.template,report_name:cgm_sale.email_template_stock_state
+msgid "{{ (object.sale_order_template_id.name or '').replace('/','_') }}"
+msgstr "{{ (object.sale_order_template_id.name or '').replace('/','_') }}"
+
+#. module: cgm_sale
+#: model:mail.template,subject:cgm_sale.email_template_stock_state
+msgid ""
+"{{ object.company_id.name }} Stock State (Ref {{ object.sale_order_template_id.name or 'n/a' }})\n"
+"            "
+msgstr ""
+"{{ object.company_id.name }} État de stock (Ref {{ "
+"object.sale_order_template_id.name or 'n/a' }})\n"

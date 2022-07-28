@@ -22,3 +22,15 @@ class ProductTemplate(models.Model):
         for record in self:
             if self.search([('default_code', '!=', False), ('default_code', '=', record.default_code), ('id', '!=', record.id)], limit=1):
                 raise ValidationError(_('An item with the same SKU Code already exists in the system.'))
+
+    @api.constrains('barcode')
+    def _check_unique_barcode(self):
+        for record in self:
+            if self.search([('barcode', '!=', False), ('barcode', '=', record.barcode), ('id', '!=', record.id)], limit=1):
+                raise ValidationError(_('An item with the same EAN Code already exists in the system.'))
+
+    def name_get(self):
+        names = []
+        for record in self:
+            names.append((record.id, record.default_code or record.name))
+        return names
