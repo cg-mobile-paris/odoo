@@ -31,7 +31,14 @@
 
             <xpath expr="//sheet" position="before">
                 <header>
-                    <field name="state" widget="statusbar"/>
+                    <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="button_generate_quotation" string="Generate Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'checked')]}"/>
+                    <button name="button_send_quotation" string="Send Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'generated')]}"/>
+                    <button name="button_print_quotation" string="Print Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['generated', 'sent'])]}"/>
+                    <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'sent')]}"/>
+                    <button name="button_cancel" string="Cancel" type="object"/>
+                    <button name="button_draft" string="Reset To Draft" type="object" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,checked,generated,sent,done" readonly="1"/>
                 </header>
             </xpath>
 
