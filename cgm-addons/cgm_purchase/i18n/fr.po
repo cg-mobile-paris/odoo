@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 13:18+0000\n"
-"PO-Revision-Date: 2022-07-21 13:18+0000\n"
+"POT-Creation-Date: 2022-07-27 16:15+0000\n"
+"PO-Revision-Date: 2022-07-27 16:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: cgm_purchase
-#: model:ir.actions.report,print_report_name:cgm_purchase.report_purchase_quotation
+#: model:ir.actions.report,print_report_name:cgm_purchase.report_state_neet
 msgid "'State of Needs - %s' % (object.name)"
-msgstr "'État des besoins - %s' % (object.name)"
+msgstr "'État de besoin - %s' % (object.name)"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
 msgid "<span class=\"o_form_label\">Need State</span>"
 msgstr "<span class=\"o_form_label\">État de besoin</span>"
 
-
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid ""
+"<span class=\"o_stat_text\">1\n"
+"                            <br/>\n"
+"                            PO\n"
+"                        </span>"
+msgstr ""
+"<span class=\"o_stat_text\">1\n"
+"                            <br/>\n"
+"                            Commande\n"
+"                        </span>"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
@@ -39,12 +50,6 @@ msgstr "<strong>FOB HK</strong>"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
-msgid "<strong>Name</strong>"
-msgstr "<strong>Nom</strong>"
-
-#. module: cgm_purchase
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
-
 msgid "<strong>Qty Available</strong>"
 msgstr "<strong>Qté Disponible</strong>"
 
@@ -64,17 +69,6 @@ msgid "<strong>Qty Projected</strong>"
 msgstr "<strong>Qté Projetée</strong>"
 
 #. module: cgm_purchase
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
-msgid "<strong>SKU Code</strong>"
-msgstr ""
-
-#. module: cgm_purchase
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchaseorder_document
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchasequotation_document
-msgid "<strong>Name</strong>"
-msgstr "<strong>Nom</strong>"
-
-#. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchaseorder_document
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.cgm_report_purchasequotation_document
 msgid "<strong>SKU Code</strong>"
@@ -84,6 +78,21 @@ msgstr "<strong>SKU Code</strong>"
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__qty_available
 msgid "Available quantity"
 msgstr "Quantité disponible"
+
+#. module: cgm_purchase
+#: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__cgm_state__cancel
+msgid "Cancel"
+msgstr "Annulé"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__cgm_state
+msgid "Cgm State"
+msgstr "Statut"
+
+#. module: cgm_purchase
+#: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__cgm_state__done
+msgid "Confirmed"
+msgstr "Confirmé"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,help:cgm_purchase.field_purchase_order_line__qty_available
@@ -96,9 +105,19 @@ msgid ""
 msgstr ""
 
 #. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "Date"
+msgstr "Date"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__device_ids
 msgid "Devices"
 msgstr "Devices"
+
+#. module: cgm_purchase
+#: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__cgm_state__draft
+msgid "Draft"
+msgstr "Brouillon"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__qty_expected
@@ -120,6 +139,11 @@ msgstr ""
 "Dans les autres contextes, ceci inclue les marchandises stockées dans n'importe quel emplacement de type 'interne'."
 
 #. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "Generate PO"
+msgstr "Générer la commande"
+
+#. module: cgm_purchase
 #: code:addons/cgm_purchase/models/purchase_order.py:0
 #, python-format
 msgid "Indefinite"
@@ -132,14 +156,38 @@ msgid "Licence"
 msgstr "Licence"
 
 #. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__cgm_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: cgm_purchase
 #: model:ir.actions.act_window,name:cgm_purchase.purchase_order_action
 #: model:ir.ui.menu,name:cgm_purchase.need_state_menu
 msgid "Need States"
 msgstr "États de besoin"
 
 #. module: cgm_purchase
+#: model_terms:ir.actions.act_window,help:cgm_purchase.purchase_form_action
+msgid "No purchase order found. Let's create one!"
+msgstr "Aucun bon de commande trouvé. Créons-en une!"
+
+#. module: cgm_purchase
+#: model_terms:ir.actions.act_window,help:cgm_purchase.purchase_form_action
+msgid ""
+"Once you ordered your products to your supplier, confirm your request for "
+"quotation and it will turn into a purchase order."
+msgstr ""
+"une fois que vous avez commandé vos articles à votre fournisseur, confirmez "
+"votre demande de prix et cela la transformera en bon de commande."
+
+#. module: cgm_purchase
+#: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__cgm_state__po_generated
+msgid "PO Generated"
+msgstr "Commande générée"
+
+#. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
-msgid "Print Need State"
+msgid "Print State Need"
 msgstr "Imprimer état de besoin"
 
 #. module: cgm_purchase
@@ -158,22 +206,52 @@ msgid "Purchase Order Line"
 msgstr "Ligne de commande d'achat"
 
 #. module: cgm_purchase
+#: model:ir.actions.act_window,name:cgm_purchase.purchase_form_action
+msgid "Purchase Orders"
+msgstr "Commandes fournisseur"
+
+#. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__type__quotation
 msgid "Request for quotation"
 msgstr "Demande de prix"
 
 #. module: cgm_purchase
-#: model:ir.actions.report,name:cgm_purchase.report_purchase_quotation
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "Send By Mail"
+msgstr "Envoyer par mail"
+
+#. module: cgm_purchase
+#: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__cgm_state__sent
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: cgm_purchase
+#: model:ir.actions.report,name:cgm_purchase.report_state_neet
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_state_of_needs_document
 msgid "State of Needs"
-msgstr "État des besoins"
+msgstr "État de besoin"
 
 #. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__purchase_order__type__state_of_needs
 msgid "State of needs"
-msgstr "État des besoins"
+msgstr "État de besoin"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__type
 msgid "Type"
 msgstr "Type"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "Validate"
+msgstr "Valider"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "View PO"
+msgstr "Voir la commande"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_form_view_inherit
+msgid "e.g. State Need GUESS 2022-07-25"
+msgstr "par exemple : État de besoin 25/07/2022"
