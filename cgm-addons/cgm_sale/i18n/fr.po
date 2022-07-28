@@ -153,6 +153,12 @@ msgstr "Icône de type d'activité"
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/product_template.py:0
 #, python-format
+msgid "An item with the same EAN Code already exists in the system."
+msgstr "Un article avec le même EAN Code existe déjà."
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/product_template.py:0
+#, python-format
 msgid "An item with the same SKU Code already exists in the system."
 msgstr ""
 "Attention ! Un article avec le même SKU Code existe déjà dans le système."
