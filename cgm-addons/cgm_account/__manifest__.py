@@ -14,7 +14,10 @@
         'cgm_base',
         'account_accountant',
     ],
-    'data': [],
+    'data': [
+        # report
+        'report/report_invoice.xml',
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,

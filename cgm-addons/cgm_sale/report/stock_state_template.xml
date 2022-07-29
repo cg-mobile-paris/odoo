@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <template id="cgm_stock_state_document" inherit_id="sale.report_saleorder_document" primary="True" priority="1000">
+            <xpath expr="//h2[hasclass('mt16')]" position="replace">
+                <h2>
+                    <span>Stock State</span>
+                    <span t-field="doc.sale_order_template_id"/>
+                </h2>
+            </xpath>
+            <!-- th -->
+            <xpath expr="//th[@name='th_description']" position="before">
+                <th name="th_sku_code" class="text-left">SKU
+                    <br/>
+                    Code
+                </th>
+            </xpath>
+            <xpath expr="//th[@name='th_quantity']" position="before">
+                <th name="th_barcode" class="text-left">EAN
+                    <br/>
+                    Code
+                </th>
+            </xpath>
+            <xpath expr="//th[@name='th_quantity']" position="after">
+                <th name="th_desired_qty" class="text-right">Desired
+                    <br/>
+                    Quantity
+                </th>
+            </xpath>
+            <xpath expr="//th[@name='th_taxes']" position="replace"/>
+            <!-- td -->
+            <xpath expr="//td[@name='td_name']" position="before">
+                <td name="td_sku_code">
+                    <span t-field="line.product_id.default_code"/>
+                </td>
+            </xpath>
+            <xpath expr="//span[@t-field='line.name']" position="replace">
+                <span t-field="line.product_id.name"/>
+            </xpath>
+            <xpath expr="//td[@name='td_quantity']" position="after">
+                <td name="td_barcode">
+                    <span t-field="line.product_id.barcode"/>
+                </td>
+            </xpath>
+            <xpath expr="//td[@name='td_quantity']" position="before">
+                <td name="th_desired_qty"></td>
+            </xpath>
+            <xpath expr="//td[@name='td_taxes']" position="replace"/>
+            <xpath expr="//div[hasclass('col-auto', 'col-3', 'mw-100', 'mb-2')][3]" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2">
+                    <strong>Date:</strong>
+                    <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                </div>
+            </xpath>
+            <xpath expr="//div[hasclass('col-auto', 'col-3', 'mw-100', 'mb-2')][6]" position="replace">
+                <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Your Contact:</strong>
+                    <p class="m-0" t-field="doc.user_id"/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="cgm_report_stock_state" inherit_id="sale.report_saleorder" primary="True" priority="1000">
+            <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="replace">
+                <t t-call="cgm_sale.cgm_stock_state_document" t-lang="doc.partner_id.lang"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

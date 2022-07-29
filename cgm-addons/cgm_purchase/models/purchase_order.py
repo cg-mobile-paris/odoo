@@ -9,6 +9,9 @@ class PurchaseOrder(models.Model):
     licence_id = fields.Many2one('product.licence', 'Licence')
     device_ids = fields.Many2many('product.device', 'purchase_order_product_device_rel', 'order_id', 'device_id', 'Devices', readonly=True)
     type = fields.Selection([('state_of_needs', 'State of needs'), ('quotation', 'Request for quotation')], 'Type', default='quotation')
+    cgm_state = fields.Selection([('draft', 'Draft'), ('sent', 'Sent'),  ('po_generated', 'PO Generated'), ('done', 'Confirmed'),
+                                  ('cancel', 'Cancel')], default='draft')
+    cgm_name = fields.Char('Name', required=False)
 
     @api.onchange('licence_id')
     def _onchange_licence_id(self):
@@ -42,17 +45,59 @@ class PurchaseOrder(models.Model):
 
         return {}
 
+    def print_state_need(self):
+        self.ensure_one()
+        self.write({'cgm_state': 'sent'})
+        return self.env.ref('cgm_purchase.report_state_neet').report_action(self)
 
-class PurchaseOrderLine(models.Model):
-    _inherit = 'purchase.order.line'
+    def button_generate_purchase_order(self):
+        """
+        Generate PO from state need
+        :return:
+        """
+        self.ensure_one()
+        self.button_confirm()
+        self.write({'cgm_state': 'po_generated'})
+        return True
 
-    qty_available = fields.Float('Available quantity', related='product_id.qty_available')
-    virtual_available = fields.Float('Projected quantity', related='product_id.virtual_available')
-    qty_expected = fields.Float('Expected quantity', compute='_compute_expected_qty', store=True)
+    def action_view_purchase_order(self):
+        self.ensure_one()
+        action = self.env.ref('cgm_purchase.purchase_form_action', raise_if_not_found=False)
+        if not action:
+            return False
+        action = action.read()[0]
+        action['res_id'] = self.id
+        action['context'] = {'come_from_state_need_action': False}
+        return action
 
-    @api.depends('product_qty', 'virtual_available')
-    def _compute_expected_qty(self):
-        for rec in self:
-            domain = [('product_id', '=', rec.product_id.id), ('order_id.state', 'in', ('draft', 'sent', 'to approve'))]
-            order_line_qty = sum(self.env['purchase.order.line'].search(domain).mapped('product_qty'))
-            rec.qty_expected = order_line_qty + rec.virtual_available
+    def button_validate(self):
+        self.ensure_one()
+        self.write({'cgm_state': 'done'})
+        return True
+
+    def button_cancel(self):
+        result = super(PurchaseOrder, self).button_cancel()
+        self.write({'cgm_state': 'cancel'})
+        return result
+
+    def button_draft(self):
+        result = super(PurchaseOrder, self).button_draft()
+        self.write({'cgm_state': 'draft'})
+        return result
+
+    def button_send_by_mail(self):
+        self.ensure_one()
+        self.write({'cgm_state': 'sent'})
+        return True
+
+    def button_view_purchase_order(self):
+        self.ensure_one()
+        return self.action_view_purchase_order()
+
+    def name_get(self):
+        names = []
+        if not self._context.get('come_from_state_need_action'):
+            return super(PurchaseOrder, self).name_get()
+        for record in self:
+            names.append((record.id, record.cgm_name))
+        return names
