@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="need_mgmt_process_form_view" model="ir.ui.view">
+            <field name="name">need_mgmt_process_form_view</field>
+            <field name="model">need.mgmt.process</field>
+            <field name="arch" type="xml">
+                <form string="Need Mgmt Process">
+                    <header>
+                        <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight" data-hotkey="c"
+                                attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                        <button name="button_send_by_mail" string="Send By Mail" type="object" class="oe_highlight" data-hotkey="s"
+                                attrs="{'invisible':[('state', 'not in', ['checked'])]}"/>
+                        <button name="button_print" string="Print" type="object" class="oe_highlight" data-hotkey="p"
+                                attrs="{'invisible':[('state', 'not in', ['checked', 'sent'])]}"/>
+                        <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" data-hotkey="v"
+                                attrs="{'invisible':[('state', '!=', 'sent')]}"/>
+                        <button name="button_generate_pos" string="Generate POs" type="object" class="oe_highlight" data-hotkey="g"
+                                attrs="{'invisible':[('state', '!=', 'confirmed')]}"/>
+                        <button name="button_validate" string="Validate" type="object" class="oe_highlight" data-hotkey="y"
+                                attrs="{'invisible':[('state', '!=', 'po_generated')]}"/>
+                        <button name="button_view_pos" string="View POs" type="object" class="oe_highlight"
+                                data-hotkey="t" attrs="{'invisible':[('state', 'not in', ['po_generated', 'done'])]}"/>
+                        <button name="button_cancel" string="Cancel" type="object" data-hotkey="x"
+                                attrs="{'invisible':[('state', '=', 'cancel')]}"/>
+                        <button name="button_draft" states="cancel" string="Set to Draft" type="object" data-hotkey="o"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,checked,sent,confirmed,po_generated,done"
+                               readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" name="action_view_pos" type="object" icon="fa-credit-card">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="po_count"/>
+                                    </span>
+                                    <span class="o_stat_text">Purchase Orders</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="priority" widget="priority" class="mr-3"/>
+                                <field name="name" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="reference"/>
+                                <field name="licence_id"/>
+                                <field name="currency_id"/>
+                                <field name="purchase_order_ids" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="date_approve"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="need_mgmt_process_line_pg" string="Need Mgmt Process Lines">
+                                <field name="need_mgmt_process_line_ids" widget="section_and_note_one2many" mode="tree,kanban" nolabel="1">
+                                    <tree string="Need Mgmt Process Lines" editable="bottom">
+                                        <control>
+                                            <create name="add_product_control" string="Add a product"/>
+                                            <create name="add_section_control" string="Add a section"
+                                                    context="{'default_display_type': 'line_section'}"/>
+                                            <create name="add_note_control" string="Add a note"
+                                                    context="{'default_display_type': 'line_note'}"/>
+                                        </control>
+                                        <field name="display_type" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="product_id" string="SKU Code"/>
+                                        <field name="name" widget="section_and_note_text"/>
+                                        <field name="image" widget="image" class="oe_avatar" height="40"/>
+                                        <field name="barcode"/>
+                                        <field name="qty_available"/>
+                                        <field name="virtual_available"/>
+                                        <field name="qty_expected"/>
+                                        <field name="product_qty"/>
+                                        <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="seller_id" context="{'filter_by_product': product_id}"/>
+                                    </tree>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field name="notes" nolabel="1" placeholder="Define your terms and conditions ..."/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <!--field name="tax_totals_json" widget="account-tax-totals-field" nolabel="1" colspan="2"/-->
+                                    </group>
+                                </group>
+                                <div class="oe_clear"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="need_mgmt_process_tree_view" model="ir.ui.view">
+            <field name="name">need_mgmt_process_tree_view</field>
+            <field name="model">need.mgmt.process</field>
+            <field name="arch" type="xml">
+                <tree string="Need Mgmt Process" decoration-info="state in ['draft', 'sent']" decoration-muted="state == 'cancel'">
+                    <field name="priority" optional="show" widget="priority" nolabel="1"/>
+                    <field name="reference"/>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="date_approve"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="need_mgmt_process_calendar_view" model="ir.ui.view">
+            <field name="name">need_mgmt_process_calendar_view</field>
+            <field name="model">need.mgmt.process</field>
+            <field name="arch" type="xml">
+                <calendar string="Need Mgmt Process" date_start="date" color="color">
+                    <field name="name"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="need_mgmt_process_search_view" model="ir.ui.view">
+            <field name="name">need_mgmt_process_search_view</field>
+            <field name="model">need.mgmt.process</field>
+            <field name="arch" type="xml">
+                <search string="Need Mgmt Process">
+                    <field name="reference"/>
+                    <field name="name"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Date" name="date_filter_group_by" domain="[]" context="{'group_by':'date'}"/>
+                        <filter string="State" name="state_filter_group_by" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="need_mgmt_process_act_window" model="ir.actions.act_window">
+            <field name="name">Need Mgmt Process</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">need.mgmt.process</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Need Mgmt Process.
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

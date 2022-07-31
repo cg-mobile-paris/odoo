@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="need_mgmt_process_line_tree_view" model="ir.ui.view">
+            <field name="name">need_mgmt_process_line_tree_view</field>
+            <field name="model">need.mgmt.process.line</field>
+            <field name="arch" type="xml">
+                <tree string="Need Mgmt Process Lines" editable="bottom">
+                    <field name="currency_id" invisible="1"/>
+                    <field name="sequence" widget="handle"/>
+                    <field name="product_id" string="SKU Code"/>
+                    <field name="name"/>
+                    <field name="image" widget="image" class="oe_avatar" height="40"/>
+                    <field name="barcode"/>
+                    <field name="qty_available"/>
+                    <field name="virtual_available"/>
+                    <field name="qty_expected"/>
+                    <field name="product_qty"/>
+                    <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="seller_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
