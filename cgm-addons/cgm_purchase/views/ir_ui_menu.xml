@@ -3,7 +3,7 @@
     <data noupdate="0">
 
         <menuitem id="need_mgmt_process_menu"
-                  name="Need Mgmt Process"
+                  name="Needs Mgmt Process"
                   sequence="0"
                   action="need_mgmt_process_act_window"
                   parent="purchase.menu_purchase_root"/>

@@ -37,7 +37,7 @@
             <field name="arch" type="xml">
                 <field name="default_code" position="replace"/>
                 <field name="priority" position="after">
-                    <field name="default_code" class="o_text_overflow" placeholder="e.g. GUHMP13SU4GPRK" string="SKU Code" required="1"/>
+                    <field name="default_code" class="o_text_overflow" placeholder="e.g. GUHMP13SU4GPRK"/>
                 </field>
                 <xpath expr="//div[hasclass('oe_title')]/h1" position="before">
                     <label for="default_code" string="SKU Code"/>

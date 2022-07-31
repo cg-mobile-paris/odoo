@@ -19,6 +19,8 @@
         # security
         'security/ir.model.access.csv',
         # report
+        'report/need_mgmt_process_report.xml',
+        'report/need_mgmt_process_report_templates.xml',
         # views
         'views/need_mgmt_process_views.xml',
         'views/need_mgmt_process_line_views.xml',
