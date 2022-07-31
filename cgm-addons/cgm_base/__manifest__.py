@@ -9,8 +9,13 @@
     'license': 'AGPL-3',
     'website': 'https://arkeup.com',
     'description': '',
-    'depends': [],
-    'data': [],
+    'depends': [
+        'product',
+    ],
+    'data': [
+        # views
+        'views/product_template_views.xml',
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,

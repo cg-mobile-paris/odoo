@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_need_mgmt_process_all,access_need_mgmt_process all,model_need_mgmt_process,,1,0,0,0
+access_need_mgmt_process_user,access_need_mgmt_process user,model_need_mgmt_process,base.group_user,1,1,1,0
+access_need_mgmt_process_manager,access_need_mgmt_process manager,model_need_mgmt_process,base.group_system,1,1,1,1
+
+access_need_mgmt_process_line_all,access_need_mgmt_process_line all,model_need_mgmt_process_line,,1,0,0,0
+access_need_mgmt_process_line_user,access_need_mgmt_process_line user,model_need_mgmt_process_line,base.group_user,1,1,1,0
+access_need_mgmt_process_line_manager,access_need_mgmt_process_line manager,model_need_mgmt_process_line,base.group_system,1,1,1,1

@@ -78,14 +78,13 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <field name="default_code" position="replace"/>
+
             <field name="barcode" position="replace"/>
             <field name="categ_id" position="replace"/>
 
             <xpath expr="//page[@name='general_information']//group" position="inside">
                 <group>
-                    <field name="default_code"/>
-                    <field name="barcode"/>
+                    <field name="barcode" string="EAN Code"/>
                     <field name="product_type_product"/>
                     <field name="royalties_margins"/>
                 </group>
@@ -93,7 +92,7 @@
 
             <xpath expr="//page[@name='general_information']//group" position="inside">
                 <group>
-                    <field name="categ_id"/>
+                    <field name="categ_id" string="Family"/>
                     <field name="form_id"/>
                     <field name="material_id"/>
                     <field name="color_id"/>
@@ -104,17 +103,6 @@
                 </group>
             </xpath>
 
-            <field name="default_code" position="attributes">
-                <attribute name="string">SKU Code</attribute>
-            </field>
-
-            <field name="barcode" position="attributes">
-                <attribute name="string">EAN Code</attribute>
-            </field>
-
-            <field name="categ_id" position="attributes">
-                <attribute name="string">Family</attribute>
-            </field>
         </field>
     </record>
 
