@@ -2,10 +2,10 @@
 <odoo>
     <data noupdate="0">
 
-        <menuitem id="need_state_menu"
-                  name="Need States"
+        <menuitem id="need_mgmt_process_menu"
+                  name="Needs Mgmt Process"
                   sequence="0"
-                  action="purchase_order_action"
+                  action="need_mgmt_process_act_window"
                   parent="purchase.menu_purchase_root"/>
 
     </data>

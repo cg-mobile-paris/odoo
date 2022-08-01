@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'CG-MOBILE APP',
+    'name': 'CG-MOBILE CONTACTS',
     'summary': '',
-    'category': 'Application',
+    'category': 'Sales/CRM',
     'version': '15.0.0.1',
-    'sequence': -100,
+    'sequence': -92,
     'author': 'ArkeUp',
     'license': 'AGPL-3',
     'website': 'https://arkeup.com',
     'description': '',
     'depends': [
-        'cgm_stock',
-        'cgm_account',
-        'cgm_purchase',
-        'cgm_contacts',
+        'cgm_base',
     ],
-    'data': [],
-    'application': True,
+    'data': [
+        # views
+        'views/res_partner_views.xml',
+    ],
+    'application': False,
     'installable': True,
     'auto_install': False,
 }
