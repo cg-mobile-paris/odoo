@@ -11,6 +11,7 @@
     'description': '',
     'depends': [
         'product',
+        'contacts',
     ],
     'data': [
         # views

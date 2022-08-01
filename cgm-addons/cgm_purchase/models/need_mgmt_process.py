@@ -14,25 +14,36 @@ class NeedMgmtProcess(models.Model):
     reference = fields.Char('Reference', required=True)
     date = fields.Date('Date', required=False)
     date_approve = fields.Date('Date Approve', required=False)
-    currency_id = fields.Many2one('res.currency', 'Currency', required=False)
+    currency_id = fields.Many2one('res.currency', 'Currency', required=True)
     licence_id = fields.Many2one('product.licence', 'Licence', required=False)
     state = fields.Selection([('draft', 'Draft'), ('checked', 'Checked'), ('sent', 'Sent'), ('confirmed', 'Confirmed'),
-                              ('po_generated', 'PO Generated'), ('done', 'Done'), ('cancel', 'Cancel')], 'State', default='draft')
+                              ('po_generated', 'PO Generated'), ('done', 'Done'), ('cancel', 'Cancel')], 'State', default='draft',
+                             track_visibility='always')
     color = fields.Integer('Color', required=False, default=10)
     notes = fields.Html('Notes', required=False)
     company_id = fields.Many2one('res.company', 'Company', required=False)
     need_mgmt_process_line_ids = fields.One2many('need.mgmt.process.line', 'need_mgmt_process_id', 'Need Mgmt Process Lines')
     purchase_order_ids = fields.One2many('purchase.order', 'need_mgmt_process_id', 'Purchase Orders', required=False)
     po_count = fields.Integer('PO Count', compute='_compute_po_count', store=True)
+    responsible_id = fields.Many2one('res.users', 'Responsible', required=True)
+    user_id = fields.Many2one('res.users', string='User', required=True)
 
     @api.model
     def default_get(self, fields_list):
-        result = super(NeedMgmtProcess, self).default_get(fields_list)
-        if not result.get('reference') and 'reference' not in result:
-            result.update({'reference': self.env['ir.sequence'].next_by_code('need.mgmt.process.seq')})
-        if not result.get('date') and 'date' not in result:
-            result.update({'date': fields.Date.today()})
-        return result
+        res = super(NeedMgmtProcess, self).default_get(fields_list)
+        if not res.get('reference') and 'reference' not in res:
+            res.update({'reference': self.env['ir.sequence'].next_by_code('need.mgmt.process.seq')})
+        if not res.get('date') and 'date' not in res:
+            res.update({'date': fields.Date.today()})
+        if not res.get('user_id') and 'user_id' not in res:
+            res.update({'user_id': self.env.user.id})
+        if not res.get('responsible_id') and 'responsible_id' not in res:
+            res.update({'responsible_id': self.env.user.id})
+        if not res.get('company_id') and 'company_id' not in res:
+            res.update({'company_id': self.env.user.company_id.id})
+        if not res.get('currency_id') and 'currency_id' not in res:
+            res.update({'currency_id': self.env.ref('base.USD').id})
+        return res
 
     @api.depends('purchase_order_ids')
     def _compute_po_count(self):
@@ -93,7 +104,7 @@ class NeedMgmtProcess(models.Model):
         """
         self.ensure_one()
         self.write({'state': 'sent'})
-        return self.env.ref('cgm_purchase.report_state_neet').report_action(self)
+        return self.env.ref('cgm_purchase.action_report_need_mgmt_process').report_action(self)
 
     def button_confirm(self):
         """
@@ -147,7 +158,7 @@ class NeedMgmtProcess(models.Model):
         :return:
         """
         self.purchase_order_ids.button_cancel()
-        self.write({'state': 'cancel'})
+        self.write({'state': 'cancel', 'date_approve': False})
         return True
 
     def button_draft(self):

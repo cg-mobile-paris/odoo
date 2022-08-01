@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_need_mgmt_process_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.responsible_id.partner_id.lang)"/>
+            <t t-set="address">
+                <div t-field="doc.responsible_id.partner_id"
+                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+            </t>
+            <t t-set="information_block">
+                <img t-if="doc.licence_id.image_1920" t-att-src="'data:image/png;base64,%s' % to_text(doc.licence_id.image_1920)"
+                     style="width: 90%"/>
+            </t>
+            <div class="page">
+                <div class="oe_structure"/>
+                <br/>
+                <h2 class="mt16">
+                    <span>Need Mgmt Process #</span>
+                    <span t-field="doc.name"/>
+                </h2>
+                <br/>
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="doc.date" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Date:</strong>
+                        <p class="m-0" t-field="doc.date" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div t-if="doc.date_approve" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Date Approve:</strong>
+                        <p class="m-0" t-field="doc.date_approve" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div t-if="doc.user_id" class="col-auto col-3 mw-100 mb-2">
+                        <strong>User:</strong>
+                        <p class="m-0" t-field="doc.user_id"/>
+                    </div>
+                </div>
+
+                <table class="table table-sm o_main_table">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_default_code" class="text-center">SKU Code</th>
+                            <th name="th_description" class="text-left">Description</th>
+                            <th name="th_thumbnail" class="text-center">Thumbnail</th>
+                            <th name="th_barcode" class="text-center">EAN Code</th>
+                            <th name="th_price_unit" class="text-center">Price Unit</th>
+                            <th name="th_qty_available" class="text-center">Qty Available</th>
+                            <th name="th_virtual_available" class="text-center">Qty Expected</th>
+                            <th name="th_qty_projected" class="text-center">Qty Projected</th>
+                            <th name="th_qty_to_order" class="text-center">Qty To Order</th>
+                            <th name="th_factory" class="text-left">Factory</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-foreach="doc.need_mgmt_process_line_ids" t-as="line">
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <t t-if="not line.display_type">
+                                    <td name="td_default_code" class="text-center">
+                                        <span t-field="line.product_id"/>
+                                    </td>
+                                    <td name="td_description" class="text-left">
+                                        <span t-field="line.product_id.name"/>
+                                    </td>
+                                    <td name="td_thumbnail" class="text-center">
+                                        <img t-if="line.image" t-att-src="'data:image/png;base64,%s' % to_text(line.image)"
+                                             style="width: 90%"/>
+                                    </td>
+                                    <td name="td_barcode" class="text-center">
+                                        <span t-field="line.barcode"/>
+                                    </td>
+                                    <td name="td_price_unit" class="text-center">
+                                        <span t-field="line.price_unit"/>
+                                    </td>
+                                    <td name="td_qty_available" class="text-center">
+                                        <span t-field="line.qty_available"/>
+                                    </td>
+                                    <td name="td_virtual_available" class="text-center">
+                                        <span t-field="line.virtual_available"/>
+                                    </td>
+                                    <td name="td_qty_projected" class="text-center">
+                                        <span t-field="line.qty_projected"/>
+                                    </td>
+                                    <td name="td_qty_to_order" class="text-center">
+                                        <span t-field="line.product_qty"/>
+                                    </td>
+                                    <td name="td_factory" class="text-left">
+                                        <span t-field="line.seller_id"/>
+                                    </td>
+                                </t>
+                                <t t-if="line.display_type == 'line_section'">
+                                    <td name="td_section_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <t t-set="current_section" t-value="line"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                </t>
+                                <t t-if="line.display_type == 'line_note'">
+                                    <td name="td_note_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div class="oe_structure"/>
+                <p t-field="doc.notes"/>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="report_need_mgmt_process">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="cgm_purchase.report_need_mgmt_process_document" t-lang="doc.responsible_id.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
