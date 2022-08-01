@@ -3,27 +3,35 @@
     <data noupdate="0">
 
         <template id="cgm_stock_state_document" inherit_id="sale.report_saleorder_document" primary="True" priority="1000">
+            <xpath expr="//t[@t-if='doc.partner_shipping_id == doc.partner_invoice_id
+                             and doc.partner_invoice_id != doc.partner_id
+                             or doc.partner_shipping_id != doc.partner_invoice_id']" position="replace">
+                <t t-set="information_block">
+                    <img t-if="doc.sale_order_template_id.licence_id.image_1920"
+                         t-att-src="'data:image/png;base64,%s' % to_text(doc.sale_order_template_id.licence_id.image_1920)" style="width: 90%"/>
+                </t>
+            </xpath>
             <xpath expr="//h2[hasclass('mt16')]" position="replace">
                 <h2>
-                    <span>Stock State</span>
+                    <span>Stock State #</span>
                     <span t-field="doc.sale_order_template_id"/>
                 </h2>
             </xpath>
             <!-- th -->
             <xpath expr="//th[@name='th_description']" position="before">
-                <th name="th_sku_code" class="text-left">SKU
+                <th name="th_sku_code" class="text-center">SKU
                     <br/>
                     Code
                 </th>
             </xpath>
             <xpath expr="//th[@name='th_quantity']" position="before">
-                <th name="th_barcode" class="text-left">EAN
+                <th name="th_barcode" class="text-center">EAN
                     <br/>
                     Code
                 </th>
             </xpath>
             <xpath expr="//th[@name='th_quantity']" position="after">
-                <th name="th_desired_qty" class="text-right">Desired
+                <th name="th_desired_qty" class="text-center">Desired
                     <br/>
                     Quantity
                 </th>
@@ -31,20 +39,20 @@
             <xpath expr="//th[@name='th_taxes']" position="replace"/>
             <!-- td -->
             <xpath expr="//td[@name='td_name']" position="before">
-                <td name="td_sku_code">
+                <td name="td_sku_code" class="text-center">
                     <span t-field="line.product_id.default_code"/>
                 </td>
             </xpath>
             <xpath expr="//span[@t-field='line.name']" position="replace">
-                <span t-field="line.product_id.name"/>
+                <span t-field="line.product_id.name" class="text-left"/>
             </xpath>
             <xpath expr="//td[@name='td_quantity']" position="after">
-                <td name="td_barcode">
-                    <span t-field="line.product_id.barcode"/>
-                </td>
+                <td name="th_desired_qty"></td>
             </xpath>
             <xpath expr="//td[@name='td_quantity']" position="before">
-                <td name="th_desired_qty"></td>
+                <td name="td_barcode" class="text-center">
+                    <span t-field="line.product_id.barcode"/>
+                </td>
             </xpath>
             <xpath expr="//td[@name='td_taxes']" position="replace"/>
             <xpath expr="//div[hasclass('col-auto', 'col-3', 'mw-100', 'mb-2')][3]" position="replace">
