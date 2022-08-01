@@ -13,6 +13,7 @@
         'cgm_stock',
         'cgm_account',
         'cgm_purchase',
+        'cgm_contacts',
     ],
     'data': [],
     'application': True,

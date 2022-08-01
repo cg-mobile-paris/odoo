@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_partner_form_cgm" model="ir.ui.view">
-        <field name="name">res.partner.cgm.form.inherit</field>
+
+    <record id="res_partner_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="priority" eval="500"/>
         <field name="arch" type="xml">
-            <group name="sale">
+            <group name="royalties_grp">
                 <field name="is_royalties"/>
             </group>
         </field>
@@ -18,9 +19,10 @@
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="priority" eval="500"/>
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='inactive']" position="before">
-                <filter string="Royalties" name="type_royalties" domain="[('is_royalties', '=', True)]"/>
-            </xpath>
+            <filter name="inactive" position="before">
+                <filter string="Royalties" name="royalties_filter" domain="[('is_royalties', '=', True)]"/>
+            </filter>
         </field>
     </record>
+
 </odoo>
