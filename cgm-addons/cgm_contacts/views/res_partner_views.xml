@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="priority" eval="500"/>
         <field name="arch" type="xml">
-            <group name="royalties_grp">
+            <group name="sale" position="inside">
                 <field name="is_royalties"/>
             </group>
         </field>
