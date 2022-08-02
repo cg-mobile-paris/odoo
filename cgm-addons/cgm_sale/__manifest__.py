@@ -13,6 +13,7 @@
         'cgm_base',
         'sale_management',
         'sale_order_line_product_image',
+        'sale_delivery_state',
     ],
     'data': [
         # data

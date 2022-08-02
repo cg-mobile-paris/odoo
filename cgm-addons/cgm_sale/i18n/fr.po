@@ -1153,3 +1153,28 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} État de stock (Ref {{ "
 "object.sale_order_template_id.name or 'n/a' }})\n"
+
+#. module: sale_delivery_state
+#: model:ir.model.fields,field_description:sale_delivery_state.field_sale_order__delivery_state
+msgid "Delivery State"
+msgstr "État de livraison"
+
+#. module: sale_delivery_state
+#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__done
+msgid "Done"
+msgstr "Fait"
+
+#. module: sale_delivery_state
+#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__no
+msgid "No delivery"
+msgstr "Pas de livraison"
+
+#. module: sale_delivery_state
+#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__partially
+msgid "Partially processed"
+msgstr "Partiellement livré"
+
+#. module: sale_delivery_state
+#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__unprocessed
+msgid "Unprocessed"
+msgstr "Non traité"
