@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_ir_actions_act_window_all,access_ir_actions_act_window all,base.model_ir_actions_act_window,,1,0,0,0
+access_ir_actions_act_window_view_all,access_ir_actions_act_window_view all,base.model_ir_actions_act_window_view,,1,0,0,0
+access_ir_actions_act_window_close_all,access_ir_actions_act_window_close all,base.model_ir_actions_act_window_close,,1,0,0,0

@@ -13,6 +13,8 @@
         'cgm_base',
     ],
     'data': [
+        # security
+        'security/res_groups.xml',
         # views
         'views/res_partner_views.xml',
     ],

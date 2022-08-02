@@ -27,3 +27,11 @@ access_product_brand_admin,access_product_brand admin,model_product_brand,base.g
 access_product_color_all,access_product_color all,model_product_color,,1,0,0,0
 access_product_color_user,access_product_color user,model_product_color,base.group_user,1,1,1,0
 access_product_color_admin,access_product_color admin,model_product_color,base.group_system,1,1,1,1
+
+access_sale_order_template_all,access_sale_order_template all,sale_management.model_sale_order_template,,1,0,0,0
+access_sale_order_template_user,access_sale_order_template user,sale_management.model_sale_order_template,base.group_user,1,1,1,0
+access_sale_order_template_admin,access_sale_order_template admin,sale_management.model_sale_order_template,base.group_system,1,1,1,1
+
+access_sale_order_template_line_all,access_sale_order_template_line all,sale_management.model_sale_order_template_line,,1,0,0,0
+access_sale_order_template_line_user,access_sale_order_template_line user,sale_management.model_sale_order_template_line,base.group_user,1,1,1,0
+access_sale_order_template_line_admin,access_sale_order_template_line admin,sale_management.model_sale_order_template_line,base.group_system,1,1,1,1

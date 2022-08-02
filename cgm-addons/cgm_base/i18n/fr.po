@@ -1,0 +1,81 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cgm_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-02 11:31+0000\n"
+"PO-Revision-Date: 2022-08-02 11:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cgm_base
+#: model:res.groups,name:cgm_base.group_adv
+msgid "ADV"
+msgstr "ADV"
+
+#. module: cgm_base
+#: model:res.groups,name:cgm_base.group_accounting_manager
+msgid "Accounting Manager"
+msgstr "Comptable"
+
+#. module: cgm_base
+#: model:res.groups,name:cgm_base.group_director
+msgid "Group Director"
+msgstr "Directeur(ice) de groupe"
+
+#. module: cgm_base
+#: model:res.groups,name:cgm_base.group_manager
+msgid "Group Manager"
+msgstr "Gestionnaire de groupe"
+
+#. module: cgm_base
+#: model:ir.model,name:cgm_base.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: cgm_base
+#: model_terms:ir.ui.view,arch_db:cgm_base.product_template_form_view_inherit
+msgid "Product Name"
+msgstr "Nom de l'article"
+
+#. module: cgm_base
+#: model:ir.model,name:cgm_base.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: cgm_base
+#: model:ir.module.category,name:cgm_base.security_category
+msgid "Role"
+msgstr "Rôle"
+
+#. module: cgm_base
+#: model_terms:ir.ui.view,arch_db:cgm_base.product_template_form_only_view_inherit
+msgid "SKU Code"
+msgstr "SKU Code"
+
+#. module: cgm_base
+#: model:res.groups,name:cgm_base.group_system_administrator
+msgid "System Administrator"
+msgstr "Administrateur système"
+
+#. module: cgm_base
+#: model:ir.module.category,name:cgm_base.profile_category
+msgid "User Profiles"
+msgstr "Profils de l'utilisateur"
+
+#. module: cgm_base
+#: model_terms:ir.ui.view,arch_db:cgm_base.product_template_form_view_inherit
+msgid "e.g. Cheese Burger"
+msgstr "ex. Cheese Burger"
+
+#. module: cgm_base
+#: model_terms:ir.ui.view,arch_db:cgm_base.product_template_form_only_view_inherit
+msgid "e.g. GUHMP13SU4GPRK"
+msgstr "ex. GUHMP13SU4GPRK"
