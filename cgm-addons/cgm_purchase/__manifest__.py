@@ -21,6 +21,7 @@
         'security/res_groups.xml',
         # report
         'report/need_mgmt_process_report.xml',
+        'report/purchase_quotation_templates.xml',
         'report/need_mgmt_process_report_templates.xml',
         # views
         'views/need_mgmt_process_views.xml',
