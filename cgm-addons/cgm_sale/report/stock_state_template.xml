@@ -8,7 +8,8 @@
                              or doc.partner_shipping_id != doc.partner_invoice_id']" position="replace">
                 <t t-set="information_block">
                     <img t-if="doc.sale_order_template_id.licence_id.image_1920"
-                         t-att-src="'data:image/png;base64,%s' % to_text(doc.sale_order_template_id.licence_id.image_1920)" style="width: 90%"/>
+                         t-att-src="'data:image/png;base64,%s' % to_text(doc.sale_order_template_id.licence_id.image_1920)"
+                         style="width: 90%"/>
                 </t>
             </xpath>
             <xpath expr="//h2[hasclass('mt16')]" position="replace">
@@ -25,6 +26,7 @@
                 </th>
             </xpath>
             <xpath expr="//th[@name='th_quantity']" position="before">
+                <th name="th_thumbnail" class="text-center">Thumbnail</th>
                 <th name="th_barcode" class="text-center">EAN
                     <br/>
                     Code
@@ -50,6 +52,11 @@
                 <td name="th_desired_qty"></td>
             </xpath>
             <xpath expr="//td[@name='td_quantity']" position="before">
+                <td name="td_thumbnail" class="text-center">
+                    <img t-if="line.image"
+                         style="width: 90%"
+                         t-att-src="'data:image/png;base64,%s' % to_text(line.image)"/>
+                </td>
                 <td name="td_barcode" class="text-center">
                     <span t-field="line.product_id.barcode"/>
                 </td>
