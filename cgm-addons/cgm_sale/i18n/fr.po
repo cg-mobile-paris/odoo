@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-01 16:10+0000\n"
-"PO-Revision-Date: 2022-08-01 16:10+0000\n"
+"POT-Creation-Date: 2022-08-02 15:47+0000\n"
+"PO-Revision-Date: 2022-08-02 15:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -269,6 +269,11 @@ msgstr "Date début"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_collection_form_view
 msgid "Dates"
 msgstr ""
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sales_order_search_view_inherit
+msgid "Delivery State"
+msgstr "État de livraison"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
@@ -770,6 +775,11 @@ msgid "Print Quotations"
 msgstr "Imprimer les états de stock"
 
 #. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_product_brand
 #: model:ir.model.fields,field_description:cgm_sale.field_product_product__brand_id
 #: model:ir.model.fields,field_description:cgm_sale.field_product_template__brand_id
@@ -933,7 +943,7 @@ msgid "Royalties & Margins"
 msgstr "Royalties & Marges"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
+#: model_terms:ir.ui.view,arch_db:cgm_sale.report_saleorder_document_inherit
 msgid ""
 "SKU\n"
 "                    <br/>\n"
@@ -973,6 +983,11 @@ msgstr "Modèle de devis"
 #: model:ir.model,name:cgm_sale.model_sale_order
 msgid "Sales Order"
 msgstr "Bon de commande"
+
+#. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
@@ -1054,6 +1069,12 @@ msgstr "Il n'y a pas de Devis/BC généré pour cet état de stock."
 #, python-format
 msgid "There is no report"
 msgstr "Il n'y a pas de rapport d'état de stock."
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__image
+#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
+msgid "Thumbnail"
+msgstr "Thumbnail"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type
@@ -1153,28 +1174,3 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} État de stock (Ref {{ "
 "object.sale_order_template_id.name or 'n/a' }})\n"
-
-#. module: sale_delivery_state
-#: model:ir.model.fields,field_description:sale_delivery_state.field_sale_order__delivery_state
-msgid "Delivery State"
-msgstr "État de livraison"
-
-#. module: sale_delivery_state
-#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__done
-msgid "Done"
-msgstr "Fait"
-
-#. module: sale_delivery_state
-#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__no
-msgid "No delivery"
-msgstr "Pas de livraison"
-
-#. module: sale_delivery_state
-#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__partially
-msgid "Partially processed"
-msgstr "Partiellement livré"
-
-#. module: sale_delivery_state
-#: model:ir.model.fields.selection,name:sale_delivery_state.selection__sale_order__delivery_state__unprocessed
-msgid "Unprocessed"
-msgstr "Non traité"

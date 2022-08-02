@@ -33,6 +33,7 @@
         # data
         'data/mail_template_data.xml',
         # views
+        'views/sale_order_views.xml',
         'views/product_form_views.xml',
         'views/product_material_views.xml',
         'views/product_licence_views.xml',
