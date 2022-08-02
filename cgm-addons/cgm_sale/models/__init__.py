@@ -5,6 +5,7 @@ from . import product_form
 from . import product_color
 from . import product_brand
 from . import product_device
+from . import product_product
 from . import product_licence
 from . import sale_order_line
 from . import product_material
