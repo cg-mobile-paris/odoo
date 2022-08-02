@@ -18,6 +18,7 @@
         'data/ir_sequence_data.xml',
         # security
         'security/ir.model.access.csv',
+        'security/res_groups.xml',
         # report
         'report/need_mgmt_process_report.xml',
         'report/need_mgmt_process_report_templates.xml',

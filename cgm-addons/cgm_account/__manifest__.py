@@ -15,6 +15,8 @@
         'account_accountant',
     ],
     'data': [
+        # security
+        'security/res_groups.xml',
         # report
         'report/report_invoice.xml',
     ],
