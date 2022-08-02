@@ -11,8 +11,10 @@
     'description': '',
     'depends': [
         'cgm_base',
+        'sales_team',
         'sale_management',
         'sale_order_line_product_image',
+        'sale_delivery_state',
     ],
     'data': [
         # data
@@ -25,6 +27,7 @@
         'data/product_color_data.xml',
         # security
         'security/ir.model.access.csv',
+        'security/res_groups.xml',
         # report
         'report/stock_state_template.xml',
         'report/sale_report.xml',

@@ -14,6 +14,9 @@
         'contacts',
     ],
     'data': [
+        # security
+        'security/ir.model.access.csv',
+        'security/res_groups.xml',
         # views
         'views/product_template_views.xml',
     ],
