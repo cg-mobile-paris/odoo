@@ -18,7 +18,7 @@ class NeedMgmtProcessLine(models.Model):
     virtual_available = fields.Float('Projected Quantity', readonly=True)
     qty_expected = fields.Float('Expected Quantity', readonly=True)
     price_unit = fields.Monetary('Price Unit', required=False)
-    seller_id = fields.Many2one('product.supplierinfo', 'Vendor', equired=False)
+    seller_id = fields.Many2one('product.supplierinfo', 'Vendor', required=False)
     company_id = fields.Many2one('res.company', 'Company', required=False)
     need_mgmt_process_id = fields.Many2one('need.mgmt.process', 'Need Mgmt Process', required=True, index=True)
     display_type = fields.Selection([('line_section', 'Section'),
