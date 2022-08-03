@@ -10,9 +10,11 @@
     'website': 'https://arkeup.com',
     'description': '',
     'depends': [
+        'cgm_i18n',
         'cgm_stock',
         'cgm_account',
         'cgm_purchase',
+        'cgm_contacts',
     ],
     'data': [],
     'application': True,

@@ -11,8 +11,9 @@
     'description': '',
     'depends': [
         'cgm_base',
+        'sales_team',
         'sale_management',
-        'sale_order_line_product_image',
+        'sale_delivery_state',
     ],
     'data': [
         # data
@@ -25,7 +26,14 @@
         'data/product_color_data.xml',
         # security
         'security/ir.model.access.csv',
+        'security/res_groups.xml',
+        # report
+        'report/stock_state_template.xml',
+        'report/sale_report.xml',
+        # data
+        'data/mail_template_data.xml',
         # views
+        'views/sale_order_views.xml',
         'views/product_form_views.xml',
         'views/product_material_views.xml',
         'views/product_licence_views.xml',
@@ -35,6 +43,7 @@
         'views/product_device_views.xml',
         'views/product_brand_views.xml',
         'views/product_color_views.xml',
+        'views/sale_order_template_views.xml',
         'views/ir_ui_menu.xml',
     ],
     'application': False,

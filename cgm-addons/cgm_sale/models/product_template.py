@@ -9,7 +9,7 @@ class ProductTemplate(models.Model):
 
     form_id = fields.Many2one('product.form', 'Product Form')
     licence_id = fields.Many2one('product.licence', 'Product Licence')
-    material_id = fields.Many2one('product.material', 'Product Material')    
+    material_id = fields.Many2one('product.material', 'Product Material')
     collection_id = fields.Many2one('product.collection', 'Product Collection')
     device_id = fields.Many2one('product.device', 'Product Device')
     brand_id = fields.Many2one('product.brand', 'Product Brand')
@@ -22,3 +22,9 @@ class ProductTemplate(models.Model):
         for record in self:
             if self.search([('default_code', '!=', False), ('default_code', '=', record.default_code), ('id', '!=', record.id)], limit=1):
                 raise ValidationError(_('An item with the same SKU Code already exists in the system.'))
+
+    @api.constrains('barcode')
+    def _check_unique_barcode(self):
+        for record in self:
+            if self.search([('barcode', '!=', False), ('barcode', '=', record.barcode), ('id', '!=', record.id)], limit=1):
+                raise ValidationError(_('An item with the same EAN Code already exists in the system.'))

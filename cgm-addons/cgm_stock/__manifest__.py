@@ -15,6 +15,7 @@
     ],
     'data': [
         # security
+        'security/res_groups.xml',
         # data
         # views
     ],

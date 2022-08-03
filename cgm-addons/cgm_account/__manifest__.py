@@ -14,7 +14,12 @@
         'cgm_base',
         'account_accountant',
     ],
-    'data': [],
+    'data': [
+        # security
+        'security/res_groups.xml',
+        # report
+        'report/report_invoice.xml',
+    ],
     'application': False,
     'installable': True,
     'auto_install': False,

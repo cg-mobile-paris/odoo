@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="sale_order_template_view_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.template.form.state</field>
+        <field name="model">sale.order.template</field>
+        <field name="mode">primary</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <div class="oe_title">
+                    <span class="o_form_label">Name</span>
+                    <h1>
+                        <field name="name" placeholder="e.g. Stock State Guess 2022-07-25"/>
+                    </h1>
+                </div>
+            </xpath>
+
+            <field name="active" position="after">
+                <field name="licence_id" required="1"/>
+                <field name="pricelist_id" options="{'no_create': True, 'no_edit': True}"/>
+                <field name="partner_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+            </field>
+
+            <field name="company_id" position="before">
+                <field name="date"/>
+                <field name="type" required="1"/>
+            </field>
+
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="button_generate_quotation" string="Generate Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'checked')]}"/>
+                    <button name="button_send_quotation" string="Send Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'generated')]}"/>
+                    <button name="button_print_quotation" string="Print Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['generated', 'sent'])]}"/>
+                    <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'sent')]}"/>
+                    <button name="button_cancel" string="Cancel" type="object" attrs="{'invisible': [('state', '=', 'cancel')]}"/>
+                    <button name="button_draft" string="Reset To Draft" type="object" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,checked,generated,sent,done" readonly="1"/>
+                </header>
+            </xpath>
+
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="action_view_sale_orders" type="object" icon="fa-usd">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="sale_order_count"/>
+                        </span>
+                        <span class="o_stat_text">Quotations/SO</span>
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record id="sale_order_template_view_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.template.tree.state</field>
+        <field name="model">sale.order.template</field>
+        <field name="mode">primary</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="sale_management.sale_order_template_view_tree"/>
+        <field name="arch" type="xml">
+
+            <field name="name" position="after">
+                <field name="date"/>
+                <field name="licence_id"/>
+                <field name="pricelist_id"/>
+                <field name="state"/>
+            </field>
+
+            <field name="name" position="attributes">
+                <attribute name="string">Name</attribute>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="sale_order_template_view_search" model="ir.ui.view">
+        <field name="name">sale.order.template.search</field>
+        <field name="model">sale.order.template</field>
+        <field name="arch" type="xml">
+            <search string="Search Quotation Template">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="licence_id"/>
+                <field name="pricelist_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Licence" name="filter_product_licence" context="{'group_by': 'licence_id'}"/>
+                    <filter string="Pricelist" name="filter_product_pricelist" context="{'group_by': 'pricelist_id'}"/>
+                    <filter string="Date" name="filter_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_state_action" model="ir.actions.act_window">
+        <field name="name">Stock States</field>
+        <field name="res_model">sale.order.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="sale_order_template_view_search"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'tree', 'view_id': ref('sale_order_template_view_tree_inherit')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_template_view_form_inherit')})]"/>
+        <field name="domain">[('type', '=', 'stock_state')]</field>
+        <field name="context">{'default_type': 'stock_state'}</field>
+    </record>
+
+</odoo>
