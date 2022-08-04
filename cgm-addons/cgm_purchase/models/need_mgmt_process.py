@@ -27,6 +27,10 @@ class NeedMgmtProcess(models.Model):
     po_count = fields.Integer('PO Count', compute='_compute_po_count', store=True)
     responsible_id = fields.Many2one('res.users', 'Responsible', required=True)
     user_id = fields.Many2one('res.users', string='User', required=True)
+    category_ids = fields.Many2many('product.category', 'need_mgmt_process_product_category_rel', 'template_id', 'category_id',
+                                    'Families', required=False)
+    device_ids = fields.Many2many('product.device', 'need_mgmt_process_product_device_rel', 'template_id', 'device_id',
+                                  'Devices', required=False)
 
     @api.model
     def default_get(self, fields_list):
@@ -50,8 +54,8 @@ class NeedMgmtProcess(models.Model):
         for record in self:
             record.po_count = len(record.purchase_order_ids)
 
-    @api.onchange('licence_id')
-    def _onchange_licence_id(self):
+    @api.onchange('licence_id', 'category_ids', 'device_ids')
+    def _onchange_licence_categories_devices(self):
         """
         Load products according to the selected licence
         :return: None
@@ -62,6 +66,10 @@ class NeedMgmtProcess(models.Model):
         products = self.licence_id.product_ids
         if not products:
             return {}
+        if self.category_ids:
+            products = products.filtered(lambda p: p.categ_id.id in self.category_ids.ids)
+        if self.device_ids:
+            products = products.filtered(lambda p: p.device_id.id in self.device_ids.ids)
         device_summary = {}
         for product in products:
             device_summary.setdefault(product.device_id, []).append(product)
