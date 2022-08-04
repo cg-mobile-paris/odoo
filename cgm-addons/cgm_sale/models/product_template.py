@@ -16,6 +16,7 @@ class ProductTemplate(models.Model):
     product_type_product = fields.Selection([('export_service', 'Export Service'), ('goods', 'Goods')], 'CGM Product Type')
     royalties_margins = fields.Selection([('yn', 'YN'), ('yy', 'YY'), ('nn', 'NN'), ('ny', 'NY')], 'Royalties & Margins')
     color_id = fields.Many2one('product.color', 'Product Color')
+    upc_code = fields.Char('UPC Code')
 
     @api.constrains('default_code')
     def _check_unique_default_code(self):
