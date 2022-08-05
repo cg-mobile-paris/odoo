@@ -27,9 +27,9 @@
                 <field name="force_delivery_state" invisible="True" />
             </field>
 
-            <field name="picking_policy" position="after">
+            <group name="sale_shipping" position="inside">
                 <field name="delivery_state"/>
-            </field>
+            </group>
         </field>
     </record>
 

@@ -12,6 +12,7 @@
     'depends': [
         'purchase',
         'cgm_sale',
+        'purchase_reception_status'
     ],
     'data': [
         # data

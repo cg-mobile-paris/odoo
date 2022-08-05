@@ -11,3 +11,4 @@ class ProductDevice(models.Model):
     name = fields.Char('Name', required=True)
     notes = fields.Text('Notes')
     active = fields.Boolean('Active', default=True)
+    color = fields.Integer('Color')
