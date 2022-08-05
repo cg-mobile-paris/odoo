@@ -14,7 +14,7 @@
         'sale_delivery_state',
     ],
     'data': [],
-    'application': True,
+    'application': False,
     'installable': True,
     'auto_install': False,
 }
