@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -69,7 +71,7 @@ class SaleOrderTemplate(models.Model):
         for device, products in device_summary.items():
             template_lines.append((0, 0, {'display_type': 'line_section', 'name': device.name or _('Indefinite')}))
             for product in products:
-                template_lines.append((0, 0, {'product_id': product.id, 'product_uom_qty': 1.0}))
+                template_lines.append((0, 0, {'product_id': product.id, 'product_uom_qty': 0.0}))
 
         self.update({'sale_order_template_line_ids': template_lines})
 
@@ -95,8 +97,13 @@ class SaleOrderTemplate(models.Model):
         :return:
         """
         self.ensure_one()
-        for line in self.sale_order_template_line_ids:
-            line.write({'product_uom_qty': line.product_id.qty_available})
+        for line in self.sale_order_template_line_ids.filtered(lambda l: not l.display_type):
+            to_date = self.date + relativedelta(days=self.number_of_days)
+            quantity = line.product_id.with_context(from_date=self.date, to_date=to_date).virtual_available
+            if not quantity:
+                line.unlink()
+                continue
+            line.write({'product_uom_qty': quantity})
         self.write({'state': 'checked'})
         return True
 

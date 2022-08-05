@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 16:41+0000\n"
-"PO-Revision-Date: 2022-08-04 16:41+0000\n"
+"POT-Creation-Date: 2022-08-05 21:57+0000\n"
+"PO-Revision-Date: 2022-08-05 21:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -94,6 +94,12 @@ msgstr "Ajouter une section"
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_attachment_count
 msgid "Attachment Count"
 msgstr "Nombre d'attachements"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__virtual_available
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
+msgid "Available Qty"
+msgstr "Qté disponible"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__qty_available
@@ -450,6 +456,11 @@ msgid "Number of Actions"
 msgstr "Nombre d'actions"
 
 #. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__number_of_days
+msgid "Number of Days"
+msgstr "Validité des stocks"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_has_error_counter
 msgid "Number of errors"
 msgstr "Nombre d'erreurs"
@@ -480,6 +491,17 @@ msgid "PO Generated"
 msgstr "Commandes générées"
 
 #. module: cgm_purchase
+#: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process__number_of_days
+msgid "Period of validity of stock"
+msgstr "Période de validité des stocks"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__qty_available
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
+msgid "Physical Qty"
+msgstr "Qté physique"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__access_url
 msgid "Portal Access URL"
 msgstr "URL d'accès au portail"
@@ -506,6 +528,12 @@ msgid "Product"
 msgstr "Article"
 
 #. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__qty_projected
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
+msgid "Projected Qty"
+msgstr "Qté projetée"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__virtual_available
 msgid "Projected quantity"
 msgstr "Quantité projetée"
@@ -524,24 +552,6 @@ msgstr "Ligne de commande d'achat"
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__purchase_order_ids
 msgid "Purchase Orders"
 msgstr "Commandes"
-
-#. module: cgm_purchase
-#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__qty_available
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
-msgid "Qty Available"
-msgstr "Qté disponible"
-
-#. module: cgm_purchase
-#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__virtual_available
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
-msgid "Qty Expected"
-msgstr "Qté attendue"
-
-#. module: cgm_purchase
-#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__qty_projected
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
-msgid "Qty Projected"
-msgstr "Qté projetée"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__product_qty
@@ -729,3 +739,8 @@ msgstr "Messages du site web"
 #: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process__website_message_ids
 msgid "Website communication history"
 msgstr "Historique de communication du site web"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
+msgid "days"
+msgstr "jours"

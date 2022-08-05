@@ -52,6 +52,14 @@
                     </div>
                 </button>
             </div>
+            <label for="number_of_days" position="attributes">
+                <attribute name="string">Stocks Validity</attribute>
+            </label>
+            <field name="number_of_days" position="attributes">
+                <attribute name="string">Stocks Validity</attribute>
+                <attribute name="help">The period of validity of the stocks</attribute>
+            </field>
+
         </field>
     </record>
 

@@ -42,9 +42,9 @@
                             <th name="th_thumbnail" class="text-center">Thumbnail</th>
                             <th name="th_barcode" class="text-center">EAN Code</th>
                             <th name="th_price_unit" class="text-center">Price Unit</th>
-                            <th name="th_qty_available" class="text-center">Qty Available</th>
-                            <th name="th_virtual_available" class="text-center">Qty Expected</th>
-                            <th name="th_qty_projected" class="text-center">Qty Projected</th>
+                            <th name="th_qty_available" class="text-center">Physical Qty</th>
+                            <th name="th_virtual_available" class="text-center">Available Qty</th>
+                            <th name="th_qty_projected" class="text-center">Projected Qty</th>
                             <th name="th_qty_to_order" class="text-center">Qty To Order</th>
                             <th name="th_factory" class="text-left">Factory</th>
                         </tr>
