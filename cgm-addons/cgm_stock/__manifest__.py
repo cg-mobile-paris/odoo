@@ -14,9 +14,11 @@
         'cgm_base',
     ],
     'data': [
+        # data
         # security
         'security/res_groups.xml',
-        # data
+        # report
+        'report/report_deliveryslip.xml',
         # views
     ],
     'application': False,
