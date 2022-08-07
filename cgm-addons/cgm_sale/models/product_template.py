@@ -29,3 +29,21 @@ class ProductTemplate(models.Model):
         for record in self:
             if self.search([('barcode', '!=', False), ('barcode', '=', record.barcode), ('id', '!=', record.id)], limit=1):
                 raise ValidationError(_('An item with the same EAN Code already exists in the system.'))
+
+    @api.depends_context('company')
+    def _compute_cost_currency_id(self):
+        """
+            Override to force the currency to USD for all products
+        :return:
+        """
+        for template in self:
+            template.cost_currency_id = self.env.ref('base.USD', raise_if_not_found=False).id
+
+    @api.depends('company_id')
+    def _compute_currency_id(self):
+        """
+            Override to force the currency to USD for all products
+        :return:
+        """
+        for template in self:
+            template.currency_id = self.env.ref('base.USD', raise_if_not_found=False).id
