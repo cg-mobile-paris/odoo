@@ -100,11 +100,20 @@ class SaleOrderTemplate(models.Model):
         for line in self.sale_order_template_line_ids.filtered(lambda l: not l.display_type):
             to_date = self.date + relativedelta(days=self.number_of_days)
             quantity = line.product_id.with_context(from_date=self.date, to_date=to_date).virtual_available
-            if not quantity:
-                line.unlink()
-                continue
             line.write({'product_uom_qty': quantity})
         self.write({'state': 'checked'})
+        return True
+
+    def button_unlink_lines_with_quantity_lt_0(self):
+        """
+        Unlink lines with quantity less than 0
+        :return:
+        """
+        to_date = self.date + relativedelta(days=self.number_of_days)
+        self.sale_order_template_line_ids.filtered(lambda line:
+                                                   not line.display_type
+                                                   and line.product_id.with_context(from_date=self.date, to_date=to_date).
+                                                   virtual_available <= 0).unlink()
         return True
 
     def button_generate_quotation(self):
@@ -116,10 +125,13 @@ class SaleOrderTemplate(models.Model):
         if not self.partner_ids:
             raise ValidationError(_('No customer is associated with the selected price list. \n'
                                     'Please check the configuration of customers or select another price list.'))
+        if not self.sale_order_template_line_ids.filtered(lambda line: not line.display_type):
+            raise ValidationError(_('There is no line to generate the corresponding stock offers.'))
 
         order_obj = self.env['sale.order']
         for partner in self.partner_ids:
             order = order_obj.create({'partner_id': partner.id, 'sale_order_template_id': self.id, 'pricelist_id': self.pricelist_id.id})
+            order.onchange_partner_id()
             order.onchange_sale_order_template_id()
 
         self.write({'state': 'generated'})
