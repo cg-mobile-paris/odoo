@@ -14,3 +14,4 @@ from . import product_template
 from . import product_pricelist
 from . import product_collection
 from . import sale_order_template
+from . import sale_order_template_line
