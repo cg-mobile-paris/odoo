@@ -973,6 +973,11 @@ msgid "Quotation Template"
 msgstr "Modèle de devis"
 
 #. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_sale_order_template_line
+msgid "Quotation Template Line"
+msgstr "Ligne Modèle de devis"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__sale_order_ids
 msgid "Quotations / Orders"
 msgstr "Devis / Bons de commande"
@@ -1083,6 +1088,7 @@ msgstr "Séquence"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__state
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template_line__state
 msgid "State"
 msgstr "Statut"
 
@@ -1156,6 +1162,12 @@ msgstr "Période de validité des stocks"
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
+#, python-format
+msgid "There is no line to generate the corresponding stock offers."
+msgstr "Il n'y a aucune ligne pour générer les offres du stock correspondantes !"
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order_template.py:0
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
@@ -1207,6 +1219,11 @@ msgstr "UPC Code"
 #, python-format
 msgid "Unit Price"
 msgstr "Prix Unitaire"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "Unlink Lines With Qte <= 0"
+msgstr "Supprimer lignes Qté <= 0"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_brand__message_unread
@@ -1282,7 +1299,7 @@ msgstr "Exemple : État de stock GUESS 25/07/2022"
 msgid ""
 "{{ Stock State # (object.sale_order_template_id.name or '').replace('/','_')"
 " }}"
-msgstr "{{ (object.sale_order_template_id.name or '').replace('/','_') }}"
+msgstr "{{ État de Stock # (object.sale_order_template_id.name or '').replace('/','_') }}"
 
 #. module: cgm_sale
 #: model:mail.template,subject:cgm_sale.email_template_stock_state
