@@ -25,8 +25,8 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="action_report_stock_state_xlsx"/>
-            <field name="report_name">Stock State # (object.sale_order_template_id.name or '').replace('/','_')</field>
+            <field name="report_template" ref="action_report_stock_state"/>
+            <field name="report_name">{{ (object.sale_order_template_id.name or '').replace('/','_') }}</field>
             <field name="lang">{{ object.partner_id.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>
