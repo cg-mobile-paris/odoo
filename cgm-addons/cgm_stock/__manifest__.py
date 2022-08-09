@@ -20,6 +20,7 @@
         # report
         'report/report_deliveryslip.xml',
         # views
+        'views/report_stockpicking_operations.xml',
     ],
     'application': False,
     'installable': True,
