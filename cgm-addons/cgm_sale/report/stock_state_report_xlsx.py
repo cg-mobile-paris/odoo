@@ -86,7 +86,7 @@ class StockStateReportXLSX(models.AbstractModel):
             if ol.product_id.image_128:
                 output = io.BytesIO(base64.b64decode(ol.product_id.image_128))
                 sheet.insert_image(row, col + 2, 'image', options={'image_data': output, 'x_offset': 15, 'y_offset': 10})
-                sheet.set_row(row, 100)
+                sheet.set_row(row, 120)
             if ol.product_id.barcode:
                 sheet.write(row, col + 3, ol.product_id.barcode, text_format_right)
             sheet.write_number(row, col + 4, ol.product_uom_qty, qty_format)
