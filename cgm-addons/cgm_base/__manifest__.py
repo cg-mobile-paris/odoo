@@ -12,6 +12,7 @@
     'depends': [
         'product',
         'contacts',
+        'report_xlsx',
     ],
     'data': [
         # security
