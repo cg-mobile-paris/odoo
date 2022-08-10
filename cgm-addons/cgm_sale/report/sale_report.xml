@@ -12,7 +12,7 @@
     </record>
 
     <record id="action_report_stock_state_xlsx" model="ir.actions.report">
-        <field name="name">Stock State Xlsx</field>
+        <field name="name">Stock State (xls)</field>
         <field name="model">sale.order</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">cgm_sale.cgm_report_stock_state_xlsx</field>

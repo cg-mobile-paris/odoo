@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 10:52+0000\n"
-"PO-Revision-Date: 2022-08-10 10:52+0000\n"
+"POT-Creation-Date: 2022-08-10 19:03+0000\n"
+"PO-Revision-Date: 2022-08-10 19:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -163,8 +163,8 @@ msgstr "Icône de type d'activité"
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
-msgid "Amount"
-msgstr "Montant"
+msgid "Amount Total"
+msgstr "Montant Total"
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/product_template.py:0
@@ -273,16 +273,12 @@ msgid "DESCRIPTION"
 msgstr "DESCRIPTION"
 
 #. module: cgm_sale
+#: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__date
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
+#, python-format
 msgid "Date"
 msgstr "Date"
-
-#. module: cgm_sale
-#: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
-#, python-format
-msgid "Date :"
-msgstr "Date :"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_collection__date_end
@@ -372,7 +368,7 @@ msgstr "EAN Code"
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "Expiration :"
-msgstr "Échéance :"
+msgstr "Échéance"
 
 #. module: cgm_sale
 #: model:ir.model.fields.selection,name:cgm_sale.selection__product_template__product_type_product__export_service
@@ -550,6 +546,7 @@ msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
+#: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "Indefinite"
 msgstr "Non définie"
@@ -1057,8 +1054,8 @@ msgstr "Ligne de bons de commande"
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
-msgid "Salesperson :"
-msgstr "Votre contact :"
+msgid "Salesperson"
+msgstr "Votre contact"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
@@ -1118,14 +1115,23 @@ msgid "Stock State"
 msgstr "État de stock"
 
 #. module: cgm_sale
-#: model:mail.template,name:cgm_sale.email_template_stock_state
-msgid "Stock State : Send by email"
-msgstr "État de stock : Envoyer par mail"
+#: model:mail.template,report_name:cgm_sale.email_template_stock_state
+msgid ""
+"Stock State # {{(object.sale_order_template_id.name or "
+"'').replace('/','_')}}"
+msgstr ""
+"État de stock # {{(object.sale_order_template_id.name or "
+"'').replace('/','_')}}"
 
 #. module: cgm_sale
 #: model:ir.actions.report,name:cgm_sale.action_report_stock_state_xlsx
-msgid "Stock State Xlsx"
-msgstr "États de stock Xlsx"
+msgid "Stock State (xls)"
+msgstr "État de stock (xls)"
+
+#. module: cgm_sale
+#: model:mail.template,name:cgm_sale.email_template_stock_state
+msgid "Stock State : Send by email"
+msgstr "État de stock : Envoyer par mail"
 
 #. module: cgm_sale
 #: model:ir.actions.act_window,name:cgm_sale.stock_state_action
@@ -1134,15 +1140,9 @@ msgid "Stock States"
 msgstr "États de stock"
 
 #. module: cgm_sale
-#: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
-#, python-format
-msgid "Stock state # %s"
-msgstr "État de stock # %s"
-
-#. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_report_cgm_sale_cgm_report_stock_state_xlsx
 msgid "Stock state XLSX"
-msgstr "États de stock Xlsx"
+msgstr "États de stock (xls)"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -1164,7 +1164,8 @@ msgstr "Période de validité des stocks"
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid "There is no line to generate the corresponding stock offers."
-msgstr "Il n'y a aucune ligne pour générer les offres du stock correspondantes !"
+msgstr ""
+"Il n'y a aucune ligne pour générer les offres du stock correspondantes !"
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
@@ -1213,17 +1214,6 @@ msgstr "PRIX UNITAIRE"
 #: model:ir.model.fields,field_description:cgm_sale.field_product_template__upc_code
 msgid "UPC Code"
 msgstr "UPC Code"
-
-#. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
-msgid "Unlink Lines With Qte <= 0"
-msgstr "Supprimer lignes Qté <= 0"
-
-#. module: cgm_sale
-#: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
-#, python-format
-msgid "Unit Price"
-msgstr "Prix Unitaire"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -1300,13 +1290,6 @@ msgid "e.g. Stock State Guess 2022-07-25"
 msgstr "Exemple : État de stock GUESS 25/07/2022"
 
 #. module: cgm_sale
-#: model:mail.template,report_name:cgm_sale.email_template_stock_state
-msgid ""
-"{{ Stock State # (object.sale_order_template_id.name or '').replace('/','_')"
-" }}"
-msgstr "{{ État de Stock # (object.sale_order_template_id.name or '').replace('/','_') }}"
-
-#. module: cgm_sale
 #: model:mail.template,subject:cgm_sale.email_template_stock_state
 msgid ""
 "{{ object.company_id.name }} Stock State (Ref {{ object.sale_order_template_id.name or 'n/a' }})\n"
@@ -1314,9 +1297,3 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} État de stock (Ref {{ "
 "object.sale_order_template_id.name or 'n/a' }})\n"
-
-#. module: cgm_sale
-#: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
-#, python-format
-msgid "Amount Total"
-msgstr "Montant Total"
