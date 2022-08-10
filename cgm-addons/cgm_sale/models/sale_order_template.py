@@ -1,9 +1,13 @@
 # -*- coding: UTF-8 -*-
 
+import io
+import base64
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.tools.misc import xlsxwriter
 
 
 class SaleOrderTemplate(models.Model):

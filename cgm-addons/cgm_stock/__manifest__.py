@@ -4,7 +4,7 @@
     'summary': '',
     'category': 'Inventory',
     'version': '15.0.0.1',
-    'sequence': -95,
+    'sequence': -96,
     'author': 'ArkeUp',
     'license': 'AGPL-3',
     'website': 'https://arkeup.com',

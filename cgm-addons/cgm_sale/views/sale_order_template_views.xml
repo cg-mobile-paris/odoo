@@ -25,7 +25,7 @@
             </field>
 
             <field name="company_id" position="before">
-                <field name="date"/>
+                <field name="date" required="1"/>
                 <field name="type" required="1"/>
             </field>
 
