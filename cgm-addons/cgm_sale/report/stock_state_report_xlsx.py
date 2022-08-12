@@ -22,8 +22,8 @@ class StockStateReportXLSX(models.AbstractModel):
         :return:
         """
         # licence image
-        if order.sale_order_template_id.licence_id.image_1920:
-            output = io.BytesIO(base64.b64decode(order.sale_order_template_id.licence_id.image_1920))
+        if order.sale_order_template_id.licence_id.image_256:
+            output = io.BytesIO(base64.b64decode(order.sale_order_template_id.licence_id.image_256))
             sheet.insert_image('D2', 'image', options={'image_data': output})
 
         style_highlight_left = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'left', 'font_size': 13})
@@ -72,10 +72,14 @@ class StockStateReportXLSX(models.AbstractModel):
         :return:
         """
         StockStateReportXLSX._configure_workbook(workbook, sheet, order)
-        text_format_left = workbook.add_format({'valign': 'top', 'font_size': 13})
+        text_format_left = workbook.add_format({'valign': 'top', 'font_size': 13, 'text_wrap': True})
         text_format_right = workbook.add_format({'valign': 'top', 'align': 'right', 'font_size': 13})
         symbol = order.currency_id.symbol
-        currency_format = workbook.add_format({'num_format': f'{symbol} #.##', 'valign': 'top', 'font_size': 13})
+        if order.currency_id.position == 'before':
+            symbol_position = f'{symbol} #,##0.00'
+        else:
+            symbol_position = f'#,##0.00 {symbol}'
+        currency_format = workbook.add_format({'num_format': symbol_position, 'valign': 'top', 'font_size': 13})
         qty_format = workbook.add_format({'num_format': '0', 'valign': 'top', 'font_size': 13})
         col = 0
         row_begin = row = 15
@@ -94,7 +98,7 @@ class StockStateReportXLSX(models.AbstractModel):
             sheet.write_number(row, col + 6, ol.price_unit, currency_format)
             sheet.write(row, col + 7, f'=F{row + 1}*G{row + 1}', currency_format)
             row += 1
-        currency_sum_format = workbook.add_format({'num_format': f'{symbol} #.##', 'bg_color': '#FFD8CE', 'font_size': 13})
+        currency_sum_format = workbook.add_format({'num_format': symbol_position, 'bg_color': '#FFD8CE', 'font_size': 13})
         text_sum_format = workbook.add_format({'align': 'right', 'bg_color': '#FFD8CE', 'font_size': 13})
         sheet.write(row + 5, col + 6, _('Amount Total'), text_sum_format)
         sheet.write(row + 5, col + 7, f'=SUM(H{row_begin + 1}:H{row})', currency_sum_format)
