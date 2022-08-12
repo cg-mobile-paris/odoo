@@ -25,17 +25,24 @@
             </field>
 
             <field name="company_id" position="before">
-                <field name="date"/>
+                <field name="date" required="1"/>
                 <field name="type" required="1"/>
             </field>
 
             <xpath expr="//sheet" position="before">
                 <header>
-                    <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button name="button_generate_quotation" string="Generate Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'checked')]}"/>
-                    <button name="button_send_quotation" string="Send Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'generated')]}"/>
-                    <button name="button_print_quotation" string="Print Quotations" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['generated', 'sent'])]}"/>
-                    <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'sent')]}"/>
+                    <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="button_unlink_lines_with_quantity_lt_0" string="Unlink Lines With Qte &lt;= 0" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'checked')]}"/>
+                    <button name="button_generate_quotation" string="Generate Quotations" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'checked')]}"/>
+                    <button name="button_send_quotation" string="Send Quotations" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'generated')]}"/>
+                    <button name="button_print_quotation" string="Print Quotations" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'not in', ['generated', 'sent'])]}"/>
+                    <button name="button_confirm" string="Confirm" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'sent')]}"/>
                     <button name="button_cancel" string="Cancel" type="object" attrs="{'invisible': [('state', '=', 'cancel')]}"/>
                     <button name="button_draft" string="Reset To Draft" type="object" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,checked,generated,sent,done" readonly="1"/>
@@ -52,6 +59,23 @@
                     </div>
                 </button>
             </div>
+            <label for="number_of_days" position="attributes">
+                <attribute name="string">Stocks Validity</attribute>
+            </label>
+            <field name="number_of_days" position="attributes">
+                <attribute name="string">Stocks Validity</attribute>
+                <attribute name="help">The period of validity of the stocks</attribute>
+            </field>
+
+            <xpath expr="//field[@name='sale_order_template_line_ids']//tree" position="inside">
+                <field name="state" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='sale_order_template_line_ids']//tree" position="attributes">
+                <attribute name="decoration-info">not display_type and state == 'checked' and product_uom_qty &lt; 0</attribute>
+                <attribute name="decoration-danger">not display_type and state == 'checked' and not product_uom_qty</attribute>
+            </xpath>
+
         </field>
     </record>
 

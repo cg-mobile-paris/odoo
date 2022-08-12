@@ -71,7 +71,7 @@
                     <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
                 </div>
             </xpath>
-            <xpath expr="//div[hasclass('col-auto', 'col-3', 'mw-100', 'mb-2')][6]" position="replace">
+            <xpath expr="//div[@t-if='doc.user_id.name']" position="replace">
                 <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
                     <strong>Your Contact:</strong>
                     <p class="m-0" t-field="doc.user_id"/>

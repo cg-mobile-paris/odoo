@@ -8,8 +8,10 @@ from . import product_device
 from . import product_product
 from . import product_licence
 from . import sale_order_line
+from . import product_category
 from . import product_material
 from . import product_template
 from . import product_pricelist
 from . import product_collection
 from . import sale_order_template
+from . import sale_order_template_line

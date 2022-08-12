@@ -4,7 +4,7 @@
     'summary': '',
     'category': 'Inventory',
     'version': '15.0.0.1',
-    'sequence': -95,
+    'sequence': -96,
     'author': 'ArkeUp',
     'license': 'AGPL-3',
     'website': 'https://arkeup.com',
@@ -14,10 +14,13 @@
         'cgm_base',
     ],
     'data': [
+        # data
         # security
         'security/res_groups.xml',
-        # data
+        # report
+        'report/report_deliveryslip.xml',
         # views
+        'views/report_stockpicking_operations.xml',
     ],
     'application': False,
     'installable': True,

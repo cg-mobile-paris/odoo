@@ -1,7 +1,13 @@
 # -*- coding: UTF-8 -*-
 
+import io
+import base64
+
+from dateutil.relativedelta import relativedelta
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.tools.misc import xlsxwriter
 
 
 class SaleOrderTemplate(models.Model):
@@ -69,7 +75,7 @@ class SaleOrderTemplate(models.Model):
         for device, products in device_summary.items():
             template_lines.append((0, 0, {'display_type': 'line_section', 'name': device.name or _('Indefinite')}))
             for product in products:
-                template_lines.append((0, 0, {'product_id': product.id, 'product_uom_qty': 1.0}))
+                template_lines.append((0, 0, {'product_id': product.id, 'product_uom_qty': 0.0}))
 
         self.update({'sale_order_template_line_ids': template_lines})
 
@@ -95,9 +101,23 @@ class SaleOrderTemplate(models.Model):
         :return:
         """
         self.ensure_one()
-        for line in self.sale_order_template_line_ids:
-            line.write({'product_uom_qty': line.product_id.qty_available})
+        for line in self.sale_order_template_line_ids.filtered(lambda l: not l.display_type):
+            to_date = self.date + relativedelta(days=self.number_of_days)
+            quantity = line.product_id.with_context(from_date=self.date, to_date=to_date).virtual_available
+            line.write({'product_uom_qty': quantity})
         self.write({'state': 'checked'})
+        return True
+
+    def button_unlink_lines_with_quantity_lt_0(self):
+        """
+        Unlink lines with quantity less than 0
+        :return:
+        """
+        to_date = self.date + relativedelta(days=self.number_of_days)
+        self.sale_order_template_line_ids.filtered(lambda line:
+                                                   not line.display_type
+                                                   and line.product_id.with_context(from_date=self.date, to_date=to_date).
+                                                   virtual_available <= 0).unlink()
         return True
 
     def button_generate_quotation(self):
@@ -109,10 +129,14 @@ class SaleOrderTemplate(models.Model):
         if not self.partner_ids:
             raise ValidationError(_('No customer is associated with the selected price list. \n'
                                     'Please check the configuration of customers or select another price list.'))
+        if not self.sale_order_template_line_ids.filtered(lambda line: not line.display_type):
+            raise ValidationError(_('There is no line to generate the corresponding stock offers.'))
 
         order_obj = self.env['sale.order']
         for partner in self.partner_ids:
-            order = order_obj.create({'partner_id': partner.id, 'sale_order_template_id': self.id, 'pricelist_id': self.pricelist_id.id})
+            order = order_obj.create({'partner_id': partner.id})
+            order.onchange_partner_id()
+            order.write({'pricelist_id': self.pricelist_id.id, 'sale_order_template_id': self.id})
             order.onchange_sale_order_template_id()
 
         self.write({'state': 'generated'})
