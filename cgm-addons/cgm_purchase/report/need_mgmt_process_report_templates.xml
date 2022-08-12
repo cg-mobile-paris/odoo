@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_need_mgmt_process_document">
-        <t t-call="web.external_layout">
+        <t t-call="web.internal_layout">
             <t t-set="doc" t-value="doc.with_context(lang=doc.responsible_id.partner_id.lang)"/>
-            <t t-set="address">
-                <div t-field="doc.responsible_id.partner_id"
-                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
-            </t>
-            <t t-set="information_block">
-                <img t-if="doc.licence_id.image_1920" t-att-src="'data:image/png;base64,%s' % to_text(doc.licence_id.image_1920)"
-                     style="width: 90%"/>
-            </t>
             <div class="page">
-                <div class="oe_structure"/>
-                <br/>
                 <h2 class="mt16">
                     <span>Need Mgmt Process #</span>
                     <span t-field="doc.name"/>
+                    /
+                    <span t-field="doc.licence_id"/>
                 </h2>
                 <br/>
                 <div class="row mt32 mb32" id="informations">
                     <div t-if="doc.date" class="col-auto col-3 mw-100 mb-2">
                         <strong>Date:</strong>
                         <p class="m-0" t-field="doc.date" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div t-if="doc.date" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Expiration:</strong>
+                        <p class="m-0"><span t-field="doc.number_of_days"/> days</p>
                     </div>
                     <div t-if="doc.date_approve" class="col-auto col-3 mw-100 mb-2">
                         <strong>Date Approve:</strong>
@@ -44,7 +40,7 @@
                             <th name="th_price_unit" class="text-center">Price Unit</th>
                             <th name="th_qty_available" class="text-center">Physical Qty</th>
                             <th name="th_virtual_available" class="text-center">Available Qty</th>
-                            <th name="th_qty_projected" class="text-center">Projected Qty</th>
+                            <!--th name="th_qty_projected" class="text-center">Projected Qty</th-->
                             <th name="th_qty_to_order" class="text-center">Qty To Order</th>
                             <th name="th_factory" class="text-left">Factory</th>
                         </tr>
@@ -75,9 +71,9 @@
                                     <td name="td_virtual_available" class="text-center">
                                         <span t-field="line.virtual_available"/>
                                     </td>
-                                    <td name="td_qty_projected" class="text-center">
+                                    <!--td name="td_qty_projected" class="text-center">
                                         <span t-field="line.qty_projected"/>
-                                    </td>
+                                    </td-->
                                     <td name="td_qty_to_order" class="text-center">
                                         <span t-field="line.product_qty"/>
                                     </td>
