@@ -31,7 +31,7 @@ class NeedMgmtProcess(models.Model):
                                     'Families', required=False)
     device_ids = fields.Many2many('product.device', 'need_mgmt_process_product_device_rel', 'template_id', 'device_id',
                                   'Devices', required=False)
-    number_of_days = fields.Float('Number of Days', help='Period of validity of stock')
+    number_of_days = fields.Integer('Number of Days', help='Period of validity of stock')
 
     @api.model
     def default_get(self, fields_list):
