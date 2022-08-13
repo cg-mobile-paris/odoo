@@ -18,7 +18,7 @@ class NeedMgmtProcess(models.Model):
     licence_id = fields.Many2one('product.licence', 'Licence', required=False)
     state = fields.Selection([('draft', 'Draft'), ('checked', 'Checked'), ('sent', 'Sent'), ('confirmed', 'Confirmed'),
                               ('po_generated', 'PO Generated'), ('done', 'Done'), ('cancel', 'Cancel')], 'State', default='draft',
-                             track_visibility='always')
+                             tracking=True)
     color = fields.Integer('Color', required=False, default=10)
     notes = fields.Html('Notes', required=False)
     company_id = fields.Many2one('res.company', 'Company', required=False)
