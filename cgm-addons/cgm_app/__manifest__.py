@@ -11,6 +11,7 @@
     'description': '',
     'depends': [
         'cgm_i18n',
+        'cgm_sale',
         'cgm_stock',
         'cgm_account',
         'cgm_purchase',

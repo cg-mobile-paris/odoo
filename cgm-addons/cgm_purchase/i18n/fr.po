@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 19:09+0000\n"
-"PO-Revision-Date: 2022-08-10 19:09+0000\n"
+"POT-Creation-Date: 2022-08-12 15:03+0000\n"
+"PO-Revision-Date: 2022-08-12 15:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,11 @@ msgstr "<strong>Date de confirmation:</strong>"
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Date :</strong>"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
+msgid "<strong>Expiration:</strong>"
+msgstr "<strong>Validité de stock :</strong>"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
@@ -529,7 +534,6 @@ msgstr "Article"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__qty_projected
-#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "Projected Qty"
 msgstr "Qté projetée"
 
@@ -742,5 +746,6 @@ msgstr "Historique de communication du site web"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "days"
 msgstr "jours"

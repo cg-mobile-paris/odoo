@@ -11,7 +11,7 @@
     'description': '',
     'depends': [
         'purchase',
-        'cgm_sale',
+        'cgm_product',
         'purchase_reception_status'
     ],
     'data': [
