@@ -11,7 +11,7 @@
                     <field name="sequence" widget="handle"/>
                     <field name="product_id" string="SKU Code"/>
                     <field name="name"/>
-                    <field name="image" widget="image" class="oe_avatar" height="40"/>
+                    <field name="image" widget="image" class="oe_avatar"/>
                     <field name="barcode"/>
                     <field name="qty_available"/>
                     <field name="virtual_available"/>

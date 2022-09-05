@@ -71,6 +71,10 @@
                 <field name="state" invisible="1"/>
             </xpath>
 
+            <xpath expr="//field[@name='sale_order_template_line_ids']//tree//field[@name='name']" position="after">
+                <field name="image" widget="image" class="oe_avatar"/>
+            </xpath>
+
             <xpath expr="//field[@name='sale_order_template_line_ids']//tree" position="attributes">
                 <attribute name="decoration-info">not display_type and state == 'checked' and product_uom_qty &lt; 0</attribute>
                 <attribute name="decoration-danger">not display_type and state == 'checked' and not product_uom_qty</attribute>
