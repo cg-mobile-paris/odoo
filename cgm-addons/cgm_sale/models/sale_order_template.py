@@ -132,6 +132,7 @@ class SaleOrderTemplate(models.Model):
         for partner in self.partner_ids:
             order = order_obj.create({'partner_id': partner.id})
             order.onchange_partner_id()
+            order.onchange_partner_shipping_id()
             order.write({'pricelist_id': self.pricelist_id.id, 'sale_order_template_id': self.id})
             order.onchange_sale_order_template_id()
 
