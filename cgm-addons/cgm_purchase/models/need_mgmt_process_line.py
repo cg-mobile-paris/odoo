@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from dateutil.relativedelta import relativedelta
-
 from odoo import fields, models
 
 
@@ -26,17 +24,22 @@ class NeedMgmtProcessLine(models.Model):
     display_type = fields.Selection([('line_section', 'Section'),
                                      ('line_note', 'Note')], default=False, help='Technical field for UX purpose.')
 
-    def check_stock(self):
+    def check_stock(self, from_date=False, to_date=False, warehouse=False):
         """
         Fill stock of the linked product
+        :param from_date:
+        :param to_date:
+        :param warehouse:
         :return:
         """
+        if not from_date or not to_date or not warehouse:
+            return False
         for line in self:
-            to_date = line.need_mgmt_process_id.date + relativedelta(days=line.need_mgmt_process_id.number_of_days)
-            qty_available = line.product_id.with_context(from_date=line.need_mgmt_process_id.date, to_date=to_date).qty_available
-            virtual_available = line.product_id.with_context(from_date=line.need_mgmt_process_id.date, to_date=to_date).virtual_available
+            qty_available = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).qty_available
+            virtual_available = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).virtual_available
             line.write({
                 'qty_available': qty_available,
                 'virtual_available': virtual_available,
                 'qty_projected': 0,
             })
+        return True

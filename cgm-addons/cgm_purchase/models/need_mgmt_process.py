@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
@@ -31,7 +33,8 @@ class NeedMgmtProcess(models.Model):
                                     'Families', required=False)
     device_ids = fields.Many2many('product.device', 'need_mgmt_process_product_device_rel', 'template_id', 'device_id',
                                   'Devices', required=False)
-    number_of_days = fields.Integer('Number of Days', help='Period of validity of stock')
+    number_of_days = fields.Integer('Number of Days', help='Period of validity of stock', default=1)
+    warehouse_id = fields.Many2one('stock.warehouse', 'Warehouse', required=True)
 
     @api.model
     def default_get(self, fields_list):
@@ -48,6 +51,8 @@ class NeedMgmtProcess(models.Model):
             res.update({'company_id': self.env.user.company_id.id})
         if not res.get('currency_id') and 'currency_id' not in res:
             res.update({'currency_id': self.env.ref('base.USD').id})
+        if not res.get('warehouse_id') and 'warehouse_id' not in res:
+            res.update({'warehouse_id': self.env['stock.warehouse'].search([('company_id', '=', res.get('company_id'))], limit=1).id})
         return res
 
     @api.depends('purchase_order_ids')
@@ -89,11 +94,11 @@ class NeedMgmtProcess(models.Model):
 
     def button_check_stock(self):
         """
-
         :return:
         """
         self.ensure_one()
-        self.need_mgmt_process_line_ids.check_stock()
+        to_date = self.date + relativedelta(days=self.number_of_days)
+        self.need_mgmt_process_line_ids.check_stock(self.date, to_date, self.warehouse_id)
         self.write({'state': 'checked'})
         return True
 
@@ -140,15 +145,23 @@ class NeedMgmtProcess(models.Model):
                                     'Please fill Seller in lines for which a PO should be generated.'))
         for nmpl in need_mgmt_process_lines:
             partner_summary.setdefault(nmpl.seller_id.name, []).append(nmpl)
+        stock_picking_obj = self.env['stock.picking.type']
+        picking_type = stock_picking_obj.search([('code', '=', 'incoming'), ('warehouse_id', '=', self.warehouse_id.id)], limit=1)
         for partner, nmpls in partner_summary.items():
-            po_obj.create({
+            po = po_obj.create({
                 'partner_id': partner.id,
+                'need_mgmt_process_id': self.id,
+                'company_id': self.company_id.id,
+                'currency_id': self.currency_id.id,
+                'picking_type_id': picking_type.id
+            })
+            po.onchange_partner_id()
+            po.write({
                 'order_line': [(0, 0, {
                     'product_id': nmpl.product_id.id,
                     'product_qty': nmpl.product_qty,
                     'price_unit': nmpl.price_unit}) for nmpl in nmpls],
-                'need_mgmt_process_id': self.id,
-                'currency_id': self.currency_id.id})
+                })
         self.write({'state': 'po_generated'})
         return True
 
