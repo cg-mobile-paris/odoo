@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 15:03+0000\n"
-"PO-Revision-Date: 2022-08-12 15:03+0000\n"
+"POT-Creation-Date: 2022-09-13 15:31+0000\n"
+"PO-Revision-Date: 2022-09-13 15:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr "URL du portail client"
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__date
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_search_view
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__date_approve
@@ -204,12 +204,12 @@ msgstr "Définir vos conditions générales ..."
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__device_ids
 msgid "Devices"
-msgstr "Devices"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__display_name
@@ -236,7 +236,7 @@ msgstr "Brouillon"
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__barcode
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "EAN Code"
-msgstr "EAN Code"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__qty_expected
@@ -301,7 +301,7 @@ msgstr "A un message"
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__id
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__activity_exception_icon
@@ -363,7 +363,7 @@ msgstr "Dernière mise à jour le"
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__licence_id
 msgid "Licence"
-msgstr "Licence"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_main_attachment_id
@@ -378,7 +378,7 @@ msgstr "Erreur d'envoi du message"
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_ids
 msgid "Messages"
-msgstr "Messages"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__my_activity_date_deadline
@@ -443,17 +443,17 @@ msgstr "Type d'activités à venir"
 #. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__need_mgmt_process__priority__0
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__need_mgmt_process_line__display_type__line_note
 msgid "Note"
-msgstr "Note"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__notes
 msgid "Notes"
-msgstr "Notes"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_needaction_counter
@@ -586,16 +586,13 @@ msgid ""
 "                <br/>\n"
 "                Code"
 msgstr ""
-"SKU\n"
-"                <br/>\n"
-"                Code"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_line_tree_view
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "SKU Code"
-msgstr "SKU Code"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_has_sms_error
@@ -605,7 +602,7 @@ msgstr "Erreur d'envoi SMS"
 #. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__need_mgmt_process_line__display_type__line_section
 msgid "Section"
-msgstr "Section"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__access_token
@@ -687,7 +684,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__image
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "Thumbnail"
-msgstr "Thumbnail"
+msgstr ""
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
@@ -712,7 +709,7 @@ msgstr "Compteur de messages non lus"
 #. module: cgm_purchase
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__need_mgmt_process__priority__1
 msgid "Urgent"
-msgstr "Urgent"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__user_id
@@ -733,6 +730,11 @@ msgstr "Fournisseur"
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
 msgid "View POs"
 msgstr "Voir les commandes"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__warehouse_id
+msgid "Warehouse"
+msgstr "Entrepôt"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__website_message_ids

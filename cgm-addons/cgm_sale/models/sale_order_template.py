@@ -20,6 +20,9 @@ class SaleOrderTemplate(models.Model):
     sale_order_count = fields.Integer('Sale Order Count', compute='_compute_sale_order_count', store=True)
     pricelist_id = fields.Many2one('product.pricelist', string='Price List', required=False)
     date = fields.Date('Date', required=False)
+    warehouse_id = fields.Many2one('stock.warehouse', 'Warehouse', required=False)
+    number_of_days = fields.Integer(default=1)
+    partner_count = fields.Integer('Partner Count', compute='_compute_partner_count', store=True)
 
     @api.model
     def default_get(self, fields_list):
@@ -31,12 +34,22 @@ class SaleOrderTemplate(models.Model):
         result = super(SaleOrderTemplate, self).default_get(fields_list)
         if not result.get('date') and 'date' not in result:
             result.update({'date': fields.Date.today()})
+        if not result.get('company_id') and 'company_id' not in result:
+            result.update({'company_id': self.env.user.company_id.id})
+        if not result.get('warehouse_id') and 'warehouse_id' not in result:
+            result.update({'warehouse_id': self.env['stock.warehouse'].search([('company_id', '=', self.env.user.company_id.id)],
+                                                                              limit=1).id})
         return result
 
     @api.depends('sale_order_ids')
     def _compute_sale_order_count(self):
         for record in self:
             record.sale_order_count = len(record.sale_order_ids)
+
+    @api.depends('partner_ids')
+    def _compute_partner_count(self):
+        for record in self:
+            record.partner_count = len(record.partner_ids)
 
     def action_view_sale_orders(self):
         self.ensure_one()
@@ -97,9 +110,9 @@ class SaleOrderTemplate(models.Model):
         :return:
         """
         self.ensure_one()
+        to_date = self.date + relativedelta(days=self.number_of_days)
         for line in self.sale_order_template_line_ids.filtered(lambda l: not l.display_type):
-            to_date = self.date + relativedelta(days=self.number_of_days)
-            quantity = line.product_id.with_context(from_date=self.date, to_date=to_date).virtual_available
+            quantity = line.product_id.with_context(from_date=self.date, to_date=to_date, warehouse=self.warehouse_id.id).virtual_available
             line.write({'product_uom_qty': quantity})
         self.write({'state': 'checked'})
         return True
@@ -133,9 +146,8 @@ class SaleOrderTemplate(models.Model):
             order = order_obj.create({'partner_id': partner.id})
             order.onchange_partner_id()
             order.onchange_partner_shipping_id()
-            order.write({'pricelist_id': self.pricelist_id.id, 'sale_order_template_id': self.id})
+            order.write({'pricelist_id': self.pricelist_id.id, 'sale_order_template_id': self.id, 'warehouse_id': self.warehouse_id.id})
             order.onchange_sale_order_template_id()
-
         self.write({'state': 'generated'})
         return True
 
@@ -175,8 +187,8 @@ class SaleOrderTemplate(models.Model):
         """
         self.ensure_one()
         orders = self.sale_order_ids.filtered(lambda so: so.state != 'cancel')
-        if not orders:
-            raise ValidationError(_('There is no quotation generated for this stock state.'))
+        # if not orders:
+        #     raise ValidationError(_('There is no quotation generated for this stock state.'))
         for order in orders:
             order.action_cancel()
         self.write({'state': 'cancel'})
@@ -199,3 +211,9 @@ class SaleOrderTemplate(models.Model):
         self.ensure_one()
         self.write({'state': 'draft'})
         return True
+
+    def action_view_customers(self):
+        self.ensure_one()
+        action = self.env.ref('base.action_partner_form', raise_if_not_found=False).read()[0]
+        action['domain'] = [('id', 'in', self.partner_ids.ids)]
+        return action

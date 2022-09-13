@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-13 18:59+0000\n"
-"PO-Revision-Date: 2022-08-13 18:59+0000\n"
+"POT-Creation-Date: 2022-09-13 15:34+0000\n"
+"PO-Revision-Date: 2022-09-13 15:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -63,6 +63,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "<span class=\"o_form_label\">Name</span>"
 msgstr "Nom"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
+msgid "<span class=\"o_stat_text\">Customers</span>"
+msgstr "<span class=\"o_stat_text\">Clients</span>"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -126,7 +131,7 @@ msgstr "Clients"
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "DESCRIPTION"
-msgstr "DESCRIPTION"
+msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
@@ -208,7 +213,7 @@ msgstr "Non définie"
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__licence_id
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
 msgid "Licence"
-msgstr "Licence"
+msgstr ""
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_tree_inherit
@@ -224,6 +229,16 @@ msgid ""
 msgstr ""
 "Aucun client n'est associé à la liste de prix sélectionnée. \n"
 "Veuillez vérifier le paramétrage des fiches clients ou sélectionner une autre liste de prix."
+
+#. module: cgm_sale
+#: model:ir.model.fields,help:cgm_sale.field_sale_order_template__number_of_days
+msgid "Number of days for the validity date computation of the quotation"
+msgstr "Nombre de jours de validité calculé pour le devis"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__partner_count
+msgid "Partner Count"
+msgstr "Nombre de clients"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__pricelist_id
@@ -293,6 +308,11 @@ msgid "QUANTITY"
 msgstr "QUANTITÉ"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__number_of_days
+msgid "Quotation Duration"
+msgstr "Durée du devis"
+
+#. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order_template
 msgid "Quotation Template"
 msgstr "Modèle de devis"
@@ -324,7 +344,7 @@ msgstr ""
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "SKU CODE"
-msgstr "SKU CODE"
+msgstr ""
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__sale_order_count
@@ -418,7 +438,7 @@ msgstr "Validité des stocks"
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "THUMBNAIL"
-msgstr "THUMBNAIL"
+msgstr ""
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -435,7 +455,6 @@ msgstr ""
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #: code:addons/cgm_sale/models/sale_order_template.py:0
-#: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid "There is no quotation generated for this stock state."
 msgstr "Il n'y a pas de Devis/BC généré pour cet état de stock."
@@ -448,14 +467,15 @@ msgstr "Il n'y a pas de rapport d'état de stock."
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__image
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template_line__image
 #: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
 msgid "Thumbnail"
-msgstr "Thumbnail"
+msgstr ""
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
@@ -467,6 +487,11 @@ msgstr "PRIX UNITAIRE"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Unlink Lines With Qte <= 0"
 msgstr "Supprimer lignes Qté <= 0"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__warehouse_id
+msgid "Warehouse"
+msgstr "Entrepôt"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
