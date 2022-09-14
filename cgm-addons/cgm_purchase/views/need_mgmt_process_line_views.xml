@@ -11,14 +11,14 @@
                     <field name="sequence" widget="handle"/>
                     <field name="product_id" string="SKU Code"/>
                     <field name="name"/>
-                    <field name="image" widget="image" class="oe_avatar" height="40"/>
-                    <field name="barcode"/>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <field name="barcode" optional="hide"/>
                     <field name="qty_available"/>
                     <field name="virtual_available"/>
                     <!--field name="qty_projected"/-->
                     <field name="product_qty"/>
                     <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                    <field name="seller_id"/>
+                    <field name="seller_id" optional="hide"/>
                 </tree>
             </field>
         </record>

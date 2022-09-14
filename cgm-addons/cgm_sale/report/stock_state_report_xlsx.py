@@ -4,7 +4,6 @@ import base64
 import io
 
 from odoo import models, _
-from itertools import groupby
 
 
 class StockStateReportXLSX(models.AbstractModel):

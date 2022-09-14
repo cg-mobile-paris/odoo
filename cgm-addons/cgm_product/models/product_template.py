@@ -17,6 +17,14 @@ class ProductTemplate(models.Model):
     royalties_margins = fields.Selection([('yn', 'YN'), ('yy', 'YY'), ('nn', 'NN'), ('ny', 'NY')], 'Royalties & Margins')
     color_id = fields.Many2one('product.color', 'Product Color')
     upc_code = fields.Char('UPC Code')
+    incoming_qty = fields.Float(required=False)
+    outgoing_qty = fields.Float(required=False)
+
+    def name_get(self):
+        names = []
+        for record in self:
+            names.append((record.id, record.default_code or record.name))
+        return names
 
     @api.constrains('default_code')
     def _check_unique_default_code(self):

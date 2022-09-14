@@ -6,23 +6,23 @@
                   name="Product Forms"
                   parent="sale.prod_config_main"
                   sequence="10"
-                  action="product_form_action"/>
+                  action="cgm_product.product_form_action"/>
 
         <menuitem name="Product Materials"
                   id="product_material_menu"
                   parent="sale.prod_config_main"
-                  action="product_material_action"
+                  action="cgm_product.product_material_action"
                   sequence="20"/>
 
         <menuitem name="Product Licences"
                   id="product_licence_menu"
                   parent="sale.prod_config_main"
-                  action="product_licence_action"
+                  action="cgm_product.product_licence_action"
                   sequence="30"/>
 
         <menuitem id="product_collection_menu"
                   name="Product Collections"
-                  action="product_collection_action"
+                  action="cgm_product.product_collection_action"
                   parent="sale.prod_config_main"
                   sequence="40"/>
 
@@ -35,19 +35,19 @@
         <menuitem name="Product Brands"
                   id="product_brand_menu"
                   parent="sale.prod_config_main"
-                  action="product_brand_action"
+                  action="cgm_product.product_brand_action"
                   sequence="60"/>
                  
         <menuitem name="Product Devices"
                   id="product_device_menu"
                   parent="sale.prod_config_main"
-                  action="product_device_action"
+                  action="cgm_product.product_device_action"
                   sequence="70"/>
 
         <menuitem name="Product Colors"
                   id="product_color_menu"
                   parent="sale.prod_config_main"
-                  action="product_color_action"
+                  action="cgm_product.product_color_action"
                   sequence="80"/>
 
         <menuitem name="Stock States"
