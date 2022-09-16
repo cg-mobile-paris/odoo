@@ -14,6 +14,7 @@
         'cgm_product',
         'sale_management',
         'sale_delivery_state',
+        'currency_rate_live',
     ],
     'data': [
         # security

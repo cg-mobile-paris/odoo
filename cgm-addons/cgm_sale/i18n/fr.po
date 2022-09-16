@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-13 15:34+0000\n"
-"PO-Revision-Date: 2022-09-13 15:34+0000\n"
+"POT-Creation-Date: 2022-09-16 13:09+0000\n"
+"PO-Revision-Date: 2022-09-16 13:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -118,9 +118,20 @@ msgid "Checked"
 msgstr "Vérifié"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__company_currency_id
+msgid "Company Currency"
+msgstr "Devise de la société"
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Confirm"
 msgstr "Confirmer"
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order.py:0
+#, python-format
+msgid "Could not find exchange rate for today"
+msgstr "Impossible de trouver le taux de change du jour"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__partner_ids
@@ -233,7 +244,7 @@ msgstr ""
 #. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template__number_of_days
 msgid "Number of days for the validity date computation of the quotation"
-msgstr "Nombre de jours de validité calculé pour le devis"
+msgstr "Nombres de jours de validité calculé pour le devis"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__partner_count
@@ -484,6 +495,17 @@ msgid "UNIT PRICE"
 msgstr "PRIX UNITAIRE"
 
 #. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"Unable to connect to the online exchange rate platform. The web service may "
+"be temporary down. Please try again in a moment."
+msgstr ""
+"Impossible de se connecter à la plate-forme de taux de change en ligne. Le "
+"service web est peut être temporairement hors service. Veuillez, s'il vous "
+"plaît, ré-essayer dans quelques minutes."
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Unlink Lines With Qte <= 0"
 msgstr "Supprimer lignes Qté <= 0"
@@ -506,3 +528,8 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} État de stock (Ref {{ "
 "object.sale_order_template_id.name or 'n/a' }})\n"
+
+#. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order__amount_total
+msgid "Total"
+msgstr "Total en devise"
