@@ -19,6 +19,7 @@
         'security/res_groups.xml',
         # report
         'report/report_deliveryslip.xml',
+        'report/report_stock_reception.xml',
         # views
         'views/report_stockpicking_operations.xml',
     ],

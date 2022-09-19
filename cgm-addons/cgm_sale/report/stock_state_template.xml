@@ -14,6 +14,9 @@
                     <span t-field="line.product_id"/>
                 </td>
             </xpath>
+            <xpath expr="//span[@t-field='line.product_uom']" position="attributes">
+                <attribute name="t-if">line.product_uom.id != line.env.ref('uom.product_uom_categ_unit').id</attribute>
+            </xpath>
         </template>
 
         <template id="cgm_stock_state_document" inherit_id="sale.report_saleorder_document" primary="True" priority="1000">
