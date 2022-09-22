@@ -31,13 +31,13 @@
                   parent="sale.prod_config_main"
                   action="product.product_category_action_form"
                   sequence="50"/>
-                  
+
         <menuitem name="Product Brands"
                   id="product_brand_menu"
                   parent="sale.prod_config_main"
                   action="cgm_product.product_brand_action"
                   sequence="60"/>
-                 
+
         <menuitem name="Product Devices"
                   id="product_device_menu"
                   parent="sale.prod_config_main"
@@ -55,6 +55,13 @@
                   parent="sale.sale_menu_root"
                   action="stock_state_action"
                   sequence="0"/>
+
+        <menuitem name="Product Moves"
+                  id="product_move_menu"
+                  parent="sale.menu_sale_report"
+                  action="product_move_report_act_window"
+                  sequence="20"/>
+
 
     </data>
 </odoo>
