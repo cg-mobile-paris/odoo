@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_move_report_tree_view" model="ir.ui.view">
+            <field name="name">product.move.report.tree.view</field>
+            <field name="model">product.move.report</field>
+            <field name="arch" type="xml">
+                <tree string="Product Moves">
+                    <field name="user_id"/>
+                    <field name="nature"/>
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="warehouse_id"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="product_name"/>
+                    <field name="product_uom_qty"/>
+                    <field name="price_subtotal"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_move_report_search_view" model="ir.ui.view">
+            <field name="name">product.move.report.search.view</field>
+            <field name="model">product.move.report</field>
+            <field name="arch" type="xml">
+                <search string="Product Moves">
+                    <field name="user_id"/>
+                    <field name="nature"/>
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="warehouse_id"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="product_name"/>
+                    <field name="product_uom_qty"/>
+                    <field name="price_subtotal"/>
+                    <field name="state"/>
+                    <separator/>
+                    <filter name="filter_confirmed_order" string="Confirmed Orders" domain="[('state', 'in', ['done', 'sale', 'purchase'])]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Number" name="filter_number_group_by" domain="[]" context="{'group_by':'name'}"/>
+                        <filter string="Partner" name="filter_partner_group_by" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Product" name="filter_product_group_by" domain="[]" context="{'group_by':'product_id'}"/>
+                        <filter string="State" name="filter_state_group_by" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Nature" name="filter_nature_group_by" domain="[]" context="{'group_by':'nature'}"/>
+                        <filter string="Date" name="filter_date_group_by" domain="[]" context="{'group_by':'date:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="product_move_report_act_window" model="ir.actions.act_window">
+            <field name="name">Product Moves</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.move.report</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+            <field name="context">{'search_default_filter_confirmed_order': 1}</field>
+        </record>
+
+    </data>
+</odoo>
