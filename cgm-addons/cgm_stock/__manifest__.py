@@ -12,7 +12,6 @@
     'depends': [
         'stock',
         'cgm_base',
-        'sale_invoice_policy',
     ],
     'data': [
         # data
