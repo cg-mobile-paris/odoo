@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="report_stock_reception_delivery_inherit" inherit_id="stock.report_reception_body">
+            <!--xpath expr="//t[@t-esc='line['uom']']" position="attributes">
+                <attribute name="t-if">line['uom'].product_uom.id != line['uom'].env.ref('uom.product_uom_categ_unit').id</attribute>
+            </xpath-->
+        </template>
+    </data>
+</odoo>

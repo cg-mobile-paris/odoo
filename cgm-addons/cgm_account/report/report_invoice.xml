@@ -18,5 +18,9 @@
         <xpath expr="//th[@name='th_description']" position="replace">
             <th name="th_description" class="text-left">Name</th>
         </xpath>
+
+        <xpath expr="//span[@t-field='line.product_uom_id']" position="attributes">
+            <attribute name="t-if">line.product_uom_id.id != line.env.ref('uom.product_uom_categ_unit').id</attribute>
+        </xpath>
     </template>
 </odoo>

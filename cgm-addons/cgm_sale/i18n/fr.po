@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-13 15:34+0000\n"
-"PO-Revision-Date: 2022-09-13 15:34+0000\n"
+"POT-Creation-Date: 2022-09-22 12:08+0000\n"
+"PO-Revision-Date: 2022-09-22 12:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -108,6 +108,11 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__cancel
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Check Stock"
 msgstr "Vérifier le stock"
@@ -118,9 +123,30 @@ msgid "Checked"
 msgstr "Vérifié"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__company_currency_id
+msgid "Company Currency"
+msgstr "Devise de la société"
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Confirm"
 msgstr "Confirmer"
+
+#. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order.py:0
+#, python-format
+msgid "Could not find exchange rate for today"
+msgstr "Impossible de trouver le taux de change du jour"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
+msgid "Confirmed Orders"
+msgstr "Commandes confirmées"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__partner_ids
@@ -135,7 +161,9 @@ msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__date
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__date
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
 #, python-format
 msgid "Date"
@@ -158,11 +186,18 @@ msgstr ""
 "                    Désirée"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__done
 #: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__done
 msgid "Done"
 msgstr "Terminé"
 
 #. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__draft
 #: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__state__draft
 msgid "Draft"
 msgstr "Brouillon"
@@ -198,9 +233,15 @@ msgid "Generated"
 msgstr "Etat généré"
 
 #. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
 msgid "Group By"
 msgstr "Grouper par"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__id
+msgid "ID"
+msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
@@ -210,6 +251,12 @@ msgid "Indefinite"
 msgstr "Non définie"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__licence_id
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__licence_id
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
 msgid "Licence"
@@ -219,6 +266,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_tree_inherit
 msgid "Name"
 msgstr "Nom"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__nature
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
+msgid "Nature"
+msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
@@ -231,9 +284,25 @@ msgstr ""
 "Veuillez vérifier le paramétrage des fiches clients ou sélectionner une autre liste de prix."
 
 #. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
+msgid "Number"
+msgstr "Numéro"
+
+#. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template__number_of_days
 msgid "Number of days for the validity date computation of the quotation"
-msgstr "Nombre de jours de validité calculé pour le devis"
+msgstr "Nombres de jours de validité calculé pour le devis"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__name
+msgid "Order Reference"
+msgstr "Numéro"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__partner_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
+msgid "Partner"
+msgstr "Tiers"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__partner_count
@@ -254,6 +323,12 @@ msgstr "Liste de prix"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Print Quotations"
 msgstr "Imprimer les états de stock"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__product_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
+msgid "Product"
+msgstr "Article"
 
 #. module: cgm_sale
 #: model:ir.ui.menu,name:cgm_sale.product_brand_menu
@@ -286,6 +361,11 @@ msgid "Product Forms"
 msgstr "Formes"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__product_name
+msgid "Product Label"
+msgstr "Libellé"
+
+#. module: cgm_sale
 #: model:ir.ui.menu,name:cgm_sale.product_licence_menu
 msgid "Product Licences"
 msgstr "Licences"
@@ -294,6 +374,34 @@ msgstr "Licences"
 #: model:ir.ui.menu,name:cgm_sale.product_material_menu
 msgid "Product Materials"
 msgstr "Matières"
+
+#. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_product_move_report
+msgid "Product Move Analysis Report"
+msgstr "Rapport d'analyse des mouvements de produit"
+
+#. module: cgm_sale
+#: model:ir.actions.act_window,name:cgm_sale.product_move_report_act_window
+#: model:ir.ui.menu,name:cgm_sale.product_move_menu
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_tree_view
+msgid "Product Moves"
+msgstr "Historique des mouvements de produit"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__product_uom_qty
+msgid "Product Qty"
+msgstr "Qté mouvement"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__nature__purchase_entry
+msgid "Purchase Entry"
+msgstr "Entrée d'achat"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__purchase
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
@@ -311,6 +419,11 @@ msgstr "QUANTITÉ"
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__number_of_days
 msgid "Quotation Duration"
 msgstr "Durée du devis"
+
+#. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__sent
+msgid "Quotation Sent"
+msgstr "Devis envoyé"
 
 #. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order_template
@@ -357,7 +470,13 @@ msgid "Sale Order Template"
 msgstr "Modèle de devis"
 
 #. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__nature__sale_outlet
+msgid "Sale Outlet"
+msgstr "Sortie de vente"
+
+#. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__sale
 msgid "Sales Order"
 msgstr "Bon de commande"
 
@@ -390,7 +509,13 @@ msgstr "Envoyé"
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__state
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template_line__state
+#: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
 msgid "State"
+msgstr "Statut"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__state
+msgid "Status"
 msgstr "Statut"
 
 #. module: cgm_sale
@@ -446,6 +571,11 @@ msgid "The period of validity of the stocks"
 msgstr "Période de validité des stocks"
 
 #. module: cgm_sale
+#: model_terms:ir.actions.act_window,help:cgm_sale.product_move_report_act_window
+msgid "There is no examples click here to add new ModelTitle."
+msgstr "Il n'y a pas d'exemple. Cliquez ici pour ajouter un nouveau mouvement de produit"
+
+#. module: cgm_sale
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid "There is no line to generate the corresponding stock offers."
@@ -473,6 +603,16 @@ msgid "Thumbnail"
 msgstr ""
 
 #. module: cgm_sale
+#: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__to_approve
+msgid "To Approve"
+msgstr "À approuver"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__amount_total_in_currency
+msgid "Total"
+msgstr ""
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type
 msgid "Type"
 msgstr ""
@@ -484,11 +624,33 @@ msgid "UNIT PRICE"
 msgstr "PRIX UNITAIRE"
 
 #. module: cgm_sale
+#: code:addons/cgm_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"Unable to connect to the online exchange rate platform. The web service may "
+"be temporary down. Please try again in a moment."
+msgstr ""
+"Impossible de se connecter à la plate-forme de taux de change en ligne. Le "
+"service web est peut être temporairement hors service. Veuillez, s'il vous "
+"plaît, ré-essayer dans quelques minutes."
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Unlink Lines With Qte <= 0"
 msgstr "Supprimer lignes Qté <= 0"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__price_subtotal
+msgid "Untaxed Total"
+msgstr "Total HT"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__user_id
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__warehouse_id
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__warehouse_id
 msgid "Warehouse"
 msgstr "Entrepôt"
@@ -506,3 +668,8 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} État de stock (Ref {{ "
 "object.sale_order_template_id.name or 'n/a' }})\n"
+
+#. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order__amount_total
+msgid "Total"
+msgstr "Total en devise"

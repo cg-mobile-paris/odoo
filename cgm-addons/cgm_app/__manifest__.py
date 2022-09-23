@@ -14,7 +14,6 @@
         'cgm_sale',
         'cgm_stock',
         'cgm_account',
-        'cgm_purchase',
         'cgm_contacts',
     ],
     'data': [],

@@ -11,9 +11,10 @@
     'description': '',
     'depends': [
         'sales_team',
-        'cgm_product',
+        'cgm_purchase',
         'sale_management',
         'sale_delivery_state',
+        'currency_rate_live',
     ],
     'data': [
         # security
@@ -25,6 +26,7 @@
         # views
         'views/sale_order_views.xml',
         'views/sale_order_template_views.xml',
+        'views/product_move_report_views.xml',
         'views/ir_ui_menu.xml',
         # data
         'data/mail_template_data.xml',
