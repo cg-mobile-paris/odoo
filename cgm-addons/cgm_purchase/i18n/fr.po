@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-13 15:31+0000\n"
-"PO-Revision-Date: 2022-09-13 15:31+0000\n"
+"POT-Creation-Date: 2022-10-11 07:59+0000\n"
+"PO-Revision-Date: 2022-10-11 07:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -553,6 +553,13 @@ msgid "Purchase Order Line"
 msgstr "Ligne de commande d'achat"
 
 #. module: cgm_purchase
+#: model:ir.actions.act_window,name:cgm_purchase.purchase_order_line_act_window_action
+#: model:ir.ui.menu,name:cgm_purchase.purchase_order_lines_menu
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_line_view_tree
+msgid "Purchase Order Lines"
+msgstr "Lignes de commande fournisseur"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__purchase_order_ids
 msgid "Purchase Orders"
 msgstr "Commandes"
@@ -647,6 +654,11 @@ msgstr ""
 "En retard : la date d'échéance est déjà dépassée\n"
 "Aujourd'hui : la date d'activité est aujourd'hui\n"
 "Planifiée : activités futures"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_line_view_tree
+msgid "Supplier"
+msgstr "Fournisseur"
 
 #. module: cgm_purchase
 #: model:ir.model,name:cgm_purchase.model_product_supplierinfo
