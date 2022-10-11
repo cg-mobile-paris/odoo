@@ -8,5 +8,11 @@
                   action="need_mgmt_process_act_window"
                   parent="purchase.menu_purchase_root"/>
 
+        <menuitem name="Purchase Order Lines"
+                  id="purchase_order_lines_menu"
+                  parent="purchase.menu_procurement_management"
+                  action="purchase_order_line_act_window_action"
+                  sequence="20"/>
+
     </data>
 </odoo>

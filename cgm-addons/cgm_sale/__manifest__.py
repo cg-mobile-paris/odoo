@@ -25,6 +25,7 @@
         'report/sale_report.xml',
         # views
         'views/sale_order_views.xml',
+        'views/sale_order_line_views.xml',
         'views/sale_order_template_views.xml',
         'views/product_move_report_views.xml',
         'views/ir_ui_menu.xml',
