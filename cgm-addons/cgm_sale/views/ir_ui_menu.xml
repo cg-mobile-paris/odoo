@@ -62,6 +62,12 @@
                   action="product_move_report_act_window"
                   sequence="20"/>
 
+        <menuitem name="Sale Order Lines"
+                  id="sale_order_lines_menu"
+                  parent="sale.sale_order_menu"
+                  action="sale_order_line_act_window_action"
+                  sequence="20"/>
+
 
     </data>
 </odoo>
