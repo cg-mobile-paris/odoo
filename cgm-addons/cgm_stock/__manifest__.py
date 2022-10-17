@@ -12,6 +12,7 @@
     'depends': [
         'stock',
         'cgm_base',
+        'stock_picking_return_refund_option',
     ],
     'data': [
         # data

@@ -7,7 +7,8 @@ from odoo.exceptions import ValidationError
 
 
 class SaleOrderTemplate(models.Model):
-    _inherit = 'sale.order.template'
+    _name = 'sale.order.template'
+    _inherit = ['sale.order.template', 'mail.thread', 'mail.activity.mixin', 'utm.mixin']
 
     licence_id = fields.Many2one('product.licence', 'Licence', index=True)
     type = fields.Selection([('sale_order_template', 'Sale Order Template'), ('stock_state', 'Stock State')], 'Type',
@@ -122,11 +123,7 @@ class SaleOrderTemplate(models.Model):
         Unlink lines with quantity less than 0
         :return:
         """
-        to_date = self.date + relativedelta(days=self.number_of_days)
-        self.sale_order_template_line_ids.filtered(lambda line:
-                                                   not line.display_type
-                                                   and line.product_id.with_context(from_date=self.date, to_date=to_date).
-                                                   virtual_available <= 0).unlink()
+        self.sale_order_template_line_ids.filtered(lambda line: not line.display_type and line.product_uom_qty <= 0).unlink()
         return True
 
     def button_generate_quotation(self):
@@ -148,37 +145,54 @@ class SaleOrderTemplate(models.Model):
             order.onchange_partner_shipping_id()
             order.write({'pricelist_id': self.pricelist_id.id, 'sale_order_template_id': self.id, 'warehouse_id': self.warehouse_id.id})
             order.onchange_sale_order_template_id()
+            break
         self.write({'state': 'generated'})
         return True
 
-    def button_send_quotation(self):
+    def action_send_by_mail(self):
         """
-        Send quotation to partners
+        Opens a wizard to compose an email, with relevant mail template loaded by default
         :return:
         """
         self.ensure_one()
-        orders = self.sale_order_ids.filtered(lambda so: so.state != 'cancel')
-        if not orders:
-            raise ValidationError(_('There is no quotation generated for this stock state.'))
-        for order in orders:
-            mail_compose = order._prepare_mail_compose()
-            mail_compose._action_send_mail()
+        template = self.env.ref('cgm_sale.email_template_stock_state', raise_if_not_found=False)
+        if not template:
+            return False
+        ctx = {
+            'default_model': 'sale.order.template',
+            'default_res_id': self.ids[0],
+            'default_use_template': bool(template.id),
+            'default_template_id': template.id,
+            'default_composition_mode': 'comment',
+            'default_partner_ids': self.partner_ids.ids,
+            'mark_so_as_sent': True,
+            'custom_layout': 'mail.mail_notification_paynow',
+            'force_email': True,
+        }
         self.write({'state': 'sent'})
-        return True
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': ctx,
+        }
 
-    def button_print_quotation(self):
+    def button_download_quotation_xls(self):
         """
-        Print all quotations
+        Download stock state xls
         :return:
         """
         self.ensure_one()
         orders = self.sale_order_ids.filtered(lambda so: so.state != 'cancel')
         if not orders:
             raise ValidationError(_('There is no quotation generated for this stock state.'))
-        action_report = self.env.ref('cgm_sale.action_report_stock_state', raise_if_not_found=False)
+        action_report = self.env.ref('cgm_sale.action_report_stock_state_xlsx', raise_if_not_found=False)
         if not action_report:
             raise ValidationError(_('There is no report'))
-        return action_report.report_action(orders.ids, config=False)
+        return action_report.report_action(orders[0].ids, config=False)
 
     def button_cancel(self):
         """
