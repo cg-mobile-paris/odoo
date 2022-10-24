@@ -82,6 +82,7 @@
 
             <xpath expr="//field[@name='sale_order_template_line_ids']//tree//field[@name='name']" position="after">
                 <field name="image" widget="image" class="oe_avatar"/>
+                <field name="barcode"/>
             </xpath>
 
             <xpath expr="//field[@name='sale_order_template_line_ids']//tree" position="attributes">

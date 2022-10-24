@@ -33,7 +33,7 @@ class NeedMgmtProcess(models.Model):
                                     'Families', required=False)
     device_ids = fields.Many2many('product.device', 'need_mgmt_process_product_device_rel', 'template_id', 'device_id',
                                   'Devices', required=False)
-    number_of_days = fields.Integer('Number of Days', help='Period of validity of stock', default=1)
+    number_of_days = fields.Integer('Number of Days', help='Period of validity of stock', default=100)
     warehouse_id = fields.Many2one('stock.warehouse', 'Warehouse', required=True)
 
     @api.model
@@ -212,3 +212,12 @@ class NeedMgmtProcess(models.Model):
         """
         self.ensure_one()
         return self.button_view_pos()
+
+    def button_delete_unordered_line(self):
+        """
+        Delete all line with qty to ordered is 0
+        :return:
+        """
+        self.ensure_one()
+        self.need_mgmt_process_line_ids.filtered(lambda nmpl: nmpl.product_qty <= 0 and not nmpl.display_type).unlink()
+        return True
