@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-11 07:59+0000\n"
-"PO-Revision-Date: 2022-10-11 07:59+0000\n"
+"POT-Creation-Date: 2022-10-24 14:27+0000\n"
+"PO-Revision-Date: 2022-10-24 14:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -200,6 +200,11 @@ msgstr "Date de confirmation"
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
 msgid "Define your terms and conditions ..."
 msgstr "Définir vos conditions générales ..."
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
+msgid "Delete Unordered Lines"
+msgstr "Supprimer lignes à 0"
 
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
@@ -565,10 +570,38 @@ msgid "Purchase Orders"
 msgstr "Commandes"
 
 #. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__outgoing_qty
+msgid "Qty Ordered"
+msgstr "Qté. commandée"
+
+#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__product_qty
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_need_mgmt_process_document
 msgid "Qty To Order"
 msgstr "Qté à commander"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__incoming_qty
+msgid "Qty To Receive"
+msgstr "Qté. à recevoir"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process_line__incoming_qty
+msgid ""
+"Quantity of planned incoming products.\n"
+"In a context with a single Stock Location, this includes goods arriving to this Location, or any of its children.\n"
+"In a context with a single Warehouse, this includes goods arriving to the Stock Location of this Warehouse, or any of its children.\n"
+"Otherwise, this includes goods arriving to any Stock Location with 'internal' type."
+msgstr ""
+
+#. module: cgm_purchase
+#: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process_line__outgoing_qty
+msgid ""
+"Quantity of planned outgoing products.\n"
+"In a context with a single Stock Location, this includes goods leaving this Location, or any of its children.\n"
+"In a context with a single Warehouse, this includes goods leaving the Stock Location of this Warehouse, or any of its children.\n"
+"Otherwise, this includes goods leaving any Stock Location with 'internal' type."
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__reference
