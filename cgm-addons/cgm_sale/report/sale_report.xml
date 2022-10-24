@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_report_stock_state" model="ir.actions.report">
+        <field name="name">Stock State</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cgm_sale.cgm_report_stock_state</field>
+        <field name="report_file">cgm_sale.cgm_report_stock_state</field>
+        <field name="print_report_name">'Stock State - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_stock_state_xlsx" model="ir.actions.report">
+        <field name="name">Stock State (xls)</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cgm_sale.cgm_report_stock_state_xlsx</field>
+        <field name="report_file">cgm_sale.cgm_report_stock_state_xlsx</field>
+        <field name="print_report_name">'Stock State # %s' % (object.sale_order_template_id.name or '')</field>
+        <field name="report_type">xlsx</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

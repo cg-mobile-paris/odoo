@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_purchase_quotation_document_inherit" inherit_id="purchase.report_purchasequotation_document">
+        <!-- th -->
+        <xpath expr="//th[@name='th_description']" position="before">
+            <th name="th_sku_code" class="text-center">SKU
+                <br/>
+                Code
+            </th>
+        </xpath>
+        <!-- td -->
+        <xpath expr="//td[@id='product']" position="before">
+            <td name="td_sku_code" class="text-center">
+                <span t-field="order_line.product_id"/>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="report_purchase_order_document_inherit" inherit_id="purchase.report_purchaseorder_document">
+        <!-- th -->
+        <xpath expr="//th[@name='th_description']" position="before">
+            <th name="th_sku_code" class="text-center">SKU
+                <br/>
+                Code
+            </th>
+        </xpath>
+        <!-- td -->
+        <xpath expr="//td[@id='product']" position="before">
+            <td name="td_sku_code" class="text-center">
+                <span t-field="line.product_id"/>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>

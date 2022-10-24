@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="500"/>
+        <field name="arch" type="xml">
+            <group name="sale" position="inside">
+                <field name="is_royalties"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="res_partner_view_search_cgm" model="ir.ui.view">
+        <field name="name">res.partner.cgm.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="priority" eval="500"/>
+        <field name="arch" type="xml">
+            <filter name="inactive" position="before">
+                <filter string="Royalties" name="royalties_filter" domain="[('is_royalties', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

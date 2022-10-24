@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_need_mgmt_process" model="ir.actions.report">
+            <field name="name">Need Mgmt Process</field>
+            <field name="model">need.mgmt.process</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cgm_purchase.report_need_mgmt_process</field>
+            <field name="report_file">cgm_purchase.report_need_mgmt_process</field>
+            <field name="print_report_name">'Need Mgmt Process - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="cgm_purchase.model_need_mgmt_process"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

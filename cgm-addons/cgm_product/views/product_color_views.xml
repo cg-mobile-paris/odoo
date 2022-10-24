@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_color_tree_view" model="ir.ui.view">
+        <field name="name">product.color.tree.view</field>
+        <field name="model">product.color</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Product Licences" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="color" widget="color"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_color_search_view" model="ir.ui.view">
+        <field name="name">product.color.search.view</field>
+        <field name="model">product.color</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="product_color_action" model="ir.actions.act_window">
+        <field name="name">Colors</field>
+        <field name="res_model">product.color</field>
+        <field name="view_mode">tree</field>
+    </record>
+</odoo>

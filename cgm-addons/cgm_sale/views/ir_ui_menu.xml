@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <menuitem id="product_form_menu"
+                  name="Product Forms"
+                  parent="sale.prod_config_main"
+                  sequence="10"
+                  action="cgm_product.product_form_action"/>
+
+        <menuitem name="Product Materials"
+                  id="product_material_menu"
+                  parent="sale.prod_config_main"
+                  action="cgm_product.product_material_action"
+                  sequence="20"/>
+
+        <menuitem name="Product Licences"
+                  id="product_licence_menu"
+                  parent="sale.prod_config_main"
+                  action="cgm_product.product_licence_action"
+                  sequence="30"/>
+
+        <menuitem id="product_collection_menu"
+                  name="Product Collections"
+                  action="cgm_product.product_collection_action"
+                  parent="sale.prod_config_main"
+                  sequence="40"/>
+
+        <menuitem name="Product Families"
+                  id="product_category_menu"
+                  parent="sale.prod_config_main"
+                  action="product.product_category_action_form"
+                  sequence="50"/>
+
+        <menuitem name="Product Brands"
+                  id="product_brand_menu"
+                  parent="sale.prod_config_main"
+                  action="cgm_product.product_brand_action"
+                  sequence="60"/>
+
+        <menuitem name="Product Devices"
+                  id="product_device_menu"
+                  parent="sale.prod_config_main"
+                  action="cgm_product.product_device_action"
+                  sequence="70"/>
+
+        <menuitem name="Product Colors"
+                  id="product_color_menu"
+                  parent="sale.prod_config_main"
+                  action="cgm_product.product_color_action"
+                  sequence="80"/>
+
+        <menuitem name="Stock States"
+                  id="stock_state_menu"
+                  parent="sale.sale_menu_root"
+                  action="stock_state_action"
+                  sequence="0"/>
+
+        <menuitem name="Product Moves"
+                  id="product_move_menu"
+                  parent="sale.menu_sale_report"
+                  action="product_move_report_act_window"
+                  sequence="20"/>
+
+        <menuitem name="Sale Order Lines"
+                  id="sale_order_lines_menu"
+                  parent="sale.sale_order_menu"
+                  action="sale_order_line_act_window_action"
+                  sequence="20"/>
+
+
+    </data>
+</odoo>
