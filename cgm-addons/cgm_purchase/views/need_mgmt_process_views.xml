@@ -24,6 +24,8 @@
                                 data-hotkey="t" attrs="{'invisible':[('state', 'not in', ['po_generated', 'done'])]}"/>
                         <button name="button_cancel" string="Cancel Need" type="object" data-hotkey="x"
                                 attrs="{'invisible':[('state', '=', 'cancel')]}"/>
+                        <button name="button_delete_unordered_line" states="confirmed" string="Delete Unordered Lines" type="object"
+                                data-hotkey="d"/>
                         <button name="button_draft" states="cancel" string="Set to Draft" type="object" data-hotkey="o"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,checked,sent,confirmed,po_generated,done"
                                readonly="1"/>
@@ -91,7 +93,8 @@
                                         <field name="barcode" optional="hide"/>
                                         <field name="qty_available"/>
                                         <field name="virtual_available"/>
-                                        <!--field name="qty_projected"/-->
+                                        <field name="outgoing_qty"/>
+                                        <field name="incoming_qty"/>
                                         <field name="product_qty"/>
                                         <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                         <field name="seller_id" context="{'filter_by_product': product_id}" optional="hide"/>

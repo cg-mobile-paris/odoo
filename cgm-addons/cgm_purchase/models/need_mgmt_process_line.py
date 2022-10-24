@@ -16,13 +16,14 @@ class NeedMgmtProcessLine(models.Model):
     product_qty = fields.Float('Qty To Order', digits='Product Unit of Measure', required=False)
     qty_available = fields.Float('Physical Qty', digits='Product Unit of Measure', readonly=True)
     virtual_available = fields.Float('Available Qty', digits='Product Unit of Measure', readonly=True)
-    qty_projected = fields.Float('Projected Qty', digits='Product Unit of Measure', readonly=True)
     price_unit = fields.Monetary('Price Unit', required=False)
     seller_id = fields.Many2one('product.supplierinfo', 'Vendor', required=False)
     company_id = fields.Many2one('res.company', 'Company', required=False)
     need_mgmt_process_id = fields.Many2one('need.mgmt.process', 'Need Mgmt Process', required=True, index=True)
     display_type = fields.Selection([('line_section', 'Section'),
                                      ('line_note', 'Note')], default=False, help='Technical field for UX purpose.')
+    incoming_qty = fields.Float('Qty To Receive', digits='Product Unit of Measure', readonly=True)
+    outgoing_qty = fields.Float('Qty Ordered', digits='Product Unit of Measure', readonly=True)
 
     def check_stock(self, from_date=False, to_date=False, warehouse=False):
         """
@@ -37,9 +38,12 @@ class NeedMgmtProcessLine(models.Model):
         for line in self:
             qty_available = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).qty_available
             virtual_available = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).virtual_available
+            incoming_qty = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).incoming_qty
+            outgoing_qty = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).outgoing_qty
             line.write({
                 'qty_available': qty_available,
                 'virtual_available': virtual_available,
-                'qty_projected': 0,
+                'incoming_qty': incoming_qty,
+                'outgoing_qty': outgoing_qty,
             })
         return True
