@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import tools
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ProductMoveReport(models.Model):
@@ -39,18 +39,18 @@ class ProductMoveReport(models.Model):
             fields = {}
         select_ = """
             sol.id as id,
-            so.user_id, 
-            so.date_order as date, 
-            so.name, 
-            so.warehouse_id, 
-            so.partner_id, 
-            sol.product_id, 
+            so.user_id,
+            so.date_order as date,
+            so.name,
+            so.warehouse_id,
+            so.partner_id,
+            sol.product_id,
             prtmpl.name as product_name,
-            - sol.product_uom_qty AS product_uom_qty, 
-            - sol.price_subtotal AS price_subtotal, 
-            so.company_id, 
-            prtmpl.licence_id, 
-            'sale_outlet' AS nature, 
+            - sol.product_uom_qty AS product_uom_qty,
+            - sol.price_subtotal AS price_subtotal,
+            so.company_id,
+            prtmpl.licence_id,
+            'sale_outlet' AS nature,
             sol.state
         """
         for field in fields.values():
@@ -62,18 +62,18 @@ class ProductMoveReport(models.Model):
             fields = {}
         select_ = """
             pol.id as id,
-            po.user_id, 
-            pol.date_planned as date, 
-            po.name, 
-            stpkt.warehouse_id, 
-            po.partner_id, 
-            pol.product_id, 
+            po.user_id,
+            pol.date_planned as date,
+            po.name,
+            stpkt.warehouse_id,
+            po.partner_id,
+            pol.product_id,
             prtmpl.name as product_name,
-            pol.product_uom_qty, 
-            pol.price_subtotal, 
-            po.company_id, 
-            prtmpl.licence_id, 
-            'purchase_entry' as nature, 
+            pol.product_uom_qty,
+            pol.price_subtotal,
+            po.company_id,
+            prtmpl.licence_id,
+            'purchase_entry' as nature,
             pol.state
         """
         for field in fields.values():
@@ -82,19 +82,19 @@ class ProductMoveReport(models.Model):
 
     def _from_sale(self, from_clause=''):
         from_ = """
-            sale_order so, 
-            sale_order_line sol, 
-            product_product pr, 
-            product_template prtmpl 
+            sale_order so,
+            sale_order_line sol,
+            product_product pr,
+            product_template prtmpl
             %s
         """ % from_clause
         return from_
 
     def _from_purchase(self, from_clause=''):
         from_ = """
-            purchase_order po, 
-            purchase_order_line pol, 
-            product_product pr, 
+            purchase_order po,
+            purchase_order_line pol,
+            product_product pr,
             product_template prtmpl,
             stock_picking_type stpkt
             %s
@@ -103,14 +103,14 @@ class ProductMoveReport(models.Model):
 
     def _where_sale(self, where_clause=''):
         where_ = """
-            sol.order_id = so.id 
-            AND 
-            sol.product_id = pr.id 
-            AND 
-            pr.product_tmpl_id = prtmpl.id 
-            AND 
-            sol.display_type IS NULL 
-            AND 
+            sol.order_id = so.id
+            AND
+            sol.product_id = pr.id
+            AND
+            pr.product_tmpl_id = prtmpl.id
+            AND
+            sol.display_type IS NULL
+            AND
             product_id IS NOT NULL
             %s
         """ % where_clause
@@ -118,13 +118,13 @@ class ProductMoveReport(models.Model):
 
     def _where_purchase(self, where_clause=''):
         where_ = """
-            pol.order_id = po.id 
-            AND 
-            pol.product_id = pr.id 
-            AND 
-            pr.product_tmpl_id = prtmpl.id 
-            AND 
-            po.picking_type_id = stpkt.id 
+            pol.order_id = po.id
+            AND
+            pol.product_id = pr.id
+            AND
+            pr.product_tmpl_id = prtmpl.id
+            AND
+            po.picking_type_id = stpkt.id
             AND
             pol.product_id IS NOT NULL
             %s
@@ -134,18 +134,18 @@ class ProductMoveReport(models.Model):
     def _group_by_sale(self, groupby=''):
         groupby_ = """
             sol.id,
-            so.user_id, 
-            date, 
-            so.name, 
-            so.warehouse_id, 
-            so.partner_id, 
-            sol.product_id, 
+            so.user_id,
+            date,
+            so.name,
+            so.warehouse_id,
+            so.partner_id,
+            sol.product_id,
             product_name,
-            product_uom_qty, 
-            price_subtotal, 
-            so.company_id, 
-            prtmpl.licence_id, 
-            nature, 
+            product_uom_qty,
+            price_subtotal,
+            so.company_id,
+            prtmpl.licence_id,
+            nature,
             sol.state
              %s
         """ % groupby
@@ -154,18 +154,18 @@ class ProductMoveReport(models.Model):
     def _group_by_purchase(self, groupby=''):
         groupby_ = """
             pol.id,
-            po.user_id, 
-            date, 
-            po.name, 
-            stpkt.warehouse_id, 
-            po.partner_id, 
-            pol.product_id, 
+            po.user_id,
+            date,
+            po.name,
+            stpkt.warehouse_id,
+            po.partner_id,
+            pol.product_id,
             product_name,
-            pol.product_uom_qty, 
-            pol.price_subtotal, 
-            po.company_id, 
-            prtmpl.licence_id, 
-            nature, 
+            pol.product_uom_qty,
+            pol.price_subtotal,
+            po.company_id,
+            prtmpl.licence_id,
+            nature,
             pol.state
              %s
         """ % groupby

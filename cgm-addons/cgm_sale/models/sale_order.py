@@ -7,7 +7,8 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    company_currency_id = fields.Many2one('res.currency', 'Company Currency', readonly=True, default=lambda self: self.env.company.currency_id, copy=False)
+    company_currency_id = fields.Many2one('res.currency', 'Company Currency', readonly=True,
+                                          default=lambda self: self.env.company.currency_id, copy=False)
     amount_total_in_currency = fields.Monetary('Total', readonly=True, currency_field='company_currency_id', copy=False)
     total_qty = fields.Float('Total Qty', compute='_compute_total_qty', digits='Product Unit of Measure', store=True)
 
