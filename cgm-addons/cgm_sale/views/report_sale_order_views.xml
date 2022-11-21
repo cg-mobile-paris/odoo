@@ -28,7 +28,7 @@
                     <td colspan="4" name="td_total_qty" class="text-right">
                         <span t-field="doc.total_qty"/>
                     </td>
-                    <td colspan="3"/>
+                    <td colspan="4"/>
                 </tr>
             </xpath>
         </template>

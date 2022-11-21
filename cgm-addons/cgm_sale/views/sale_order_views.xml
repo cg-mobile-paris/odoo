@@ -45,7 +45,11 @@
             <field name="arch" type="xml">
                 <field name="amount_total" position="after">
                     <field name="company_currency_id" invisible="1"/>
-                    <field name="amount_total_in_currency"/>
+                    <field name="amount_total_in_currency" sum="Amount Total in Company Currency"/>
+                    <field name="total_qty" optional="hide"/>
+                </field>
+                <field name="amount_total" position="attributes">
+                    <attribute name="sum">Amount Total</attribute>
                 </field>
             </field>
         </record>
@@ -66,6 +70,19 @@
                 <xpath expr="//field[@name='order_line']//tree/field[@name='qty_invoiced']" position="attributes">
                     <attribute name="sum">Total Invoiced Qty</attribute>
                 </xpath>
+
+            </field>
+        </record>
+
+        <record id="sale_quotation_view_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.quotation.view.tree.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="amount_total" position="before">
+                    <field name="total_qty" optional="hide" sum="Total Qty"/>
+                </field>
 
             </field>
         </record>

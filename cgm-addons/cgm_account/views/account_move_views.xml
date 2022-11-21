@@ -2,6 +2,19 @@
 <odoo>
     <data>
 
+        <record id="account_move_view_tree_inherit" model="ir.ui.view">
+            <field name="name">account.move.view.tree.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="state" position="before">
+                    <field name="total_qty" optional="hide" sum="Total Qty"/>
+                </field>
+
+            </field>
+        </record>
+
         <record id="account_move_view_form_inherit" model="ir.ui.view">
             <field name="name">account.move.view.form.inherit</field>
             <field name="model">account.move</field>
