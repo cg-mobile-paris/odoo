@@ -2,12 +2,17 @@
 <odoo>
 
     <template id="report_purchase_quotation_document_inherit" inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//h2" position="replace">
+            <h2>Purchase Order
+                <span t-field="o.name"/>
+            </h2>
+        </xpath>
         <!-- th -->
         <xpath expr="//th[@name='th_description']" position="before">
-            <th name="th_sku_code" class="text-center">SKU
-                <br/>
-                Code
-            </th>
+            <th name="th_sku_code" class="text-center">SKU CODE</th>
+        </xpath>
+        <xpath expr="//th[@name='th_expected_date']" position="replace">
+            <th name="th_barcode" class="text-center">EAN CODE</th>
         </xpath>
         <!-- td -->
         <xpath expr="//td[@id='product']" position="before">
@@ -15,15 +20,22 @@
                 <span t-field="order_line.product_id"/>
             </td>
         </xpath>
+        <xpath expr="//span[@t-field='order_line.date_planned']" position="replace">
+            <span t-field="order_line.product_id.barcode"/>
+        </xpath>
+        <xpath expr="//t[@t-foreach='o.order_line']" position="after">
+            <tr>
+                <td colspan="4" name="td_total_qty" class="text-right">
+                    <span t-field="o.total_qty"/>
+                </td>
+            </tr>
+        </xpath>
     </template>
 
     <template id="report_purchase_order_document_inherit" inherit_id="purchase.report_purchaseorder_document">
         <!-- th -->
         <xpath expr="//th[@name='th_description']" position="before">
-            <th name="th_sku_code" class="text-center">SKU
-                <br/>
-                Code
-            </th>
+            <th name="th_sku_code" class="text-center">SKU CODE</th>
         </xpath>
         <!-- td -->
         <xpath expr="//td[@id='product']" position="before">
