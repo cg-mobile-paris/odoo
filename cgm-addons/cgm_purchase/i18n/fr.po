@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-24 14:27+0000\n"
-"PO-Revision-Date: 2022-10-24 14:27+0000\n"
+"POT-Creation-Date: 2022-11-21 17:53+0000\n"
+"PO-Revision-Date: 2022-11-21 17:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -236,6 +236,11 @@ msgstr "Terminé"
 #: model:ir.model.fields.selection,name:cgm_purchase.selection__need_mgmt_process__state__draft
 msgid "Draft"
 msgstr "Brouillon"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_purchase_quotation_document_inherit
+msgid "EAN CODE"
+msgstr ""
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__barcode
@@ -538,17 +543,13 @@ msgid "Product"
 msgstr "Article"
 
 #. module: cgm_purchase
-#: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process_line__qty_projected
-msgid "Projected Qty"
-msgstr "Qté projetée"
-
-#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order_line__virtual_available
 msgid "Projected quantity"
 msgstr "Quantité projetée"
 
 #. module: cgm_purchase
 #: model:ir.model,name:cgm_purchase.model_purchase_order
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.report_purchase_quotation_document_inherit
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
 
@@ -586,24 +587,6 @@ msgid "Qty To Receive"
 msgstr "Qté. à recevoir"
 
 #. module: cgm_purchase
-#: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process_line__incoming_qty
-msgid ""
-"Quantity of planned incoming products.\n"
-"In a context with a single Stock Location, this includes goods arriving to this Location, or any of its children.\n"
-"In a context with a single Warehouse, this includes goods arriving to the Stock Location of this Warehouse, or any of its children.\n"
-"Otherwise, this includes goods arriving to any Stock Location with 'internal' type."
-msgstr ""
-
-#. module: cgm_purchase
-#: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process_line__outgoing_qty
-msgid ""
-"Quantity of planned outgoing products.\n"
-"In a context with a single Stock Location, this includes goods leaving this Location, or any of its children.\n"
-"In a context with a single Warehouse, this includes goods leaving the Stock Location of this Warehouse, or any of its children.\n"
-"Otherwise, this includes goods leaving any Stock Location with 'internal' type."
-msgstr ""
-
-#. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__reference
 msgid "Reference"
 msgstr "Référence"
@@ -621,10 +604,7 @@ msgstr "Utilisateur Responsable"
 #. module: cgm_purchase
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_purchase_order_document_inherit
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.report_purchase_quotation_document_inherit
-msgid ""
-"SKU\n"
-"                <br/>\n"
-"                Code"
+msgid "SKU CODE"
 msgstr ""
 
 #. module: cgm_purchase
@@ -735,6 +715,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cgm_purchase.need_mgmt_process_form_view
 msgid "Title"
 msgstr "Titre"
+
+#. module: cgm_purchase
+#: model:ir.model.fields,field_description:cgm_purchase.field_purchase_order__total_qty
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_line_view_tree
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_view_form_inherit
+msgid "Total Qty"
+msgstr "Quantité totale"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process__activity_exception_decoration

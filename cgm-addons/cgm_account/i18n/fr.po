@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 12:57+0000\n"
-"PO-Revision-Date: 2022-07-21 12:57+0000\n"
+"POT-Creation-Date: 2022-11-21 17:50+0000\n"
+"PO-Revision-Date: 2022-11-21 17:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,82 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: cgm_account
+#: model:ir.model.fields,field_description:cgm_account.field_res_partner__property_account_payable_id
+#: model:ir.model.fields,field_description:cgm_account.field_res_users__property_account_payable_id
+msgid "Account Payable"
+msgstr "Compte fournisseur"
+
+#. module: cgm_account
+#: model:ir.model.fields,field_description:cgm_account.field_res_partner__property_account_receivable_id
+#: model:ir.model.fields,field_description:cgm_account.field_res_users__property_account_receivable_id
+msgid "Account Receivable"
+msgstr "Compte client"
+
+#. module: cgm_account
+#: model:ir.model,name:cgm_account.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: cgm_account
+#: model:ir.model.fields,field_description:cgm_account.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,field_description:cgm_account.field_res_users__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr "Conditions de Paiement Client"
+
+#. module: cgm_account
+#: model_terms:ir.ui.view,arch_db:cgm_account.cgm_report_invoice_document
+msgid "EAN CODE"
+msgstr ""
+
+#. module: cgm_account
+#: model:ir.model,name:cgm_account.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: cgm_account
 #: model_terms:ir.ui.view,arch_db:cgm_account.cgm_report_invoice_document
 msgid "Name"
 msgstr "Nom"
 
 #. module: cgm_account
 #: model_terms:ir.ui.view,arch_db:cgm_account.cgm_report_invoice_document
-msgid "SKU Code"
-msgstr "SKU Code"
+msgid "SKU CODE"
+msgstr ""
+
+#. module: cgm_account
+#: model:ir.model.fields,help:cgm_account.field_res_partner__property_account_payable_id
+#: model:ir.model.fields,help:cgm_account.field_res_users__property_account_payable_id
+msgid ""
+"This account will be used instead of the default one as the payable account "
+"for the current partner"
+msgstr "Ce compte de tiers remplacera le compte par défaut du partenaire."
+
+#. module: cgm_account
+#: model:ir.model.fields,help:cgm_account.field_res_partner__property_account_receivable_id
+#: model:ir.model.fields,help:cgm_account.field_res_users__property_account_receivable_id
+msgid ""
+"This account will be used instead of the default one as the receivable "
+"account for the current partner"
+msgstr "Ce compte remplacera le compte de tiers par défaut pour ce partenaire"
+
+#. module: cgm_account
+#: model:ir.model.fields,help:cgm_account.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,help:cgm_account.field_res_users__property_payment_term_id
+msgid ""
+"This payment term will be used instead of the default one for sales orders "
+"and customer invoices"
+msgstr ""
+"Ce délai de paiement sera utilisé à la place de celui par défaut pour les "
+"commandes et les factures clients"
+
+#. module: cgm_account
+#: model_terms:ir.ui.view,arch_db:cgm_account.account_move_view_form_inherit
+msgid "Total Invoiced Qty"
+msgstr "Total quantité facturée"
+
+#. module: cgm_account
+#: model:ir.model.fields,field_description:cgm_account.field_account_bank_statement_line__total_qty
+#: model:ir.model.fields,field_description:cgm_account.field_account_move__total_qty
+#: model:ir.model.fields,field_description:cgm_account.field_account_payment__total_qty
+msgid "Total Qty"
+msgstr "Quantité totale"

@@ -22,6 +22,7 @@
         'report/report_deliveryslip.xml',
         'report/report_stock_reception.xml',
         # views
+        'views/stock_picking_views.xml',
         'views/report_stockpicking_operations.xml',
     ],
     'application': False,
