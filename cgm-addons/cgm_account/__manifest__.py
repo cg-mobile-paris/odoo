@@ -17,6 +17,8 @@
     'data': [
         # security
         'security/res_groups.xml',
+        # views
+        'views/account_move_views.xml',
         # report
         'report/report_invoice.xml',
     ],
