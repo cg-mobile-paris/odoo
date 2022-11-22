@@ -2,12 +2,22 @@
 <odoo>
     <template id="cgm_report_invoice_document" inherit_id="account.report_invoice_document">
         <xpath expr="//th[@name='th_description']" position="before">
-            <th name="th_sku_code" class="text-left">SKU Code</th>
+            <th name="th_sku_code" class="text-left">SKU CODE</th>
+        </xpath>
+
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_ean_code" class="text-left">EAN CODE</th>
         </xpath>
 
         <xpath expr="//td[@name='account_invoice_line_name']" position="before">
             <td name="td_sku_code">
                 <span t-field="line.product_id.default_code"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//td[@name='account_invoice_line_name']" position="after">
+            <td name="td_ean_code">
+                <span t-field="line.product_id.barcode"/>
             </td>
         </xpath>
 
@@ -22,5 +32,15 @@
         <xpath expr="//span[@t-field='line.product_uom_id']" position="attributes">
             <attribute name="t-if">line.product_uom_id.id != line.env.ref('uom.product_uom_categ_unit').id</attribute>
         </xpath>
+
+        <xpath expr="//t[@t-foreach='lines']" position="after">
+            <tr>
+                <td colspan="4" name="td_total_qty" class="text-right">
+                    <span t-field="o.total_qty"/>
+                </td>
+                <td colspan="4"/>
+            </tr>
+        </xpath>
+
     </template>
 </odoo>

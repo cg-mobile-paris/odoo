@@ -2,23 +2,6 @@
 <odoo>
     <data noupdate="0">
 
-        <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
-            <xpath expr="//th[@name='th_description']" position="before">
-                <th name="th_sku_code" class="text-center">SKU
-                    <br/>
-                    Code
-                </th>
-            </xpath>
-            <xpath expr="//td[@name='td_name']" position="before">
-                <td name="td_sku_code" class="text-center">
-                    <span t-field="line.product_id"/>
-                </td>
-            </xpath>
-            <xpath expr="//span[@t-field='line.product_uom']" position="attributes">
-                <attribute name="t-if">line.product_uom.id != line.env.ref('uom.product_uom_categ_unit').id</attribute>
-            </xpath>
-        </template>
-
         <template id="cgm_stock_state_document" inherit_id="sale.report_saleorder_document" primary="True" priority="1000">
             <xpath expr="//t[@t-if='doc.partner_shipping_id == doc.partner_invoice_id
                              and doc.partner_invoice_id != doc.partner_id

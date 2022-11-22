@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, _
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    company_currency_id = fields.Many2one('res.currency', 'Company Currency', readonly=True, default=lambda self: self.env.company.currency_id, copy=False)
+    company_currency_id = fields.Many2one('res.currency', 'Company Currency', readonly=True,
+                                          default=lambda self: self.env.company.currency_id, copy=False)
     amount_total_in_currency = fields.Monetary('Total', readonly=True, currency_field='company_currency_id', copy=False)
+    total_qty = fields.Float('Total Qty', compute='_compute_total_qty', digits='Product Unit of Measure', store=True)
+
+    @api.depends('order_line', 'order_line.product_uom_qty')
+    def _compute_total_qty(self):
+        for order in self:
+            order.total_qty = sum(order.order_line.mapped('product_uom_qty'))
 
     def _prepare_mail_compose(self):
         self.ensure_one()
@@ -38,7 +45,7 @@ class SaleOrder(models.Model):
     def compute_amount_total_in_currency(self):
         self.ensure_one()
         try:
-            amount = self.order_amount_total_in_currency()
+            amount = self.sudo().order_amount_total_in_currency()
         except UserError as e:
             self.message_post(body=str(e))
             amount = 0.0

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_sale_order_document_inherit" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//th[@name='th_description']" position="before">
+                <th name="th_sku_code" class="text-center">SKU CODE</th>
+            </xpath>
+            <xpath expr="//th[@name='th_description']" position="after">
+                <th name="th_ean_code" class="text-center">EAN CODE</th>
+            </xpath>
+            <xpath expr="//td[@name='td_name']" position="before">
+                <td name="td_sku_code" class="text-center">
+                    <span t-field="line.product_id"/>
+                </td>
+            </xpath>
+            <xpath expr="//td[@name='td_name']" position="after">
+                <td name="td_ean_code" class="text-center">
+                    <span t-field="line.product_id.barcode"/>
+                </td>
+            </xpath>
+            <xpath expr="//span[@t-field='line.product_uom']" position="attributes">
+                <attribute name="t-if">line.product_uom.id != line.env.ref('uom.product_uom_categ_unit').id</attribute>
+            </xpath>
+
+            <xpath expr="//t[@t-foreach='doc.order_line']" position="after">
+                <tr>
+                    <td colspan="4" name="td_total_qty" class="text-right">
+                        <span t-field="doc.total_qty"/>
+                    </td>
+                    <td colspan="4"/>
+                </tr>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

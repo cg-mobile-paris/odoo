@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="purchase_order_view_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.view.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']//tree/field[@name='product_qty']" position="attributes">
+                    <attribute name="sum">Total Qty</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree/field[@name='qty_received']" position="attributes">
+                    <attribute name="sum">Total Qty Received</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree/field[@name='qty_invoiced']" position="attributes">
+                    <attribute name="sum">Total Qty Invoiced</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_order_view_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.view.tree.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="amount_total" position="after">
+                    <field name="total_qty" optional="hide" sum="Total Qty"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record id="purchase_order_kpis_view_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.kpis.view.tree.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="amount_total" position="after">
+                    <field name="total_qty" optional="hide" sum="Total Qty"/>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

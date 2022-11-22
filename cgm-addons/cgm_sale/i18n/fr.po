@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-24 14:30+0000\n"
-"PO-Revision-Date: 2022-10-24 14:30+0000\n"
+"POT-Creation-Date: 2022-11-21 22:42+0000\n"
+"PO-Revision-Date: 2022-11-21 22:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -122,9 +122,15 @@ msgstr "Icône de type d'activité"
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_order_tree_inherit
 #, python-format
 msgid "Amount Total"
 msgstr "Montant Total"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_order_tree_inherit
+msgid "Amount Total in Company Currency"
+msgstr "Montant total dans la devise de la société"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__message_attachment_count
@@ -246,6 +252,7 @@ msgstr ""
 
 #. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:cgm_sale.report_sale_order_document_inherit
 #, python-format
 msgid "EAN CODE"
 msgstr ""
@@ -608,15 +615,8 @@ msgid "Responsible User"
 msgstr "Utilisateur Responsable"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.report_saleorder_document_inherit
-msgid ""
-"SKU\n"
-"                    <br/>\n"
-"                    Code"
-msgstr ""
-
-#. module: cgm_sale
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:cgm_sale.report_sale_order_document_inherit
 #, python-format
 msgid "SKU CODE"
 msgstr ""
@@ -828,6 +828,27 @@ msgstr "À approuver"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
 msgid "Total"
 msgstr ""
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_form_inherit
+msgid "Total Delivered Qty"
+msgstr "Total quantité livrée"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_form_inherit
+msgid "Total Invoiced Qty"
+msgstr "Total quantité facturée"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_form_inherit
+msgid "Total Ordered Qty"
+msgstr "Total quantité commandée"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__total_qty
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_quotation_view_tree_inherit
+msgid "Total Qty"
+msgstr "Quantité totale"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__type

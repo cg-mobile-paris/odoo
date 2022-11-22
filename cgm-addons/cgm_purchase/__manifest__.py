@@ -28,6 +28,7 @@
         'views/need_mgmt_process_views.xml',
         'views/need_mgmt_process_line_views.xml',
         'views/purchase_order_line_views.xml',
+        'views/purchase_order_views.xml',
         'views/ir_ui_menu.xml',
     ],
     'application': False,
