@@ -61,12 +61,7 @@
                             </group>
                             <group>
                                 <field name="date"/>
-                                <label for="number_of_days"/>
-                                <div id="number_of_days">
-                                    <field name="number_of_days" class="oe_inline"/>
-                                    days
-                                </div>
-                                <field name="date_approve"/>
+                                <field name="date_approve" states="confirmed,po_generated,done"/>
                                 <field name="user_id" options="{'no_create': True, 'no_edit': True}"/>
                                 <field name="responsible_id" options="{'no_create': True, 'no_edit': True}"/>
                                 <field name="warehouse_id" options="{'no_create': True, 'no_edit': True}"/>
@@ -91,11 +86,12 @@
                                         <field name="name" widget="section_and_note_text"/>
                                         <field name="image" widget="image" class="oe_avatar"/>
                                         <field name="barcode" optional="hide"/>
-                                        <field name="qty_available"/>
-                                        <field name="virtual_available"/>
-                                        <field name="outgoing_qty"/>
-                                        <field name="incoming_qty"/>
-                                        <field name="product_qty"/>
+                                        <field name="physical_qty" sum="Total Physical Qty"/>
+                                        <field name="outgoing_qty" sum="Total Outgoing Qty"/>
+                                        <field name="available_qty" sum="Total Available Qty"/>
+                                        <field name="incoming_qty" sum="Total Incoming Qty"/>
+                                        <field name="projected_qty" sum="Total Projected Qty"/>
+                                        <field name="product_qty" sum="Total Ordered Qty"/>
                                         <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                         <field name="seller_id" context="{'filter_by_product': product_id}" optional="hide"/>
                                     </tree>
