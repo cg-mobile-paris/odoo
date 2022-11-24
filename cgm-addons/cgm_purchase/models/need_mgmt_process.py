@@ -33,7 +33,6 @@ class NeedMgmtProcess(models.Model):
                                     'Families', required=False)
     device_ids = fields.Many2many('product.device', 'need_mgmt_process_product_device_rel', 'template_id', 'device_id',
                                   'Devices', required=False)
-    number_of_days = fields.Integer('Number of Days', help='Period of validity of stock', default=100)
     warehouse_id = fields.Many2one('stock.warehouse', 'Warehouse', required=True)
 
     @api.model
@@ -87,7 +86,7 @@ class NeedMgmtProcess(models.Model):
                 need_mgmt_process_lines.append((0, 0, {'product_id': product.id,
                                                        'name': product.name,
                                                        'product_qty': 0.0,
-                                                       'price_unit': seller and seller.price,
+                                                       'price_unit': seller and seller.price or product.standard_price,
                                                        'seller_id': seller and seller.id}))
         self.update({'need_mgmt_process_line_ids': need_mgmt_process_lines})
         return {}
@@ -97,8 +96,7 @@ class NeedMgmtProcess(models.Model):
         :return:
         """
         self.ensure_one()
-        to_date = self.date + relativedelta(days=self.number_of_days)
-        self.need_mgmt_process_line_ids.check_stock(self.date, to_date, self.warehouse_id)
+        self.need_mgmt_process_line_ids.check_stock(self.warehouse_id)
         self.write({'state': 'checked'})
         return True
 

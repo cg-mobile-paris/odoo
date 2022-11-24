@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class NeedMgmtProcessLine(models.Model):
@@ -14,8 +15,8 @@ class NeedMgmtProcessLine(models.Model):
     image = fields.Image('Thumbnail', related='product_id.image_1920', store=True)
     barcode = fields.Char('EAN Code', related='product_id.barcode', store=True)
     product_qty = fields.Float('Qty To Order', digits='Product Unit of Measure', required=False)
-    qty_available = fields.Float('Physical Qty', digits='Product Unit of Measure', readonly=True)
-    virtual_available = fields.Float('Available Qty', digits='Product Unit of Measure', readonly=True)
+    physical_qty = fields.Float('Physical Qty', digits='Product Unit of Measure', readonly=True)
+    available_qty = fields.Float('Available Qty', digits='Product Unit of Measure', readonly=True)
     price_unit = fields.Monetary('Price Unit', required=False)
     seller_id = fields.Many2one('product.supplierinfo', 'Vendor', required=False)
     company_id = fields.Many2one('res.company', 'Company', required=False)
@@ -24,26 +25,28 @@ class NeedMgmtProcessLine(models.Model):
                                      ('line_note', 'Note')], default=False, help='Technical field for UX purpose.')
     incoming_qty = fields.Float('Qty To Receive', digits='Product Unit of Measure', readonly=True)
     outgoing_qty = fields.Float('Qty Ordered', digits='Product Unit of Measure', readonly=True)
+    projected_qty = fields.Float('Projected Qty', digits='Product Unit of Measure', readonly=True)
 
-    def check_stock(self, from_date=False, to_date=False, warehouse=False):
+    def check_stock(self, warehouse=False):
         """
         Fill stock of the linked product
-        :param from_date:
-        :param to_date:
         :param warehouse:
         :return:
         """
-        if not from_date or not to_date or not warehouse:
-            return False
+        if not warehouse:
+            raise ValidationError(_('Warehouse is required to process this action!'))
         for line in self:
-            qty_available = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).qty_available
-            virtual_available = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).virtual_available
-            incoming_qty = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).incoming_qty
-            outgoing_qty = line.product_id.with_context(from_date=from_date, to_date=to_date, warehouse=warehouse.id).outgoing_qty
+            physical_qty = line.product_id.with_context(warehouse=warehouse.id).qty_available
+            outgoing_qty = line.product_id.with_context(warehouse=warehouse.id).outgoing_qty
+            available_qty = physical_qty - outgoing_qty
+            incoming_qty = line.product_id.with_context(warehouse=warehouse.id).incoming_qty
+            projected_qty = available_qty + incoming_qty
+
             line.write({
-                'qty_available': qty_available,
-                'virtual_available': virtual_available,
-                'incoming_qty': incoming_qty,
+                'physical_qty': physical_qty,
                 'outgoing_qty': outgoing_qty,
+                'available_qty': available_qty,
+                'incoming_qty': incoming_qty,
+                'projected_qty': projected_qty
             })
         return True
