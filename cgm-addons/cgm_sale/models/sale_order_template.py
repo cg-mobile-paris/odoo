@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*-
 
-from dateutil.relativedelta import relativedelta
-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -111,10 +109,12 @@ class SaleOrderTemplate(models.Model):
         :return:
         """
         self.ensure_one()
-        to_date = self.date + relativedelta(days=self.number_of_days)
+        warehouse = self.warehouse_id
         for line in self.sale_order_template_line_ids.filtered(lambda l: not l.display_type):
-            quantity = line.product_id.with_context(from_date=self.date, to_date=to_date, warehouse=self.warehouse_id.id).virtual_available
-            line.write({'product_uom_qty': quantity})
+            physical_qty = line.product_id.with_context(warehouse=warehouse.id).qty_available
+            outgoing_qty = line.product_id.with_context(warehouse=warehouse.id).outgoing_qty
+            available_qty = physical_qty - outgoing_qty
+            line.write({'product_uom_qty': available_qty})
         self.write({'state': 'checked'})
         return True
 
