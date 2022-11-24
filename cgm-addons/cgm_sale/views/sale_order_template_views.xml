@@ -86,8 +86,7 @@
             </xpath>
 
             <xpath expr="//field[@name='sale_order_template_line_ids']//tree" position="attributes">
-                <attribute name="decoration-info">not display_type and state == 'checked' and product_uom_qty &lt; 0</attribute>
-                <attribute name="decoration-danger">not display_type and state == 'checked' and not product_uom_qty</attribute>
+                <attribute name="decoration-danger">not display_type and state == 'checked' and product_uom_qty &lt;= 0</attribute>
             </xpath>
 
             <xpath expr="//sheet" position="after">
