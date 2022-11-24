@@ -16,10 +16,6 @@
                         <strong>Date:</strong>
                         <p class="m-0" t-field="doc.date" t-options='{"widget": "date"}'/>
                     </div>
-                    <div t-if="doc.date" class="col-auto col-3 mw-100 mb-2">
-                        <strong>Expiration:</strong>
-                        <p class="m-0"><span t-field="doc.number_of_days"/> days</p>
-                    </div>
                     <div t-if="doc.date_approve" class="col-auto col-3 mw-100 mb-2">
                         <strong>Date Approve:</strong>
                         <p class="m-0" t-field="doc.date_approve" t-options='{"widget": "date"}'/>
@@ -38,9 +34,11 @@
                             <th name="th_thumbnail" class="text-center">Thumbnail</th>
                             <th name="th_barcode" class="text-center">EAN Code</th>
                             <th name="th_price_unit" class="text-center">Price Unit</th>
-                            <th name="th_qty_available" class="text-center">Physical Qty</th>
-                            <th name="th_virtual_available" class="text-center">Available Qty</th>
-                            <!--th name="th_qty_projected" class="text-center">Projected Qty</th-->
+                            <th name="th_physical_qty" class="text-center">Physical Qty</th>
+                            <th name="th_outgoing_qty" class="text-center">Outgoing Qty</th>
+                            <th name="th_available_qty" class="text-center">Available Qty</th>
+                            <th name="th_incoming_qty" class="text-center">Incoming Qty</th>
+                            <th name="th_qty_projected" class="text-center">Projected Qty</th>
                             <th name="th_qty_to_order" class="text-center">Qty To Order</th>
                             <th name="th_factory" class="text-left">Factory</th>
                         </tr>
@@ -65,15 +63,21 @@
                                     <td name="td_price_unit" class="text-center">
                                         <span t-field="line.price_unit"/>
                                     </td>
-                                    <td name="td_qty_available" class="text-center">
-                                        <span t-field="line.qty_available"/>
+                                    <td name="td_physical_qty" class="text-center">
+                                        <span t-field="line.physical_qty"/>
                                     </td>
-                                    <td name="td_virtual_available" class="text-center">
-                                        <span t-field="line.virtual_available"/>
+                                    <td name="td_outgoing_qty" class="text-center">
+                                        <span t-field="line.outgoing_qty"/>
                                     </td>
-                                    <!--td name="td_qty_projected" class="text-center">
-                                        <span t-field="line.qty_projected"/>
-                                    </td-->
+                                    <td name="td_available_qty" class="text-center">
+                                        <span t-field="line.available_qty"/>
+                                    </td>
+                                    <td name="td_incoming_qty" class="text-center">
+                                        <span t-field="line.incoming_qty"/>
+                                    </td>
+                                    <td name="td_projected_qty" class="text-center">
+                                        <span t-field="line.projected_qty"/>
+                                    </td>
                                     <td name="td_qty_to_order" class="text-center">
                                         <span t-field="line.product_qty"/>
                                     </td>
