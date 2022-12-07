@@ -13,6 +13,22 @@
             </field>
         </record>
 
+        <record id="sale_order_delivery_state_form_view_inherit" model="ir.ui.view">
+            <field name="name">sale.order.delivery.state.form.view.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_delivery_state.view_order_form_inherit_delivery_state"/>
+            <field name="arch" type="xml">
+
+                <button name="action_force_delivery_state" position="attributes">
+                    <attribute name="states">sale,done</attribute>
+                </button>
+                <button name="action_unforce_delivery_state" position="attributes">
+                    <attribute name="states">sale,done</attribute>
+                </button>
+
+            </field>
+        </record>
+
         <record id="sale_quotation_with_onboarding_tree_view_inherit" model="ir.ui.view">
             <field name="name">sale.quotation.with.onboarding.tree.view.inherit</field>
             <field name="model">sale.order</field>
