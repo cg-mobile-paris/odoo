@@ -10,6 +10,7 @@
     'website': 'https://arkeup.com',
     'description': '',
     'depends': [
+        'web',
         'contacts',
         'report_xlsx',
     ],
@@ -19,6 +20,7 @@
         'security/ir.model.access.csv',
         'security/res_groups.xml',
         # views
+        'views/templates.xml',
     ],
     'application': False,
     'installable': True,

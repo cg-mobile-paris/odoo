@@ -12,6 +12,10 @@
                     <field name="total_qty" optional="hide" sum="Total Qty"/>
                 </field>
 
+                <field name="amount_total_in_currency_signed" position="attributes">
+                    <attribute name="sum">Amount Total In Currency</attribute>
+                </field>
+
             </field>
         </record>
 
