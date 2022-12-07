@@ -15,6 +15,7 @@
         'cgm_stock',
         'cgm_account',
         'cgm_contacts',
+        'arkeup_background_image',
     ],
     'data': [],
     'application': True,

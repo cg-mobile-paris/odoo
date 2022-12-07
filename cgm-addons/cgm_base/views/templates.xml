@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="cg_mobile_web_layout" name="CG MOBILE Web Layout" inherit_id="web.layout">
+            <xpath expr="//body" position="inside">
+                <style>
+                    .o_main_navbar {background-color: #70b9d1 !important;border-bottom: 0px;}
+                    .o_main_navbar .show .dropdown-toggle {background-color: #70b9d1;}
+                    .o_main_navbar > ul > li > a:hover, .o_main_navbar
+                    > ul > li > label:hover {background-color: #70b9d1;}
+                    .o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar
+                    > button:hover, .o_main_navbar
+                    > button:focus {background-color: #70b9d1;color: inherit;}
+                    .o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar
+                    > button:hover, .o_main_navbar
+                    > button:focus {background-color: #70b9d1;color: inherit;}
+                </style>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
