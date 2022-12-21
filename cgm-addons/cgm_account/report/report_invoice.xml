@@ -41,6 +41,11 @@
                 <td colspan="4"/>
             </tr>
         </xpath>
-
+        <xpath expr="//p[@name='payment_communication']" position="before">
+            <t t-if="o.partner_bank_id">
+                <strong>Bank account:</strong>
+                <p t-field="o.partner_bank_id"/>
+            </t>
+        </xpath>
     </template>
 </odoo>
