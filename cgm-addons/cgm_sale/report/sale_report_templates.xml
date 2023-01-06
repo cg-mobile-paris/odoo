@@ -5,7 +5,10 @@
         <xpath expr="//p[@t-field='doc.note']" position="before">
             <t t-if="doc.bank_id">
                 <strong>Bank account:</strong>
-                <p t-field="doc.bank_id"/>
+                <div t-field="doc.bank_id.acc_number"/>
+                SWIFT BIC:
+                <span t-field="doc.bank_id.bank_id.bic"/>
+                <div t-field="doc.bank_id.bank_id.note"/>
             </t>
         </xpath>
     </template>
