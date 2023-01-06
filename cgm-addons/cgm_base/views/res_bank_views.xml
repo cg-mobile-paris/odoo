@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_bank_form_inherit" model="ir.ui.view">
+            <field name="name">res.bank.form</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[last()]" position="after">
+                    <notebook>
+                        <page name="notes" string="Notes">
+                            <field name="note" placeholder="Note..."/>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
