@@ -86,6 +86,10 @@
                 <xpath expr="//field[@name='order_line']//tree/field[@name='qty_invoiced']" position="attributes">
                     <attribute name="sum">Total Invoiced Qty</attribute>
                 </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="bank_partner_id" invisible="1"/>
+                    <field name="bank_id" domain="[('partner_id', '=', bank_partner_id)]"/>
+                </xpath>
 
             </field>
         </record>

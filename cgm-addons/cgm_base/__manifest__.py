@@ -20,8 +20,14 @@
         'security/ir.model.access.csv',
         'security/res_groups.xml',
         # views
+        'views/res_bank_views.xml',
         'views/templates.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'cgm_base/static/src/legacy/js/fields/form_view.js',
+        ]
+    },
     'application': False,
     'installable': True,
     'auto_install': False,

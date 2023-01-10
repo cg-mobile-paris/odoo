@@ -23,6 +23,7 @@
         # report
         'report/stock_state_template.xml',
         'report/sale_report.xml',
+        'report/sale_report_templates.xml',
         # views
         'views/sale_order_views.xml',
         'views/report_sale_order_views.xml',
