@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-24 11:27+0000\n"
-"PO-Revision-Date: 2022-11-24 11:27+0000\n"
+"POT-Creation-Date: 2022-12-21 13:20+0000\n"
+"PO-Revision-Date: 2022-12-21 13:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,11 @@ msgid "<span>Stock State #</span>"
 msgstr "<span>État de stock #</span>"
 
 #. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.report_saleorder_document_inherit
+msgid "<strong>Bank account:</strong>"
+msgstr "<strong>Compte bancaire:</strong>"
+
+#. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Date : </strong>"
@@ -136,6 +141,16 @@ msgstr "Montant total dans la devise de la société"
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__message_attachment_count
 msgid "Attachment Count"
 msgstr "Nombre de pièces jointes"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__bank_id
+msgid "Bank account"
+msgstr "Compte bancaire"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__bank_partner_id
+msgid "Bank partner"
+msgstr "Banque partenaire"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__campaign_id
@@ -647,6 +662,11 @@ msgstr "Modèle de devis"
 #: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__nature__sale_outlet
 msgid "Sale Outlet"
 msgstr "Sortie de vente"
+
+#. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_sale_advance_payment_inv
+msgid "Sales Advance Payment Invoice"
+msgstr "Facture de paiement d'avance"
 
 #. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order
