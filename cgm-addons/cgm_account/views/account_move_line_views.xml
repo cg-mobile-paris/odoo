@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- views -->
+    <record id="view_move_line_tree" model="ir.ui.view">
+      <field name="name">account.move.line.tree</field>
+      <field name="model">account.move.line</field>
+      <field name="arch" type="xml">
+        <tree string="Journal Items" default_order="date desc, move_name desc, id">
+          <!-- Displayed fields -->
+          <field name="move_name" invisible="1"/>
+          <field name="product_id"
+            optional="show"
+          />
+          <field name="name" widget="section_and_note_text"/>
+          <field name="account_id"
+                 groups="account.group_account_readonly"
+                 options="{'no_create': True}"
+                 attrs="{'required': [('display_type', '=', False)]}"/>
+          <field name="analytic_account_id"
+                 groups="analytic.group_analytic_accounting"
+                 optional="show"/>
+          <field name="analytic_tag_ids"
+                 groups="analytic.group_analytic_tags"
+                 optional="show"
+                 widget="many2many_tags"/>
+          <field name="quantity"/>
+          <field name="product_uom_category_id" invisible="1"/>
+          <field name="product_uom_id" string="UoM" groups="uom.group_uom" optional="show"/>
+          <field name="price_unit" string="Price"/>
+          <field name="discount" string="Disc.%" optional="hide"/>
+          <field name="tax_ids" widget="many2many_tags"
+                 options="{'no_create': True}"
+                 optional="show"/>
+          <field name="price_subtotal"
+                 string="Subtotal"
+                 groups="account.group_show_line_subtotals_tax_excluded"/>
+          <field name="price_total"
+                 string="Total"
+                 groups="account.group_show_line_subtotals_tax_included"/>
+
+          <!-- Others fields -->
+          <field name="partner_id" invisible="1"/>
+          <field name="amount_currency" invisible="1"/>
+          <field name="currency_id" invisible="1"/>
+          <field name="debit" invisible="1"/>
+          <field name="credit" invisible="1"/>
+          <field name="date" invisible="1"/>
+          <field name="date_maturity" invisible="1"/>
+
+          <field name="group_tax_id" invisible="1"/>
+          <field name="tax_line_id" invisible="1"/>
+          <field name="tax_repartition_line_id" invisible="1"/>
+          <field name="tax_tag_ids" invisible="1"/>
+          <field name="tax_base_amount" invisible="1"/>
+          <field name="company_id" invisible="1"/>
+          <field name="company_currency_id" invisible="1"/>
+          <field name="recompute_tax_line" invisible="1" force_save="1"/>
+          <field name="display_type" force_save="1" invisible="1"/>
+          <field name="is_rounding_line" invisible="1"/>
+          <field name="exclude_from_invoice_tab" invisible="1"/>
+          <field name="account_internal_type" invisible="1"/>
+          <field name="account_internal_group" invisible="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- action -->
+    <record id="action_account_move_line" model="ir.actions.act_window">
+      <field name="name">Invoice Lines</field>
+      <field name="res_model">account.move.line</field>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="view_move_line_tree"/>
+      <field name="domain">[('move_id.move_type', '=', 'in_invoice')]</field>
+      <field name="context">{'create': False}</field>
+    </record>
+
+    <!-- menu -->
+    <menuitem id="menu_action_account_move_line" action="action_account_move_line" sequence="500" parent="account.menu_finance_payables"/>
+  </data>
+</odoo>
