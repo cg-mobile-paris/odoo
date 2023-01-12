@@ -19,6 +19,7 @@
         'security/res_groups.xml',
         # views
         'views/account_move_views.xml',
+        'views/account_move_line_views.xml',
         # report
         'report/report_invoice.xml',
     ],
