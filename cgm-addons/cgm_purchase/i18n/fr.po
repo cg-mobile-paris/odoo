@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-24 11:21+0000\n"
-"PO-Revision-Date: 2022-11-24 11:21+0000\n"
+"PO-Revision-Date: 2023-10-18 07:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -272,6 +272,11 @@ msgstr "Abonnés (Partenaires)"
 #: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Icône Font Awesome e.g. fa-tasks"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_view_form_inherit
+msgid "Force reception done"
+msgstr "Forcer réception"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,help:cgm_purchase.field_purchase_order_line__virtual_available
@@ -776,6 +781,11 @@ msgstr "Total quantité livrée"
 #: model:ir.model.fields,help:cgm_purchase.field_need_mgmt_process__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr "Type d'activité d'exception enregistrée"
+
+#. module: cgm_purchase
+#: model_terms:ir.ui.view,arch_db:cgm_purchase.purchase_order_view_form_inherit
+msgid "Unforce reception done"
+msgstr "Annuler forcer reçu"
 
 #. module: cgm_purchase
 #: model:ir.model.fields,field_description:cgm_purchase.field_need_mgmt_process__message_unread
