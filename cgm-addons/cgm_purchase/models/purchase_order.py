@@ -13,3 +13,9 @@ class PurchaseOrder(models.Model):
     def _compute_total_qty(self):
         for order in self:
             order.total_qty = sum(order.order_line.mapped('product_qty'))
+
+    def action_force_received(self):
+        self.write({"force_received": True})
+
+    def action_unforce_received(self):
+        self.write({"force_received": False})
