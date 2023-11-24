@@ -15,6 +15,7 @@ class SaleOrderLine(models.Model):
     currency_dollar_id = fields.Many2one('res.currency', string=" ", default=lambda self: self.env.ref('base.USD'))
     currency_symbol_dollars = fields.Char(string=" ", compute='_get_currency_symbol_dollars')
     qty_to_deliver = fields.Float(compute='_compute_qty_to_deliver', store=True, digits='Product Unit of Measure')
+    barcode = fields.Char('EAN Code', related='product_id.barcode', store=True)
 
     def _get_filtered_lines(self):
         return self.filtered(lambda line: line.qty_to_deliver > 0)
@@ -29,10 +30,11 @@ class SaleOrderLine(models.Model):
         for rec in self:
             rec.currency_symbol_euros = rec.currency_euro_id.symbol
 
-    @api.depends('qty_to_deliver', 'price_unit')
+    @api.depends('qty_to_deliver', 'price_unit', 'discount')
     def _compute_remaining_deliverables_dollars(self):
         for line in self:
-            remaining_deliverables = line.qty_to_deliver * line.price_unit
+            price_unit = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            remaining_deliverables = line.qty_to_deliver * price_unit
             if line.order_id.currency_id.name == 'EUR':
                 exchange_rate = self._get_exchange_rate('EUR', 'USD')
                 line.remaining_deliverables_dollars = remaining_deliverables * exchange_rate

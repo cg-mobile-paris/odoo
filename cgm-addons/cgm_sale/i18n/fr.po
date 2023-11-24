@@ -963,3 +963,8 @@ msgstr "Reste à livrer dollars"
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__remaining_deliverables_euros
 msgid "Remaining deliverables euros"
 msgstr "Reste à livrer euros"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
+msgid "Price subtotal $"
+msgstr "Sous-total $"
