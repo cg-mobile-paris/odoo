@@ -22,7 +22,7 @@
                     <field name="currency_symbol_dollars" string=""/>
                     <field name="remaining_deliverables_euros" sum="Total Euros"/>
                     <field name="currency_symbol_euros" string=""/>
-                    <field name="price_subtotal" sum="Total" widget="monetary"/>
+                    <field name="price_subtotal" string="Price subtotal $" sum="Total" widget="monetary"/>
                     <field name="currency_id" invisible="1"/>
                 </tree>
             </field>
