@@ -13,6 +13,12 @@ class SaleOrder(models.Model):
     total_qty = fields.Float('Total Qty', compute='_compute_total_qty', digits='Product Unit of Measure', store=True)
     bank_id = fields.Many2one('res.partner.bank', string='Bank account')
     bank_partner_id = fields.Many2one('res.partner', string='Bank partner', related='company_id.partner_id')
+    barcode = fields.Char('EAN Code', compute='_compute_barcode', store=True)
+
+    @api.depends('order_line', 'order_line.barcode')
+    def _compute_barcode(self):
+        for order in self:
+            order.barcode = order.order_line.mapped('barcode')
 
     @api.depends('order_line', 'order_line.product_uom_qty')
     def _compute_total_qty(self):

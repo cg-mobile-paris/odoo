@@ -91,6 +91,10 @@
                     <field name="bank_id" domain="[('partner_id', '=', bank_partner_id)]"/>
                 </xpath>
 
+                <xpath expr="//field[@name='order_line']//tree/field[@name='route_id']" position="before">
+                    <field name="barcode" optional="hide"/>
+                </xpath>
+
             </field>
         </record>
 
