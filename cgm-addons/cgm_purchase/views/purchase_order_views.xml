@@ -35,6 +35,10 @@
                             attrs="{'invisible': ['|', ('force_received', '=', False)]}"
                     />
                 </field>
+
+                <xpath expr="//field[@name='order_line']//tree/field[@name='product_qty']" position="before">
+                    <field name="barcode" optional="hide"/>
+                </xpath>
             </field>
         </record>
 
