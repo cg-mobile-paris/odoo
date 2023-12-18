@@ -9,6 +9,7 @@ class PurchaseOrderLine(models.Model):
     qty_available = fields.Float('Available quantity', related='product_id.qty_available', store=True)
     virtual_available = fields.Float('Projected quantity', related='product_id.virtual_available', store=True)
     qty_expected = fields.Float('Expected quantity', compute='_compute_expected_qty', store=True)
+    barcode = fields.Char('EAN Code', related='product_id.barcode', store=True)
 
     @api.depends('product_qty', 'virtual_available')
     def _compute_expected_qty(self):
