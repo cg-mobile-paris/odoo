@@ -13,13 +13,31 @@
                     <field name="order_partner_id"/>
                     <field name="product_uom_qty" string="Qty"/>
                     <field name="qty_delivered"/>
-                    <field name="qty_to_deliver"/>
+                    <field name="qty_to_deliver" options="{'compute': '_get_filtered_lines'}"/>
                     <field name="qty_invoiced"/>
                     <field name="qty_to_invoice"/>
+                    <field name="price_unit" widget="monetary" invisible="True"/>
                     <field name="product_uom" string="Unit of Measure" groups="uom.group_uom"/>
-                    <field name="price_subtotal" sum="Total" widget="monetary"/>
+                    <field name="remaining_deliverables_dollars" sum="Total Dollars"/>
+                    <field name="currency_symbol_dollars" string=""/>
+                    <field name="remaining_deliverables_euros" sum="Total Euros"/>
+                    <field name="currency_symbol_euros" string=""/>
+                    <field name="price_subtotal" string="Price subtotal $" sum="Total" widget="monetary"/>
                     <field name="currency_id" invisible="1"/>
                 </tree>
+            </field>
+        </record>
+
+        <record id="view_sales_order_line_filter_inherit" model="ir.ui.view">
+            <field name="name">sale.order.line.select.inherit</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <filter string="Qté à livrer > 0 et Partiellement livré (non annulé, en attente)"
+                            domain="[('qty_to_deliver','>', 0), ('parent_delivery_state', '=', 'partially')]"
+                            name="qty_to_deliver_and_partially"/>
+                </xpath>
             </field>
         </record>
 
@@ -29,6 +47,7 @@
             <field name="res_model">sale.order.line</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('display_type', '=', False)]</field>
+            <field name="context">{'search_default_qty_to_deliver_and_partially': 1}</field>
             <field name="view_id" ref="cgm_sale.sale_order_line_view_tree"/>
         </record>
 
