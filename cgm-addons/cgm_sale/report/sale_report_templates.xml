@@ -11,6 +11,9 @@
                 <div t-field="doc.bank_id.bank_id.note"/>
             </t>
         </xpath>
+        <xpath expr="//table[@class='table table-sm o_main_table']/thead" position="attributes">
+            <attribute name="style">display: table-header-group;</attribute>
+        </xpath>
     </template>
 
 </odoo>
