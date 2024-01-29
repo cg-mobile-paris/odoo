@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, SUPERUSER_ID
 
 
 class PurchaseOrderLine(models.Model):
@@ -29,3 +29,22 @@ class PurchaseOrderLine(models.Model):
         if product_lang.description_purchase:
             name += '\n' + product_lang.description_purchase
         return name
+
+    @api.model
+    def create(self, vals):
+        product_id = vals.get('product_id')
+        if product_id:
+            product = self.env['product.product'].browse(product_id)
+            if product and product.name:
+                vals['name'] = product.name
+        return super().create(vals)
+
+    # def migrate(cr, registry):
+    #     env = api.Environment(cr, SUPERUSER_ID, {})
+    #     purchase_order_lines = env['purchase.order.line'].search([])
+    #     for line in purchase_order_lines:
+    #         line.name = line.product_id.name
+
+
+
+
