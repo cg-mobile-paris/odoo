@@ -8,16 +8,16 @@
                     <strong>SKU Code</strong>
                 </th>
             </xpath>
-            <xpath expr="//t[@t-foreach='o.move_line_ids_without_package']/tr/td" position="replace">
-                <td name="td_sku_code" class="text-center">
-                    <span t-field="ml.product_id.default_code"/>
-                </td>
-                <td name="td_product">
-                    <span t-field="ml.product_id.name"/>
-                    <br/>
-                    <span t-field="ml.product_id.description_picking"/>
-                </td>
-            </xpath>
+<!--            <xpath expr="//t[@t-foreach='o.move_line_ids_without_package']/tr/td" position="replace">-->
+<!--                <td name="td_sku_code" class="text-center">-->
+<!--                    <span t-field="ml.product_id.default_code"/>-->
+<!--                </td>-->
+<!--                <td name="td_product">-->
+<!--                    <span t-field="ml.product_id.name"/>-->
+<!--                    <br/>-->
+<!--                    <span t-field="ml.product_id.description_picking"/>-->
+<!--                </td>-->
+<!--            </xpath>-->
         </template>
 
     </data>

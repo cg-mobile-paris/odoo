@@ -12,7 +12,7 @@
     'depends': [
         'web',
         'contacts',
-        # 'report_xlsx',
+        'report_xlsx',
     ],
     'data': [
         # data

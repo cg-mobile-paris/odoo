@@ -25,7 +25,6 @@
                     </p>
                 </div>
             </field>
-            <field name="report_name">Stock State # {{(object.name or '').replace('/','_')}}</field>
             <field name="lang">{{ user.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>

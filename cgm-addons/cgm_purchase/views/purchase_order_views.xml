@@ -19,20 +19,17 @@
                 </xpath>
 
                 <field name="state" position="before">
-                    <!-- states and attrs[invisible] must be combined with an extra & -->
+                    <!--TODO invisible condition-->
                     <button
                             name="action_force_received"
                             type="object"
                             string="Force reception done"
-                            states="purchase"
-                            attrs="{'invisible': ['|', '|', ('force_received', '=', True), ('reception_status', '=', 'received')]}"
                     />
+                    <!--TODO invisible condition-->
                     <button
                             name="action_unforce_received"
                             type="object"
                             string="Unforce reception done"
-                            states="purchase"
-                            attrs="{'invisible': ['|', ('force_received', '=', False)]}"
                     />
                 </field>
 

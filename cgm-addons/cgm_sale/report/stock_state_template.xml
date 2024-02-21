@@ -12,12 +12,12 @@
                          style="width: 90%"/>
                 </t>
             </xpath>
-            <xpath expr="//h2[hasclass('mt16')]" position="replace">
-                <h2>
-                    <span>Stock State #</span>
-                    <span t-field="doc.sale_order_template_id"/>
-                </h2>
-            </xpath>
+<!--            <xpath expr="//h2[hasclass('mt16')]" position="replace">-->
+<!--                <h2>-->
+<!--                    <span>Stock State #</span>-->
+<!--                    <span t-field="doc.sale_order_template_id"/>-->
+<!--                </h2>-->
+<!--            </xpath>-->
             <!-- th -->
             <xpath expr="//th[@name='th_quantity']" position="before">
                 <th name="th_thumbnail" class="text-center">Thumbnail</th>
@@ -65,11 +65,11 @@
             </xpath>
         </template>
 
-        <template id="cgm_report_stock_state" inherit_id="sale.report_saleorder" primary="True" priority="1000">
-            <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="replace">
-                <t t-call="cgm_sale.cgm_stock_state_document" t-lang="doc.partner_id.lang"/>
-            </xpath>
-        </template>
+<!--        <template id="cgm_report_stock_state" inherit_id="sale.report_saleorder" primary="True" priority="1000">-->
+<!--            <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="replace">-->
+<!--                <t t-call="cgm_sale.cgm_stock_state_document" t-lang="doc.partner_id.lang"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
 
     </data>
 </odoo>

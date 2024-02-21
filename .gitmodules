@@ -1,0 +1,4 @@
+[submodule "oca-addons/reporting-engine"]
+	path = oca-addons/reporting-engine
+	url = https://github.com/OCA/reporting-engine.git
+	branch = 17.0

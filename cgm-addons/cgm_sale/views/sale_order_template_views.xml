@@ -33,20 +33,28 @@
             <xpath expr="//sheet" position="before">
                 <header>
                     <button name="button_check_stock" string="Check Stock" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button name="button_unlink_lines_with_quantity_lt_0" string="Unlink Lines Qte &lt;= 0" type="object"
-                            attrs="{'invisible': [('state', '!=', 'checked')]}"/>
-                    <button name="button_generate_quotation" string="Generate Quotations" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', '!=', 'checked')]}"/>
+                            invisible="state != 'draft'"/>
+                    <button name="button_unlink_lines_with_quantity_lt_0"
+                            string="Unlink Lines Qte &lt;= 0" type="object"
+                            invisible="state != 'checked'"/>
+                    <button name="button_generate_quotation" string="Generate Quotations"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'checked'"/>
                     <button name="action_send_by_mail" string="Send By Mail" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', '!=', 'generated')]}"/>
-                    <button name="button_download_quotation_xls" string="Download XLS" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', 'not in', ['generated', 'sent'])]}"/>
+                            invisible="state != 'generated'"/>
+                    <button name="button_download_quotation_xls" string="Download XLS"
+                            type="object" class="oe_highlight"
+                            invisible="state not in ['generated', 'sent']"/>
                     <button name="button_confirm" string="Confirm" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', '!=', 'sent')]}"/>
-                    <button name="button_cancel" string="Cancel" type="object" attrs="{'invisible': [('state', '=', 'cancel')]}"/>
-                    <button name="button_draft" string="Reset To Draft" type="object" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,checked,generated,sent,done" readonly="1"/>
+                            invisible="state != 'sent'"/>
+                    <button name="button_cancel" string="Cancel" type="object"
+                            invisible="state == 'cancel'"/>
+                    <button name="button_draft" string="Reset To Draft"
+                            type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,checked,generated,sent,done"
+                           readonly="1"/>
                 </header>
             </xpath>
 
