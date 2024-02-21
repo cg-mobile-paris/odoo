@@ -3,16 +3,16 @@
     'name': 'CG-MOBILE BASE',
     'summary': '',
     'category': 'Tools',
-    'version': '15.0.0.1',
+    'version': '17.0.0.1',
     'sequence': -99,
-    'author': 'ArkeUp',
+    'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',
-    'website': 'https://arkeup.com',
+    'website': 'https://www.irokoo.fr',
     'description': '',
     'depends': [
         'web',
         'contacts',
-        'report_xlsx',
+        # 'report_xlsx',
     ],
     'data': [
         # data
@@ -21,13 +21,13 @@
         'security/res_groups.xml',
         # views
         'views/res_bank_views.xml',
-        'views/templates.xml',
+        # 'views/templates.xml',
     ],
-    'assets': {
-        'web.assets_backend': [
-            'cgm_base/static/src/legacy/js/fields/form_view.js',
-        ]
-    },
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'cgm_base/static/src/legacy/js/fields/form_view.js',
+    #     ]
+    # },
     'application': False,
     'installable': True,
     'auto_install': False,

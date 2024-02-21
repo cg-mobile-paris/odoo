@@ -3,16 +3,16 @@
     'name': 'CG-MOBILE PURCHASE',
     'summary': '',
     'category': 'Purchase',
-    'version': '15.0.0.1',
+    'version': '17.0.0.1',
     'sequence': -96,
-    'author': 'ArkeUp',
+    'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',
-    'website': 'https://arkeup.com',
+    'website': 'https://www.irokoo.fr',
     'description': '',
     'depends': [
         'purchase',
         'cgm_product',
-        'purchase_reception_status'
+        # 'purchase_reception_status'
     ],
     'data': [
         # data
