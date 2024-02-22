@@ -75,7 +75,7 @@
                             Please note, some required fields have not been added to the list of fields, creating or updating may not work.
                         </div>
                         <field name="api_field_ids"
-                               context="{'default_path_id': active_id}">
+                               context="{'default_path_id': id}">
                             <tree editable="bottom" decoration-muted="default_value">
                                 <field name="model_id" invisible="1"/>
                                 <field name="path_id" invisible="1" />

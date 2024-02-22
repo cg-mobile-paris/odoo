@@ -53,8 +53,8 @@ class ApiRestPath(models.Model):
     version_id = fields.Many2one(
         'api.rest.version', string='API Version', required=True,
         ondelete='cascade')
-    model_id = fields.Many2one('ir.model', required=True, ondelete='cascade')
-    model = fields.Char(related='model_id.model', readonly=True)
+    model_id = fields.Many2one('ir.model', required=True, ondelete='cascade', string='Model ID')
+    model = fields.Char(related='model_id.model', readonly=True, string="Related Model ID")
     method = fields.Selection([
         ('get', 'Read'),
         ('post', 'Create'),
@@ -75,7 +75,7 @@ class ApiRestPath(models.Model):
     warning_required = fields.Boolean(
         compute='_compute_warning_required', compute_sudo=True)
     api_field_ids = fields.One2many(
-        'api.rest.field', 'path_id', string='Fields', copy=True)
+        'api.rest.field', 'path_id', string='Api Fields', copy=True)
     update_domain = fields.Char(default="[]")
     # Unlink
     unlink_domain = fields.Char(default="[]")
@@ -119,7 +119,7 @@ class ApiRestPath(models.Model):
         default.update(name=_("%s (copy)") % (self.name or ''))
         return super(ApiRestPath, self).copy(default)
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         self._update_values(values)
         return super().create(values)

@@ -25,7 +25,7 @@ class ApiRestField(models.Model):
         related="field_id.name", readonly=True)
     description = fields.Char()
     force_required = fields.Boolean(
-        related="field_id.required", readonly=True)
+        related="field_id.required", readonly=True, string="Force required")
     required = fields.Boolean()
     default_value = fields.Char()
 

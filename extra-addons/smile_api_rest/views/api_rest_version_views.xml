@@ -54,7 +54,7 @@
                     <notebook colspan="4">
                         <page string="Paths">
                             <field name="path_ids"
-                                   context="{'default_version_id': active_id}"
+                                   context="{'default_version_id': id}"
                                    nolabel="1" />
                         </page>
                         <page string="Security">
