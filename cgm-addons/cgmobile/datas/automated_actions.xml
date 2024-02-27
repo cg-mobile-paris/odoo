@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Shipping Methods -->
+
+            <!-- Default US Carrier -->
+<!--            <record id="delivery_carrier_default_us" model="delivery.carrier">-->
+<!--                <field name="name">Default US Carrier</field>-->
+<!--                <field name="product_id" ref="delivery_shippo.product_product_delivery_shippo_cheapest"/>-->
+<!--                <field name="delivery_type">shippo</field>-->
+<!--                <field name="shippo_api_key"></field>-->
+<!--                <field name="shippo_api_version">2018-02-08</field>-->
+<!--                <field name="shippo_verify_ssl_certs">True</field>-->
+<!--                <field name="shippo_rates_req_timeout">30</field>-->
+<!--                <field name="shippo_rate_policy">cheapest</field>-->
+<!--                <field name="shippo_default_packaging_id" ref="delivery_shippo.delivery_carrier_shippo_default_packaging" />-->
+<!--            </record>-->
+
+            <!-- Default Non US Carrier -->
+            <record id="product_product_delivery_non_us" model="product.product">
+                <field name="name">Shipping Fees - Standard - Non US</field>
+                <field name="default_code">SHIP-N-US</field>
+                <field name="barcode">SHIP-N-US</field>
+                <field name="type">service</field>
+                <field name="categ_id" ref="delivery.product_category_deliveries"/>
+                <field name="sale_ok" eval="False"/>
+                <field name="purchase_ok" eval="False"/>
+                <field name="list_price">0.0</field>
+            </record>
+
+            <record id="delivery_carrier_default_non_us" model="delivery.carrier">
+                <field name="name">Default Non US Carrier</field>
+                <field name="product_id" ref="cgmobile.product_product_delivery_non_us"/>
+                <field name="delivery_type">fixed</field>
+                <field name="tracking_required">True</field>
+            </record>
+
+        <!-- Automations -->
+
+            <!-- For new delivery, set shippo -->
+            <record id="automation_delivery_carrier_creation" model="base.automation">
+                <field name="name">Shipping Methods - New - Set as Shippo</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="delivery.model_delivery_carrier" />
+                <field name="state">object_write</field>
+                <field name="trigger">on_create</field>
+                <field name="filter_domain">[["tracking_required","=",False]]</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('delivery.field_delivery_carrier__delivery_type'), 'value': 'shippo'}),(0, 0, {'col1': ref('delivery_shippo.field_delivery_carrier__shippo_default_packaging_id'), 'value': 1}),(0, 0, {'col1': ref('delivery_shippo.field_delivery_carrier__shippo_api_key'), 'value': 'replace_here'})]" />
+            </record>
+
+            <!-- For Sales with delivery in US, set carrier to default US -->
+            <record id="automation_sale_order_carrier_for_us" model="base.automation">
+                <field name="name">Sales Order - Shipping Methods - US - Default US</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="sale.model_sale_order" />
+                <field name="state">object_write</field>
+                <field name="trigger">on_create_or_write</field>
+                <field name="filter_pre_domain">["&amp;","&amp;",["partner_shipping_id.country_id.code","=","US"],["picking_ids","=",False],"|",["carrier_id","=",False],["carrier_id.delivery_type","!=","shippo"]]</field>
+                <field name="filter_domain">["&amp;","&amp;",["partner_shipping_id.country_id.code","=","US"],["picking_ids","=",False],"|",["carrier_id","=",False],["carrier_id.delivery_type","!=","shippo"]]</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('delivery.field_sale_order__carrier_id'), 'value': ref('cgmobile.delivery_carrier_default_us')})]" />
+            </record>
+
+            <!-- For Sales with delivery not in US, set carrier to default Non US -->
+            <record id="automation_sale_order_carrier_for_non_us" model="base.automation">
+                <field name="name">Sales Order - Shipping Methods - Non US - Default Non US</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="sale.model_sale_order" />
+                <field name="state">object_write</field>
+                <field name="trigger">on_create_or_write</field>
+                <field name="filter_pre_domain">["&amp;","&amp;",["partner_shipping_id.country_id.code","!=","US"],["picking_ids","=",False],"|",["carrier_id","=",False],["carrier_id.delivery_type","=","shippo"]]</field>
+                <field name="filter_domain">["&amp;","&amp;",["partner_shipping_id.country_id.code","!=","US"],["picking_ids","=",False],"|",["carrier_id","=",False],["carrier_id.delivery_type","=","shippo"]]</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('delivery.field_sale_order__carrier_id'), 'value': ref('cgmobile.delivery_carrier_default_non_us')})]" />
+            </record>
+
+            <!-- Default vendors in product -->
+            <record id="automation_product_template_default_vendors" model="base.automation">
+                <field name="name">Product Template - Add default vendors</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="product.model_product_template" />
+                <field name="state">code</field>
+                <field name="trigger">on_create_or_write</field>
+                <field name="filter_pre_domain">[]</field>
+                <field name="filter_domain">[('seller_ids', '=', False)]</field>
+                <field name="code">
+for vendor_id in [1, 12]:
+  sellerinfo = env['product.supplierinfo'].search([('name', '=', vendor_id), ('product_tmpl_id', '=', record.id)])
+  if not sellerinfo:
+    sellerinfo = env['product.supplierinfo'].create({'name': vendor_id, 'product_tmpl_id': record.id, 'price': 0.00})
+                </field>
+            </record>
+
+            <!-- Default category in product -->
+            <record id="automation_product_template_default_category" model="base.automation">
+                <field name="name">Product Template - Add default category</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="product.model_product_template" />
+                <field name="state">object_write</field>
+                <field name="trigger">on_create</field>
+                <field name="filter_domain">[('categ_id', '=', 1)]</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('product.field_product_template__categ_id'), 'value': 6})]" /><!-- Full Shared Stock (B2B <-> B2C) -->
+            </record>
+
+            <!-- Default weight in product -->
+            <record id="automation_product_template_default_weight" model="base.automation">
+                <field name="name">Product Template - Add default weight</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="product.model_product_template" />
+                <field name="state">object_write</field>
+                <field name="trigger">on_create</field>
+                <field name="filter_domain">[('weight', 'in', [False, 0.00])]</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('product.field_product_template__weight'), 'value': 0.3})]" />
+            </record>
+
+            <!-- For Sales with delivery in US, set carrier to default US -->
+            <record id="automation_res_partner_phone" model="base.automation">
+                <field name="name">Contact - Add default phone number</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="base.model_res_partner" />
+                <field name="state">object_write</field>
+                <field name="trigger">on_create_or_write</field>
+                <field name="filter_pre_domain">[('type', 'in', ['contact', 'delivery'])]</field>
+                <field name="filter_domain">[('phone', '=', False)]</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('base.field_res_partner__phone'), 'value': '+1 (786) 788-8792'})]" /><!-- CG Mobile phone -->
+            </record>
+
+            <!-- Automatically validate inter-warehouses transfers -->
+            <record id="automation_autovalidate_interwarehouse_pickings" model="base.automation">
+                <field name="name">Transfers - Auto-validate inter-warehouse transfers</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="stock.model_stock_picking" />
+                <field name="state">code</field>
+                <field name="trigger">on_create_or_write</field>
+                <field name="filter_pre_domain">[('location_id', 'in', [8,22]), ('location_dest_id', '=', 6), ('state', 'not in', ['done', 'cancel'])]</field>
+                <field name="filter_domain">[('location_id', 'in', [8,22]), ('location_dest_id', '=', 6), ('state', '=', 'assigned')]</field>
+                <field name="code">
+next_picking = False
+for stock_move in record.move_lines:
+    # next move
+    next_move = stock_move.get_move_dest_ids()
+    if not next_move:
+        continue  # error
+
+    # next next move
+    last_move = next_move.get_move_dest_ids()
+    if not last_move:
+        continue  # error
+
+    # next picking
+    if not next_picking:
+        next_picking = next_move.picking_id
+
+    # location in destination warehouse
+    location_in_dst = stock_move.move_line_ids.location_id.get_or_create_location_in_another_company(last_move.company_id)
+
+    next_move.move_line_ids.update({'location_dest_id': location_in_dst.id})
+    # last_move.update({'location_id': location_in_dst.id})
+
+record.update({'immediate_transfer': True})
+next_picking.update({'immediate_transfer': True})
+                </field>
+            </record>
+
+            <!-- Launch stock rule for Amazon transfers -->
+            <record id="automation_launch_stock_rule_for_amazon_pickings" model="base.automation">
+                <field name="name">Transfers - Launch stock rule for Amazon transfers</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="stock.model_stock_picking" />
+                <field name="trigger">on_create_or_write</field>
+                <field name="trigger_field_ids" eval="[(4, ref('stock.field_stock_picking__state'))]" />
+                <field name="filter_pre_domain">['&amp;', ('state', '=', 'draft'), '|', '&amp;', ('location_id', '=', 22), ('location_dest_id', '=', 27), '&amp;', ('location_id', '=', 8), ('location_dest_id', '=', 28)]</field>
+                <field name="filter_domain">['&amp;', ('state', '=', 'waiting'), '|', '&amp;', ('location_id', '=', 22), ('location_dest_id', '=', 27), '&amp;', ('location_id', '=', 8), ('location_dest_id', '=', 28)]</field>
+
+                <field name="state">code</field>
+                <field name="code">
+# Trigger the Scheduler for Pickings
+prev_prev_picking_ids = record.get_picking_orig_ids().get_picking_orig_ids()
+if prev_prev_picking_ids:
+    prev_picking_ids = record.get_picking_orig_ids()
+    if prev_picking_ids:
+        all_picking_ids = prev_prev_picking_ids + prev_picking_ids
+        all_picking_ids.action_confirm()
+        all_picking_ids.action_assign()
+        all_picking_ids._action_done_for_immediate()
+# to fix: set picking as ready
+move_states = record.move_lines.mapped('state')
+if len(move_states) == 1 and move_states[0] == 'assigned':
+    record.update({'state': 'assigned'})
+                </field>
+            </record>
+            <record id="automation_default_values_for_amazon_pickings" model="base.automation">
+                <field name="name">Transfers - Default values for Amazon transfers</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="stock.model_stock_picking" />
+                <field name="trigger">on_create</field>
+                <field name="filter_domain">['&amp;', ('state', '=', 'draft'), '|', '&amp;', ('location_id', '=', 22), ('location_dest_id', '=', 27), '&amp;', ('location_id', '=', 8), ('location_dest_id', '=', 28)]</field>
+
+                <field name="state">object_write</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('stock.field_stock_picking__group_id'), 'value': 'env[\'procurement.group\'].create({\'name\': record.name})', 'evaluation_type': 'equation'})]" />
+            </record>
+            <record id="automation_default_values_for_amazon_stock_moves" model="base.automation">
+                <field name="name">Stock Move - Default values for Amazon transfers</field>
+                <field name="active">False</field>
+                <field name="model_id" ref="stock.model_stock_move" />
+                <field name="trigger">on_create_or_write</field>
+                <field name="filter_pre_domain">['&amp;', ('state', '=', 'draft'), '|', '&amp;', ('location_id', '=', 22), ('location_dest_id', '=', 27), '&amp;', ('location_id', '=', 8), ('location_dest_id', '=', 28)]</field>
+                <field name="filter_domain">['&amp;', ('state', '=', 'draft'), '|', '&amp;', ('location_id', '=', 22), ('location_dest_id', '=', 27), '&amp;', ('location_id', '=', 8), ('location_dest_id', '=', 28)]</field>
+
+                <field name="state">object_write</field>
+                <field name="fields_lines" eval="[(5, 0, 0), (0, 0, {'col1': ref('stock.field_stock_move__procure_method'), 'value': 'make_to_order'}), (0, 0, {'col1': ref('stock.field_stock_move__origin'), 'value': 'record.picking_id.name', 'evaluation_type': 'equation'}), (0, 0, {'col1': ref('stock.field_stock_move__group_id'), 'value': 'record.picking_id.group_id.id', 'evaluation_type': 'equation'})]" />
+            </record>
+    </data>
+</odoo>

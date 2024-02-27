@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- include vat number in report -->
+        <template id="external_layout_boxed_cgmobile" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
+                <div class="row mb1">
+                    <div class="col-12">
+                        <center>
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                        </center>
+                    </div>
+                    <div class="text-right" style="position:absolute;top:0;right:0;">
+                        <h4 class="mt0" t-field="company.report_header"/>
+                        <div name="company_address" class="float-right mb4">
+                            <span class="company_address" t-field="company.partner_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[hasclass('text-center')]" position="before">
+                <div class="col-4 m-1" style="border:1px solid gray;font-size:9px;">
+Please make check payable to: CG Mobile America LLC<br/>
+Bank transfer to: CITIBANK, N.A<br/>
+3800 SOUTH OCEAN DRIVE, HOLLYWOOD, FLORIDA 33019<br/>
+Account#: 9144260123 Account Holder: CG MOBILE AMERICA “LLC”<br/>
+Citibank ABA/Routing Number: 266086554 SWIFT Code: CITI US 33<br/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

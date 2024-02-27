@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="device_model_search_form_view" model="ir.ui.view">
+        <field name="name">device_model.search.form</field>
+        <field name="model">cgmobile.device_model</field>
+        <field name="arch" type="xml">
+            <search string="Device Model">
+                <field name="name"/>
+                <field name="brand_id" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_device_model_form">
+        <field name="name">device_model.form</field>
+        <field name="model">cgmobile.device_model</field>
+        <field name="arch" type="xml">
+            <form string="Device Model">
+                <sheet>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" string="Name"/>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="brand_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_device_model_tree">
+        <field name="name">device_model.tree</field>
+        <field name="model">cgmobile.device_model</field>
+        <field name="arch" type="xml">
+            <tree string="Device Model">
+                <field name="brand_id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="device_model_product_search_form_view" model="ir.ui.view">
+        <field name="name">device_model.product.search.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="device_model_id"/>
+                <filter string="Device Model" name="groupby_device_model" domain="[]" context="{'group_by':'device_model_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_device_model">
+        <field name="name">Device Models</field>
+        <field name="res_model">cgmobile.device_model</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Device Model Management" id="menu_device_model_management" action="action_device_model" parent="sale.prod_config_main"/>
+</odoo>

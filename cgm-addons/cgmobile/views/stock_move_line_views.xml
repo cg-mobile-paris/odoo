@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_move_line_tree" model="ir.ui.view">
+            <field name="name">stock.move.line.tree.inherit.cgmobile</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="before">
+                    <field name="movement_type"/>
+                    <field name="sale_company_id"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="stock_move_line_view_search" model="ir.ui.view">
+            <field name="name">stock.move.line.search.inherit.cgmobile</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.stock_move_line_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/group" position="inside">
+                    <filter string="Movement Type" name="movement_type" domain="[]" context="{'group_by': 'movement_type'}"/>
+                </xpath>
+<!--                <xpath expr="//search" position="inside">-->
+<!--                    <filter string="To Customer and Amazon" name="customer_and_amazon" domain="[-->
+<!--                        '&amp;',('state','=','done'),-->
+<!--                        '&amp;',('location_id.usage','=','internal'),('location_id.amazon_location','=',False),-->
+<!--                        '|',('location_dest_id.amazon_location','=',True),'&amp;',('location_dest_id.usage','=','customer'),('sale_company_id','!=',False)-->
+<!--                        ]"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

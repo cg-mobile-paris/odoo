@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_collection_search_form_view" model="ir.ui.view">
+        <field name="name">product_collection.search.form</field>
+        <field name="model">cgmobile.product_collection</field>
+        <field name="arch" type="xml">
+            <search string="Product Collection">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_product_collection_form">
+        <field name="name">product_collection.form</field>
+        <field name="model">cgmobile.product_collection</field>
+        <field name="arch" type="xml">
+            <form string="Product Collection">
+                <sheet>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" string="Name"/>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_product_collection_tree">
+        <field name="name">product_collection.tree</field>
+        <field name="model">cgmobile.product_collection</field>
+        <field name="arch" type="xml">
+            <tree string="Product Collection">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_collection_product_search_form_view" model="ir.ui.view">
+        <field name="name">product_collection.product.search.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="product_collection_id"/>
+                <filter string="Product Collection" name="groupby_product_collection" domain="[]" context="{'group_by':'product_collection_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_product_collection">
+        <field name="name">Product Collections</field>
+        <field name="res_model">cgmobile.product_collection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Collection Management" id="menu_product_collection_management" action="action_product_collection" parent="sale.prod_config_main"/>
+</odoo>

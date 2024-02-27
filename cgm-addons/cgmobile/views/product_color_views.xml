@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_color_search_form_view" model="ir.ui.view">
+        <field name="name">product_color.search.form</field>
+        <field name="model">cgmobile.product_color</field>
+        <field name="arch" type="xml">
+            <search string="Product Color">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_product_color_form">
+        <field name="name">product_color.form</field>
+        <field name="model">cgmobile.product_color</field>
+        <field name="arch" type="xml">
+            <form string="Product Color">
+                <sheet>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" string="Name"/>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_product_color_tree">
+        <field name="name">product_color.tree</field>
+        <field name="model">cgmobile.product_color</field>
+        <field name="arch" type="xml">
+            <tree string="Product Color">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_color_product_search_form_view" model="ir.ui.view">
+        <field name="name">product_color.product.search.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="product_color_id"/>
+                <filter string="Product Color" name="groupby_product_color" domain="[]" context="{'group_by':'product_color_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_product_color">
+        <field name="name">Product Colors</field>
+        <field name="res_model">cgmobile.product_color</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Color Management" id="menu_product_color_management" action="action_product_color" parent="sale.prod_config_main"/>
+</odoo>

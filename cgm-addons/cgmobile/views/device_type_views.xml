@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="device_type_search_form_view" model="ir.ui.view">
+        <field name="name">device_type.search.form</field>
+        <field name="model">cgmobile.device_type</field>
+        <field name="arch" type="xml">
+            <search string="Device Type">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_device_type_form">
+        <field name="name">device_type.form</field>
+        <field name="model">cgmobile.device_type</field>
+        <field name="arch" type="xml">
+            <form string="Device Type">
+                <sheet>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" string="Name"/>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_device_type_tree">
+        <field name="name">device_type.tree</field>
+        <field name="model">cgmobile.device_type</field>
+        <field name="arch" type="xml">
+            <tree string="Device Type">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="device_type_product_search_form_view" model="ir.ui.view">
+        <field name="name">device_type.product.search.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="device_type_id"/>
+                <filter string="Device Type" name="groupby_device_type" domain="[]" context="{'group_by':'device_type_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_device_type">
+        <field name="name">Device Types</field>
+        <field name="res_model">cgmobile.device_type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Device Type Management" id="menu_device_type_management" action="action_device_type" parent="sale.prod_config_main"/>
+</odoo>

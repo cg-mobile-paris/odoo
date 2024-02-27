@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+<!--        <template id="assets_backend" inherit_id="web.assets_backend" priority="99">-->
+<!--            <xpath expr="//script[contains(@src, '/stock_barcode/static/src/js/client_action/picking_client_action.js')]" position="replace">-->
+<!--                <script type="text/javascript" src="/cgmobile/static/src/js/client_action/picking_client_action.js"></script>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+<!--        <template id="report_pdf_file">-->
+<!--            <t t-call="web.html_container">-->
+<!--                <t t-foreach="docs" t-as="o">-->
+<!--                    <t t-call="web.external_layout">-->
+<!--                        <div class="page">-->
+<!--                            <h2 ><span t-field="o.name"/></h2>-->
+<!--                            <p>ERROR</p>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--        </template>-->
+
+<!--        <record id="action_report_shipping_label" model="ir.actions.report">-->
+<!--            <field name="name">Shipping Label</field>-->
+<!--            <field name="model">stock.picking</field>-->
+
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">cgmobile.report_pdf_file</field>-->
+<!--            <field name="report_file">cgmobile.report_pdf_file</field>-->
+
+<!--            <field name="attachment">((object.name or 'SL').replace('/','_')+'.pdf')</field>-->
+<!--            <field name="attachment_use">True</field>-->
+
+<!--            <field name="binding_model_id" ref="model_stock_picking"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

@@ -14,7 +14,7 @@ class SaleOrderLine(models.Model):
     currency_symbol_euros = fields.Char(string=" ", compute='_get_currency_symbol_euros')
     currency_dollar_id = fields.Many2one('res.currency', string=" ", default=lambda self: self.env.ref('base.USD'))
     currency_symbol_dollars = fields.Char(string=" ", compute='_get_currency_symbol_dollars')
-    qty_to_deliver = fields.Float(compute='_compute_qty_to_deliver', store=True, digits='Product Unit of Measure')
+    qty_to_deliver = fields.Float(digits='Product Unit of Measure') # FIXME v17 where is function _compute_qty_to_deliver?
     barcode = fields.Char('EAN Code', related='product_id.barcode', store=True)
 
     def _get_filtered_lines(self):

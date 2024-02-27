@@ -1,0 +1,12 @@
+<odoo>
+    <!-- record to create a group group_auto_apply_purchase_receipt -->
+    <record id="group_auto_apply_purchase_receipt" model="res.groups">
+        <field name="name">Ice Mobility: Auto Apply Purchase Receipt</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+    <!-- record to create a group group_auto_validate_inventory_adustment -->
+    <record id="group_auto_validate_inventory_adustment" model="res.groups">
+        <field name="name">Ice Mobility: Auto Validate Inventory Adjustment</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

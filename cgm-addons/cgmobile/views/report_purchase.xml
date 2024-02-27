@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchaseorder_document" 
+                inherit_id="purchase.report_purchaseorder_document"
+                name="CGMobile Customization">
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_barcode"><strong>Barcode</strong></th>
+        </xpath>
+        <xpath expr="//td[@id='product']" position="after">
+            <td id="product">
+                <span t-field="line.barcode"/>
+            </td>
+        </xpath>
+    </template>
+    <template id="report_purchasequotation_document" 
+                inherit_id="purchase.report_purchasequotation_document"
+                name="CGMobile Customization">
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_barcode"><strong>Barcode</strong></th>
+        </xpath>
+        <xpath expr="//td[@id='product']" position="after">
+            <td id="product">
+                <span t-field="order_line.barcode"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

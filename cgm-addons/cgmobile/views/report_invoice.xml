@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <!-- Rename Customer Code by Vendor number -->
+            <xpath expr="//div[@name='customer_code']" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.ref" name="customer_code">
+                    <strong>Vendor Number:</strong>
+                    <p class="m-0" t-field="o.partner_id.ref"/>
+                </div>
+            </xpath>
+            <!-- Rename Reference by Customer Reference -->
+            <xpath expr="//div[@name='reference']" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.ref" name="reference">
+                    <strong>PO Number:</strong>
+                    <p class="m-0" t-field="o.ref"/>
+                </div>
+            </xpath>
+            <!-- Add Total Quantity -->
+            <xpath expr="//tr[hasclass('o_subtotal')]" position="before">
+                <t t-set="total_quantity" t-value="0"/>
+                <t t-foreach="lines" t-as="line">
+                <t t-set="total_quantity" t-value="total_quantity + line.quantity"/>
+                </t>
+                <tr class="border-black" style="">
+                    <td><strong>Total Quantity:</strong></td>
+                    <td class="text-right">
+                        <span t-esc="'{:,.0f}'.format(total_quantity)" />
+                    </td>
+                </tr>
+            </xpath>
+            <!-- Format quantity column -->
+            <xpath expr="//span[@t-field='line.quantity']" position='replace'>
+                <span t-esc="'{:,.0f}'.format(line.quantity)" />
+            </xpath>
+            <!-- Remove Units -->
+            <xpath expr="//span[@t-field='line.product_uom_id']" position='replace'>
+                <span t-field="line.product_uom_id" groups="uom.group_uom" t-if="line.product_uom_id.id != 1" />
+            </xpath>
+            <!-- Format quantity column -->
+            <xpath expr="//span[@t-field='line.price_subtotal']" position='replace'>
+                <span t-esc="'{:,.2f}'.format(line.price_subtotal)" groups="account.group_show_line_subtotals_tax_excluded" />
+            </xpath>
+            <!-- Format quantity column -->
+            <xpath expr="//span[@t-field='line.price_total']" position='replace'>
+                <span t-esc="'{:,.2f}'.format(line.price_total)" groups="account.group_show_line_subtotals_tax_included" />
+            </xpath>
+            <!-- Remove payment informations -->
+            <xpath expr="//p[@name='payment_communication']" position="replace">
+            </xpath>
+            <!-- Resize columns -->
+            <xpath expr="//th[@name='th_description']" position="attributes">
+                <attribute name="width">66.91%</attribute>
+            </xpath>
+            <xpath expr="//th[@name='th_quantity']" position="attributes">
+                <attribute name="width">9.90%</attribute>
+            </xpath>
+            <xpath expr="//th[@name='th_priceunit']" position="attributes">
+                <attribute name="width">7.68%</attribute>
+            </xpath>
+            <xpath expr="//th[@name='th_taxes']" position="attributes">
+                <attribute name="width">6.20%</attribute>
+            </xpath>
+            <xpath expr="//th[@name='th_subtotal']" position="attributes">
+                <attribute name="width">8.94%</attribute>
+            </xpath>
+        </template>
+
+        <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <!-- Add Vendor number -->
+            <xpath expr="//div[@id='informations']" position="inside">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="doc.partner_id.ref" name="customer_code">
+                    <strong>Vendor Number:</strong>
+                    <p class="m-0" t-field="doc.partner_id.ref"/>
+                </div>
+            </xpath>
+            <!-- Rename Reference by Customer Reference -->
+            <xpath expr="//div[@id='informations']//div[1]" position="replace">
+                <div t-if="doc.client_order_ref" class="col-auto col-3 mw-100 mb-2" name="reference">
+                    <strong>PO Number:</strong>
+                    <p class="m-0" t-field="doc.client_order_ref"/>
+                </div>
+            </xpath>
+            <!-- Add Total Quantity -->
+            <xpath expr="//tr[hasclass('o_subtotal')]" position="before">
+                <t t-set="total_quantity" t-value="0"/>
+                <t t-foreach="doc.order_line" t-as="line">
+                <t t-set="total_quantity" t-value="total_quantity + line.product_uom_qty"/>
+                </t>
+                <tr class="border-black" style="">
+                    <td><strong>Total Quantity:</strong></td>
+                    <td class="text-right">
+                        <span t-esc="'{:,.0f}'.format(total_quantity)" />
+                    </td>
+                </tr>
+            </xpath>
+            <!-- Format and remove Units -->
+            <xpath expr="//td[@name='td_quantity']" position="replace">
+                <td name="td_quantity" class="text-right">
+                    <span t-esc="'{:,.0f}'.format(line.product_uom_qty)" t-if="line.product_uom.id == 1"  />
+                    <span t-field="line.product_uom_qty" t-if="line.product_uom.id != 1"  />
+                    <span t-field="line.product_uom" groups="uom.group_uom" t-if="line.product_uom.id != 1" />
+                </td>
+            </xpath>
+            <!-- Format -->
+            <xpath expr="//td[@name='td_priceunit']" position="replace">
+                <td name="td_priceunit" class="text-right">
+                    <span t-esc="'{:,.2f}'.format(line.price_unit)" />
+                </td>
+            </xpath>
+            <!-- Format -->
+            <xpath expr="//td[@name='td_subtotal']" position="replace">
+                <td name="td_subtotal" class="text-right o_price_total">
+                    <span t-esc="'{:,.2f}'.format(line.price_subtotal)" groups="account.group_show_line_subtotals_tax_excluded" />
+                    <span t-esc="'{:,.2f}'.format(line.price_total)" groups="account.group_show_line_subtotals_tax_included" />
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

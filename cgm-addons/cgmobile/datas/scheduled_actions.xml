@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+<!--        <record id="ir_cron_cgm_move_available_quants_from_b2c_to_b2b" model="ir.cron">-->
+<!--            <field name="name">CGMobile: Move Available Quants from B2C to B2B</field>-->
+<!--            <field eval="True" name="active"/>-->
+<!--            <field name="user_id" ref="base.user_root"/>-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="doall">False</field>-->
+<!--            <field name="model_id" ref="stock_taloula.model_stock_location"/>-->
+<!--            <field name="code">b2c_warehouse_id = 2-->
+<!--b2b_warehouse_id = 1-->
+<!--model.move_available_quants(b2c_warehouse_id, b2b_warehouse_id)</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

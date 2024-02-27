@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <record id="cgmobile_order_view_form" model="ir.ui.view">-->
+<!--        <field name="name">cgmobile.order.form</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_sales_order_auto_done_setting"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='payment_term_id']" position="after">-->
+<!--                <field name="amazon_order_ref" attrs="{'invisible':[('amazon_order_ref', '=', False)]}"/>-->
+<!--                <field name="delivery_status" decoration-success="delivery_status == 'done'" decoration-info="delivery_status == 'in_progress'" decoration-danger="delivery_status == 'cancel'" widget="badge"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//header" position="inside">-->
+<!--                    <field name="reservation" invisible="1"/>-->
+<!--                    <button name="action_reserve_and_confirm" id="action_reserve_and_confirm" string="CONFIRM AND RESERVE STOCK" class="btn-info" type="object" attrs="{'invisible': [('state', 'not in', ['sent', 'draft'])]}"/>-->
+<!--                    <button name="action_reserve" id="action_reserve" string="Reserve Stock - Block Delivery" class="btn-secondary" type="object" attrs="{'invisible': ['|', ('state', 'not in', ['sale']), ('reservation', '=', True)]}"/>-->
+<!--                    <button name="action_unreserve" id="action_unreserve" string="Release Stock - Allow Delivery" class="btn-primary" type="object" attrs="{'invisible': ['|', ('state', 'not in', ['sale']), ('reservation', '=', False)]}"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//button[@name='action_done']" position="attributes">-->
+<!--                <attribute name="attrs" value="{'invisible': [('reservation', '=', True)]}" />-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>
