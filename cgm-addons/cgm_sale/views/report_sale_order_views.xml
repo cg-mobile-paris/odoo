@@ -22,7 +22,7 @@
             <xpath expr="//span[@t-field='line.product_uom']" position="attributes">
                 <attribute name="t-if">line.product_uom.id != line.env.ref('uom.product_uom_categ_unit').id</attribute>
             </xpath>
-
+<!-- FIXME-->
 <!--            <xpath expr="//t[@t-foreach='doc.order_line']" position="after">-->
 <!--                <tr>-->
 <!--                    <td colspan="4" name="td_total_qty" class="text-right">-->
