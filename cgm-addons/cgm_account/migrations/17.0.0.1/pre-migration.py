@@ -37,6 +37,7 @@ def delete_views(env):
     print('openupgrade: delete_views')
 
     for v in view_list:
+
         util.records.remove_record(env.cr, v)
 
 
