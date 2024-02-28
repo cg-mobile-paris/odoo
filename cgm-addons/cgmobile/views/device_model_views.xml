@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <search string="Device Model">
                 <field name="name"/>
-                <field name="brand_id" />
+<!--                <field name="brand_id" />-->
             </search>
         </field>
     </record>
@@ -25,9 +25,9 @@
                             <field name="name"/>
                         </h1>
                     </div>
-                    <group>
-                        <field name="brand_id"/>
-                    </group>
+<!--                    <group>-->
+<!--                        <field name="brand_id"/>-->
+<!--                    </group>-->
                 </sheet>
             </form>
         </field>
@@ -38,7 +38,7 @@
         <field name="model">cgmobile.device_model</field>
         <field name="arch" type="xml">
             <tree string="Device Model">
-                <field name="brand_id"/>
+<!--                <field name="brand_id"/>-->
                 <field name="name"/>
             </tree>
         </field>

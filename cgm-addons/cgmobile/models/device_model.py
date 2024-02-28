@@ -8,4 +8,4 @@ class DeviceModel(models.Model):
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
-    brand_id = fields.Many2one('common.product.brand.ept', string='Brand')
+    # brand_id = fields.Many2one('common.product.brand.ept', string='Brand')

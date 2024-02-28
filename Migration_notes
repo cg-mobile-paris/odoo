@@ -30,3 +30,6 @@ day2:
   prepare_order_lines_values: use for manage taxes "if marketplace.do_not_import_tax:" is possible to used sale_amazon_taxcloud ?
 3-inherit : 'stock.inventory', create_stock_inventory function no call in code. deleted.
 4-comment all JS stock_barcode, too many (much) difference/evolution v14>v17
+
+day3:
+remove brand_id and device_brand_id from common.product.brand.ept in "cgmobile.device_model" and "product.template"

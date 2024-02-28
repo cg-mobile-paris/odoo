@@ -29,5 +29,5 @@ class ProductTemplate(models.Model):
     product_collection_id = fields.Many2one('cgmobile.product_collection', string='Collection')
 
     device_type_id = fields.Many2one('cgmobile.device_type', string='Device Type')
-    device_brand_id = fields.Many2one('common.product.brand.ept', string='Device Brand')
+    # device_brand_id = fields.Many2one('common.product.brand.ept', string='Device Brand')
     device_model_id = fields.Many2one('cgmobile.device_model', string='Device Model')

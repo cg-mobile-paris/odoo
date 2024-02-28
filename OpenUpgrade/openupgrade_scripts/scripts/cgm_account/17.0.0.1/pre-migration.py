@@ -32,16 +32,23 @@ def delete_views(env):
         'purchase_reception_status.view_purchase_order_filter',
         'purchase_reception_status.purchase_order_tree',
         'purchase_reception_status.purchase_order_view_tree',
-
+        'smile_api_rest.model_api_rest_version',
+        'smile_api_rest.model_api_rest_field',
+        'smile_api_rest.model_api_rest_function_parameter',
+        'smile_api_rest.model_api_rest_log',
+        'smile_api_rest.model_api_rest_path',
+        'smile_api_rest.model_api_rest_tag',
+        'smile_api_rest.model_api_rest_version',
+        'smile_api_rest.menu_api_rest',
+        'smile_api_rest.menu_action_api_rest_version',
+        'smile_api_rest.menu_action_api_rest_path',
+        'smile_api_rest.menu_api_rest_configuration',
+        'smile_api_rest.menu_action_api_rest_tag',
     ]
     print('openupgrade: delete_views')
 
     openupgrade.delete_records_safely_by_xml_id(env, view_list)
 
-# def delete_module(env):
-#     openupgrade.logged_query("""DELETE FROM ir_module_module
-# WHERE name=""
-# RETURNING (select_list | *);""")
 
 def rename_user(env):
     print('rename user')

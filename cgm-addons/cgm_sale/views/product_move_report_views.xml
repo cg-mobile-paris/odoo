@@ -39,7 +39,9 @@
                     <field name="price_subtotal"/>
                     <field name="state"/>
                     <separator/>
-                    <filter name="filter_confirmed_order" string="Confirmed Orders" domain="[('state', 'in', ['done', 'sale', 'purchase'])]"/>
+                    <filter name="filter_confirmed_order"
+                            string="Confirmed Orders"
+                            domain="[('state', 'in', ['done', 'sale', 'purchase'])]"/>
                     <group expand="1" string="Group By">
                         <filter string="Number" name="filter_number_group_by" domain="[]" context="{'group_by':'name'}"/>
                         <filter string="Partner" name="filter_partner_group_by" domain="[]" context="{'group_by':'partner_id'}"/>

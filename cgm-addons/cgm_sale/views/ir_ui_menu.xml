@@ -56,11 +56,12 @@
                   action="stock_state_action"
                   sequence="0"/>
 
-        <menuitem name="Product Moves"
-                  id="product_move_menu"
-                  parent="sale.menu_sale_report"
-                  action="product_move_report_act_window"
-                  sequence="20"/>
+<!--        <menuitem name="Product Moves"-->
+<!--                  id="product_move_menu"-->
+<!--                  parent="sale.menu_sale_report"-->
+<!--                  action="product_move_report_act_window"-->
+<!--                  sequence="20"/>-->
+<!--        #FIXME V17 not work-->
 
         <menuitem name="Sale Order Lines"
                   id="sale_order_lines_menu"
