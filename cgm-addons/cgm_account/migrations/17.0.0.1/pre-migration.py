@@ -13,7 +13,7 @@ def delete_views(env):
         'cgm_sale.report_sale_order_document_inherit',
         'cgm_sale.report_saleorder_document_inherit',
         'cgm_base.res_bank_form_inherit',
-        'cg_mobile_web_layout',
+        'cgm_base.cg_mobile_web_layout',
         'sale_delivery_state.view_order_tree_inherit_delivery_state',
         'sale_delivery_state.view_quotation_tree_inherit_delivery_state',
         'sale_delivery_state.view_order_form_inherit_delivery_state',
