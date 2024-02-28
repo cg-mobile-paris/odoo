@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+from odoo.upgrade import util
+
+def delete_views(env):
+    view_list = [
+        'base.module_arkeup_background_image',
+        'base.module_purchase_reception_status',
+        'base.module_sale_delivery_state',
+        'base.module_smile_api_rest',
+        'view_move_line_tree',
+        'action_account_move_line',
+        'account_move_view_tree_inherit',
+        'report_sale_order_document_inherit',
+        'report_saleorder_document_inherit',
+        'res_bank_form_inherit',
+        'cg_mobile_web_layout',
+        'sale_delivery_state.view_order_tree_inherit_delivery_state',
+        'sale_delivery_state.view_quotation_tree_inherit_delivery_state',
+        'sale_delivery_state.view_order_form_inherit_delivery_state',
+        'purchase_reception_status.purchase_order_form',
+        'purchase_reception_status.view_purchase_order_filter',
+        'purchase_reception_status.purchase_order_tree',
+        'purchase_reception_status.purchase_order_view_tree',
+        'smile_api_rest.model_api_rest_version',
+        'smile_api_rest.model_api_rest_field',
+        'smile_api_rest.model_api_rest_function_parameter',
+        'smile_api_rest.model_api_rest_log',
+        'smile_api_rest.model_api_rest_path',
+        'smile_api_rest.model_api_rest_tag',
+        'smile_api_rest.model_api_rest_version',
+        'smile_api_rest.menu_api_rest',
+        'smile_api_rest.menu_action_api_rest_version',
+        'smile_api_rest.menu_action_api_rest_path',
+        'smile_api_rest.menu_api_rest_configuration',
+        'smile_api_rest.menu_action_api_rest_tag',
+    ]
+    print('openupgrade: delete_views')
+
+    for v in view_list:
+        util.records.remove_record(env.cr, v)
+
+
+def migrate(cr, version):
+    delete_views(cr)
