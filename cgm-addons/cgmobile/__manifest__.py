@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'CG Mobile Customization',
-    'version': '17.0.0.1',
+    'version': '17.0',
     'author': 'Irokoo | Lilian Olivier',
     'website': 'https://www.irokoo.fr',
     'summary': 'Customize Odoo for CG Mobile',

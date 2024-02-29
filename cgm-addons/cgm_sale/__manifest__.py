@@ -3,7 +3,7 @@
     'name': 'CG-MOBILE SALE',
     'summary': '',
     'category': 'Sales',
-    'version': '17.0.0.1',
+    'version': '17.0',
     'sequence': -97,
     'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',

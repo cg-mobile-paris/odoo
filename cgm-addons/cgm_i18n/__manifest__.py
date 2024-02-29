@@ -3,7 +3,7 @@
     'name': 'CG-MOBILE i18n',
     'summary': '',
     'category': 'Tools',
-    'version': '17.0.0.1',
+    'version': '17.0',
     'sequence': -91,
     'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',
