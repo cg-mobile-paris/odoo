@@ -39,6 +39,11 @@ def delete_views(env):
     for v in view_list:
         util.records.remove_record(env, v)
 
+def manage_modules(env):
+    util.uninstall_module(env, 'smile_api_rest')
+    util.remove_module(env, 'smile_api_rest')
 
 def migrate(cr, version):
     delete_views(cr)
+    manage_modules(cr)
+
