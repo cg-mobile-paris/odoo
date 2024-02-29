@@ -193,6 +193,5 @@ class ProductMoveReport(models.Model):
                 self._group_by_purchase(groupby_purchase))
 
     def init(self):
-        print('INIT')
         tools.drop_view_if_exists(self.env.cr, self._table)
         self.env.cr.execute("""CREATE or REPLACE VIEW %s as (%s)""" % (self._table, self._query()))
