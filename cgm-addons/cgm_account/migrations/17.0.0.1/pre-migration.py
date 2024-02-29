@@ -44,6 +44,7 @@ def manage_modules(env):
     util.remove_module(env, 'smile_api_rest')
 
 def migrate(cr, version):
+    print('MIGRATE')
     delete_views(cr)
     manage_modules(cr)
 
