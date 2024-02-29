@@ -46,5 +46,5 @@ def manage_modules(env):
 def migrate(cr, version):
     print('MIGRATE')
     delete_views(cr)
-    manage_modules(cr)
+    # manage_modules(cr)
 
