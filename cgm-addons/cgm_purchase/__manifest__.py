@@ -3,7 +3,7 @@
     'name': 'CG-MOBILE PURCHASE',
     'summary': '',
     'category': 'Purchase',
-    'version': '17.0.0.1',
+    'version': '17.0',
     'sequence': -96,
     'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',

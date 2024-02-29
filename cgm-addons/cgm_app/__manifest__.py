@@ -3,7 +3,7 @@
     'name': 'CG-MOBILE APP',
     'summary': '',
     'category': 'Application',
-    'version': '17.0.0.1',
+    'version': '17.0',
     'sequence': -100,
     'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',

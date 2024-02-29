@@ -3,7 +3,7 @@
     'name': 'CG-MOBILE CONTACTS',
     'summary': '',
     'category': 'Sales/CRM',
-    'version': '17.0.0.1',
+    'version': '17.0',
     'sequence': -92,
     'author': 'Irokoo | Lilian Olivier',
     'license': 'AGPL-3',
