@@ -39,17 +39,17 @@
         </field>
     </record>
 
-    <record id="product_color_product_search_form_view" model="ir.ui.view">
-        <field name="name">product_color.product.search.form</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_search_form_view"/>
-        <field name="arch" type="xml">
-            <field name="product_tmpl_id" position="after">
-                <field name="product_color_id"/>
-                <filter string="Product Color" name="groupby_product_color" domain="[]" context="{'group_by':'product_color_id'}"/>
-            </field>
-        </field>
-    </record>
+<!--    <record id="product_color_product_search_form_view" model="ir.ui.view">-->
+<!--        <field name="name">product_color.product.search.form</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="inherit_id" ref="product.product_search_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="product_tmpl_id" position="after">-->
+<!--                <field name="product_color_id"/>-->
+<!--                <filter string="Product Color" name="groupby_product_color" domain="[]" context="{'group_by':'product_color_id'}"/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record model="ir.actions.act_window" id="action_product_color">
         <field name="name">Product Colors</field>
