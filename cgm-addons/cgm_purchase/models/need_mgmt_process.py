@@ -140,7 +140,7 @@ class NeedMgmtProcess(models.Model):
             raise ValidationError(_('There is a line without Seller defined. \n'
                                     'Please fill Seller in lines for which a PO should be generated.'))
         for nmpl in need_mgmt_process_lines:
-            partner_summary.setdefault(nmpl.seller_id.name, []).append(nmpl)
+            partner_summary.setdefault(nmpl.seller_id.product_name, []).append(nmpl)
         stock_picking_obj = self.env['stock.picking.type']
         picking_type = stock_picking_obj.search([('code', '=', 'incoming'), ('warehouse_id', '=', self.warehouse_id.id)], limit=1)
         for partner, nmpls in partner_summary.items():
