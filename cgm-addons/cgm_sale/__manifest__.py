@@ -33,6 +33,10 @@
         'views/ir_ui_menu.xml',
         # data
         'data/mail_template_data.xml',
+
+        #dash report
+        'report/sale_report_view.xml',
+
     ],
     'application': False,
     'installable': True,

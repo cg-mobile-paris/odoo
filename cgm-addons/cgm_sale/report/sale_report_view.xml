@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="view_order_product_search" model="ir.ui.view">
+        <field name="inherit_id" ref="sale.view_order_product_search" />
+        <field name="model">sale.report</field>
+        <field name="arch" type="xml">
+            <filter name="Customer" position="after">
+                <filter string="Form" name="form" context="{'group_by':'form_id'}"/>
+                <filter string="Licence" name="licence" context="{'group_by':'licence_id'}"/>
+                <filter string="Material" name="material" context="{'group_by':'material_id'}"/>
+                <filter string="Collection" name="collection" context="{'group_by':'collection_id'}"/>
+                <filter string="Device" name="device" context="{'group_by':'device_id'}"/>
+                <filter string="Brand" name="brand" context="{'group_by':'brand_id'}"/>
+                <filter string="Color" name="color" context="{'group_by':'color_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>
