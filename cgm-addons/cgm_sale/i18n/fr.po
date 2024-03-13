@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0+e\n"
+"Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-21 13:20+0000\n"
-"PO-Revision-Date: 2022-12-21 13:20+0000\n"
+"POT-Creation-Date: 2024-03-13 10:59+0000\n"
+"PO-Revision-Date: 2024-03-13 10:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: cgm_sale
-#: model:ir.actions.report,print_report_name:cgm_sale.action_report_stock_state_xlsx
-msgid "'Stock State # %s' % (object.sale_order_template_id.name or '')"
-msgstr "'État de stock # %s' % (object.sale_order_template_id.name or '')"
-
-#. module: cgm_sale
-#: model:ir.actions.report,print_report_name:cgm_sale.action_report_stock_state
-msgid "'Stock State - %s' % (object.name)"
-msgstr "'État de stock - %s' % (object.name)"
-
-#. module: cgm_sale
 #: model:mail.template,body_html:cgm_sale.email_template_stock_state
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "                        Dear,\n"
-"                        <br/>\n"
-"                        <br/>\n"
+"                        <br>\n"
+"                        <br>\n"
 "                        Your stock state is ready for review.\n"
-"                        <br/>\n"
-"                        <br/>\n"
+"                        <br>\n"
+"                        <br>\n"
 "                        Do not hesitate to contact us if you have any questions.\n"
-"                        <br/>\n"
-"                        <br/>\n"
+"                        <br>\n"
+"                        <br>\n"
 "                        Regards,\n"
 "                    </p>\n"
 "                </div>\n"
@@ -75,26 +65,7 @@ msgid "<span class=\"o_stat_text\">Quotations/SO</span>"
 msgstr "<span class=\"o_stat_text\">Devis/BC</span>"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid "<span>Stock State #</span>"
-msgstr "<span>État de stock #</span>"
-
-#. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.report_saleorder_document_inherit
-msgid "<strong>Bank account:</strong>"
-msgstr "<strong>Compte bancaire:</strong>"
-
-#. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid "<strong>Date:</strong>"
-msgstr "<strong>Date : </strong>"
-
-#. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid "<strong>Your Contact:</strong>"
-msgstr "<strong>Votre Contact : </strong>"
-
-#. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "AMOUNT"
@@ -126,6 +97,7 @@ msgid "Activity Type Icon"
 msgstr "Icône de type d'activité"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_order_tree_inherit
 #, python-format
@@ -151,6 +123,12 @@ msgstr "Compte bancaire"
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order__bank_partner_id
 msgid "Bank partner"
 msgstr "Banque partenaire"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__brand_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
+msgid "Brand"
+msgstr "Marque"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__campaign_id
@@ -179,6 +157,18 @@ msgid "Checked"
 msgstr "Vérifié"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__collection_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
+msgid "Collection"
+msgstr "Collection"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__color_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
+msgid "Color"
+msgstr "Couleur"
+
+#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__company_id
 msgid "Company"
 msgstr "Société"
@@ -204,12 +194,14 @@ msgid "Customers"
 msgstr "Clients"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "DESCRIPTION"
 msgstr ""
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__date
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__date
@@ -220,20 +212,10 @@ msgid "Date"
 msgstr ""
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.sales_order_search_view_inherit
-msgid "Delivery State"
-msgstr "État de livraison"
-
-#. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid ""
-"Desired\n"
-"                    <br/>\n"
-"                    Quantity"
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__device_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
+msgid "Device"
 msgstr ""
-"Quantité\n"
-"                    <br/>\n"
-"                    Désirée"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__display_name
@@ -258,26 +240,22 @@ msgid "Draft"
 msgstr "Brouillon"
 
 #. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
-msgid ""
-"EAN\n"
-"                    <br/>\n"
-"                    Code"
-msgstr ""
-
-#. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:cgm_sale.report_sale_order_document_inherit
 #, python-format
 msgid "EAN CODE"
-msgstr ""
+msgstr "Code EAN"
 
 #. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order__barcode
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__barcode
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template_line__barcode
 msgid "EAN Code"
-msgstr ""
+msgstr "Code EAN"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "Expiration"
@@ -297,6 +275,12 @@ msgstr "Abonnés (Partenaires)"
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Icône Font Awesome e.g. fa-tasks"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__form_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
+msgid "Form"
+msgstr "Forme"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -336,7 +320,6 @@ msgstr "Icône pour indiquer une activité d'exception."
 
 #. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template__message_needaction
-#: model:ir.model.fields,help:cgm_sale.field_sale_order_template__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Si coché, de nouveaux messages nécessitent votre attention."
 
@@ -347,6 +330,7 @@ msgid "If checked, some messages have a delivery error."
 msgstr "Si actif, certains messages ont une erreur de livraison."
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
@@ -354,6 +338,7 @@ msgid "Indefinite"
 msgstr "Indéfini"
 
 #. module: cgm_sale
+#: model:ir.model.fields,help:cgm_sale.field_sale_order_line__barcode
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template_line__barcode
 msgid "International Article Number used for product identification."
 msgstr ""
@@ -365,21 +350,19 @@ msgid "Is Follower"
 msgstr "Est abonné"
 
 #. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_product_move_report____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__licence_id
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__licence_id
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__licence_id
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
 msgid "Licence"
 msgstr ""
 
 #. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Pièce jointe principale"
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_report__material_id
+#: model_terms:ir.ui.view,arch_db:cgm_sale.view_order_product_search
+msgid "Material"
+msgstr "Matière"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__medium_id
@@ -428,6 +411,7 @@ msgid "Next Activity Type"
 msgstr "Type d'activités à venir"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid ""
@@ -459,18 +443,13 @@ msgstr "Nombre d'erreurs"
 
 #. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr "Nombre de messages exigeant une action"
 
 #. module: cgm_sale
 #: model:ir.model.fields,help:cgm_sale.field_sale_order_template__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Nombre de messages avec des erreurs d'envoi"
-
-#. module: cgm_sale
-#: model:ir.model.fields,help:cgm_sale.field_sale_order_template__message_unread_counter
-msgid "Number of unread messages"
-msgstr "Nombre de messages non lus"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__name
@@ -492,6 +471,11 @@ msgstr "Nombre de clients"
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__pricelist_id
 msgid "Price List"
 msgstr "Liste de prix"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
+msgid "Price subtotal $"
+msgstr "Sous-total $"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_search
@@ -556,7 +540,6 @@ msgstr "Rapport d'analyse des mouvements de produit"
 
 #. module: cgm_sale
 #: model:ir.actions.act_window,name:cgm_sale.product_move_report_act_window
-#: model:ir.ui.menu,name:cgm_sale.product_move_menu
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_search_view
 #: model_terms:ir.ui.view,arch_db:cgm_sale.product_move_report_tree_view
 msgid "Product Moves"
@@ -578,12 +561,14 @@ msgid "Purchase Order"
 msgstr "Commande fournisseur"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "QTY DESIRED"
 msgstr "QTÉ DÉSIRÉE"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "QUANTITY"
@@ -593,6 +578,11 @@ msgstr "QUANTITÉ"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
 msgid "Qty"
 msgstr "Qté."
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__qty_to_deliver
+msgid "Qty To Deliver"
+msgstr "Qté à livrer"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__number_of_days
@@ -612,12 +602,27 @@ msgstr "Modèle de devis"
 #. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order_template_line
 msgid "Quotation Template Line"
-msgstr "Ligne Modèle de devis"
+msgstr "Ligne du modèle de devis"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__sale_order_ids
 msgid "Quotations / Orders"
 msgstr "Devis / Bons de commande"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__remaining_deliverables_dollars
+msgid "Remaining deliverables dollars"
+msgstr "Reste à livrer dollars"
+
+#. module: cgm_sale
+#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__remaining_deliverables_euros
+msgid "Remaining deliverables euros"
+msgstr "Reste à livrer euros"
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
@@ -630,11 +635,12 @@ msgid "Responsible User"
 msgstr "Utilisateur Responsable"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:cgm_sale.report_sale_order_document_inherit
 #, python-format
 msgid "SKU CODE"
-msgstr ""
+msgstr "Code SKU"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__message_has_sms_error
@@ -669,6 +675,11 @@ msgid "Sales Advance Payment Invoice"
 msgstr "Facture de paiement d'avance"
 
 #. module: cgm_sale
+#: model:ir.model,name:cgm_sale.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order
 #: model:ir.model.fields.selection,name:cgm_sale.selection__product_move_report__state__sale
 msgid "Sales Order"
@@ -677,9 +688,10 @@ msgstr "Bon de commande"
 #. module: cgm_sale
 #: model:ir.model,name:cgm_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de bons de commande"
+msgstr "Ligne de commande"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "Salesperson"
@@ -732,22 +744,9 @@ msgstr ""
 "Planifiée : activités futures"
 
 #. module: cgm_sale
-#: model:ir.actions.report,name:cgm_sale.action_report_stock_state
 #: model:ir.model.fields.selection,name:cgm_sale.selection__sale_order_template__type__stock_state
 msgid "Stock State"
 msgstr "État de stock"
-
-#. module: cgm_sale
-#: model:mail.template,report_name:cgm_sale.email_template_stock_state
-msgid "Stock State # {{(object.name or '').replace('/','_')}}"
-msgstr ""
-"État de stock # {{(object.sale_order_template_id.name or "
-"'').replace('/','_')}}"
-
-#. module: cgm_sale
-#: model:ir.actions.report,name:cgm_sale.action_report_stock_state_xlsx
-msgid "Stock State (xls)"
-msgstr "État de stock (xls)"
 
 #. module: cgm_sale
 #: model:mail.template,name:cgm_sale.email_template_stock_state
@@ -771,6 +770,7 @@ msgid "Stocks Validity"
 msgstr "Validité des stocks"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "THUMBNAIL"
@@ -789,6 +789,7 @@ msgstr ""
 "produit"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid "There is no line to generate the corresponding stock offers."
@@ -796,12 +797,14 @@ msgstr ""
 "Il n'y a aucune ligne pour générer les offres du stock correspondantes !"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid "There is no quotation generated for this stock state."
 msgstr "Il n'y a pas de Devis/BC généré pour cet état de stock."
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/models/sale_order_template.py:0
 #, python-format
 msgid "There is no report"
@@ -834,7 +837,6 @@ msgstr ""
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__image
 #: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template_line__image
-#: model_terms:ir.ui.view,arch_db:cgm_sale.cgm_stock_state_document
 msgid "Thumbnail"
 msgstr ""
 
@@ -853,6 +855,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_form_inherit
 msgid "Total Delivered Qty"
 msgstr "Total quantité livrée"
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
+msgid "Total Dollars"
+msgstr ""
+
+#. module: cgm_sale
+#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
+msgid "Total Euros"
+msgstr ""
 
 #. module: cgm_sale
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_view_form_inherit
@@ -881,12 +893,14 @@ msgid "Type of the exception activity on record."
 msgstr "Type d'activité d'exception enregistrée."
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/report/stock_state_report_xlsx.py:0
 #, python-format
 msgid "UNIT PRICE"
 msgstr "PRIX UNITAIRE"
 
 #. module: cgm_sale
+#. odoo-python
 #: code:addons/cgm_sale/models/sale_order.py:0
 #, python-format
 msgid ""
@@ -903,16 +917,6 @@ msgstr "Unité de mesure"
 #: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_template_view_form_inherit
 msgid "Unlink Lines Qte <= 0"
 msgstr "Supprimer lignes à 0"
-
-#. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__message_unread
-msgid "Unread Messages"
-msgstr "Messages non lus"
-
-#. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_template__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Compteur des messagnes non lus"
 
 #. module: cgm_sale
 #: model:ir.model.fields,field_description:cgm_sale.field_product_move_report__price_subtotal
@@ -953,18 +957,3 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} État de stock (Ref {{ "
 "object.sale_order_template_id.name or 'n/a' }})\n"
-
-#. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__remaining_deliverables_dollars
-msgid "Remaining deliverables dollars"
-msgstr "Reste à livrer dollars"
-
-#. module: cgm_sale
-#: model:ir.model.fields,field_description:cgm_sale.field_sale_order_line__remaining_deliverables_euros
-msgid "Remaining deliverables euros"
-msgstr "Reste à livrer euros"
-
-#. module: cgm_sale
-#: model_terms:ir.ui.view,arch_db:cgm_sale.sale_order_line_view_tree
-msgid "Price subtotal $"
-msgstr "Sous-total $"
