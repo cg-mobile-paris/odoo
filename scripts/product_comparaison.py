@@ -86,21 +86,22 @@ def create_list(datas, field):
 
 
 def main():
-    # Sub Category us supprimer ?
-    # product_protection_level_id
-    convert_field = {
-        'product_brand_id': 'brand_id',
-        'product_color_id': 'color_id',
-        'product_category_id': 'categ_id', #TODO a uniformiser
-        'product_material_id': 'material_id',
-        'product_collection_id': 'collection_id',
-        'device_brand_id': 'licence_id',
-        'device_model_id': 'device_id',
-        'device_type_id': 'categ_id'
 
+    convert_field = {
+        "categ_id": (["device_type_id", "product_category_id"],),
+        "device_id": ("device_model_id",),
+
+        "form_id": ("product_sub_category_id", "product_form.csv"),
+        "material_id": ("product_material_id", "product_material.csv"),
+        "color_id": ("product_color_id", "product_color.csv"),
+        "licence_id": ("product_brand_id", "product_licence.csv"),
+        "brand_id": ("device_brand_id", "product_brand.csv"),
+        "collection_id": ("product_collection_id", False),
     }
     fix_field = {'detailed_type': 'product'}
     common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'standard_price', 'list_price', 'image_1920']
+
+
     product_fr_ids = con_odoo_fr.search_read(model="product.template", domain=[[('detailed_type', '=', 'product')]], fields=['barcode'])
     product_us_ids = con_odoo_us.search_read(model="product.template", domain=[[('type', '=', 'product')]], fields=['barcode'])
     barcode_fr = create_list(product_fr_ids, "barcode")
@@ -119,6 +120,9 @@ def main():
     print('barcode non existant chez FR, a reprendre chez US')
     print(len(diff_us_fr))
     print(diff_us_fr)
+    # 14 vers 15 / US vers FR
+    for p_id in diff_fr_us:
+        print(p_id)
 
 
 main()
