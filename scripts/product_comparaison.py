@@ -92,7 +92,7 @@ con_odoo_dest = ConOdoo(
             port=8069,
             url="http://127.0.0.1"
         )
-print(con_odoo_dest)
+
 def migrate_attributes():
     files = [
         ("product_device.csv", "product.device"),
@@ -103,16 +103,13 @@ def migrate_attributes():
         ("product_brand.csv", "product.brand"),
     ]
     for file in files:
-        print(file)
         df = pd.read_csv(file[0])
         for i, r in df.iterrows():
-            print(r['fr'])
             data_exist = con_odoo_dest.search_read(
                 model=file[1],
                 domain=[[('name', '=', r['fr'])]],
                 fields=['name']
             )
-            print(data_exist)
             if not data_exist:
                 con_odoo_dest.create(
                     model=file[1],
@@ -132,10 +129,10 @@ def add_fix_field(datas, fix_field):
     return datas
 
 def find_in_df(us_value, df):
-    print(us_value, df)
     filtered_df = df[df["us"].str.contains(us_value, na=False)]["fr"]
-    print('filtered_df', filtered_df.loc[0])
-    return filtered_df.loc[0]
+    if filtered_df.empty:
+        return False
+    return filtered_df.iloc[0]
 
 
 def add_converted_field(datas, convert_field):
@@ -143,10 +140,16 @@ def add_converted_field(datas, convert_field):
         field_origin = v[0]
         df = v[1]
         model = v[2]
+        if datas[field_origin] == False:
+            del datas[field_origin]
+            return datas
         filtered_df = find_in_df(datas[field_origin][1], df)
-        rec_id = con_odoo_dest.search(model, [[('name', '=', filtered_df)]])[0]['id']
-        del datas[field_origin]
-        datas[field_dest] = rec_id
+        if filtered_df:
+            rec_id = con_odoo_dest.search(model, [[('name', '=', filtered_df)]])
+            del datas[field_origin]
+            datas[field_dest] = rec_id[0]
+        else:
+            del datas[field_origin]
     return datas
 
 def main():
@@ -155,14 +158,14 @@ def main():
 
     convert_field = {
         # "categ_id": (["device_type_id", "product_category_id"],),
-        "device_id": ("device_model_id", pd.read_csv("product_device.csv"), "product.device"),
+        "device_id": ("device_model_id", pd.read_csv("product_device.csv", index_col=None), "product.device"),
 
         "form_id": ("product_sub_category_id", pd.read_csv("product_form.csv"), "product.form"),
         "material_id": ("product_material_id", pd.read_csv("product_material.csv"), "product.material"),
         "color_id": ("product_color_id", pd.read_csv("product_color.csv"), "product.color"),
         "licence_id": ("product_brand_id", pd.read_csv("product_licence.csv"), "product.licence"),
         "brand_id": ("device_brand_id", pd.read_csv("product_brand.csv"), "product.brand"),
-        "collection_id": ("product_collection_id", False),
+        # "collection_id": ("product_collection_id", False),
     }
     fix_field = {'detailed_type': 'product'}
     common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'standard_price', 'list_price',]
@@ -183,7 +186,6 @@ def main():
 
     # 14 vers 15 / US vers FR
     for p_id in diff_us_fr:
-        print(p_id)
         p_us_id = con_odoo_us.search_read(
             model="product.template",
             domain=[[('barcode', '=', p_id)]],
@@ -194,5 +196,4 @@ def main():
         data = add_fix_field(data, fix_field)
         data = add_converted_field(data, convert_field)
         print(data)
-        lol
 main()

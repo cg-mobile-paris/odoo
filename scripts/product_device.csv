@@ -81,11 +81,6 @@ Samsung S23,,
 Samsung S23 Plus,,
 Samsung S23 Ultra,,
 MAGSAFE COMPATIBLE DEVICES,,MAGSAFE COMPATIBLE DEVICES
-"13""/14""",,13""/14"""
-"13""/14""",,"13""/14
-"16""",,
-"15""/16""",,"15""/16
-"15""/16""",,15""/16"""
 Samsung A54,,
 Samsung A34,,
 Samsung A13,,
@@ -108,8 +103,8 @@ Samsung Tab A9+,,
 Apple Watch 38/40,create,
 Apple Watch 42/44,create,
 Galaxy S10 Lite,create,Galaxy S10 Lite
-Galaxy S10 Lite,,Samsung S10 Lite
-Galaxy S10 Lite,,
+Galaxy S10 Lite,create,Samsung S10 Lite
+Galaxy S10 Lite,create,
 Galaxy S8,create,
 Galaxy S8 Plus,create,
 "iPad 11""",create,
