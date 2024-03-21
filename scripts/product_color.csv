@@ -1,47 +1,48 @@
-fr,todo,us,todo
-BLACK,,Black,
-BLUE,,Blue,
-KAKI,,Kaki,
-GREY,,Grey;Gray,
-BEIGE,,Beige,
-BROWN,,Brown,
-BURGUNDY,,Burgundy,
-FUSHIA,,Fuschia;Fushia,
-GOLD,,Gold,
-GREEN,,Green,
-MULTICOLOR,,Multicolor,
-ORANGE,,Orange,
-PINK,,Pink,
-PURPLE,,Purple,
-RED,,Red,
-TRANSPARENT,,Transparent;Trasnparent,
-WHITE,,White,
-YELLOW,,Yellow,
-LILAC,,Lilac,
-TURQUOISE,,Turquoise,
-CLEAR,create,Clear,
-CLEAR/SILVER,create,Clear/Silver,
-DARK GREEN,create,Dark Green,
-DARK GREY,create,Dark Grey,
-DARK PINK,create,Dark Pink,
-DENIM,create,Denim,
-GOLD/PINK,create,Gold/Pink,
-GREY/PINK,create,Grey/Pink,
-IRIDESCENT,create,Iridescent,
-LEOPARD,create,Leopard,
-LIGHT BLUE,create,Light Blue,
-LIGHT PINK,create,Light Pink,
-MLT,create,MLT,
-MAGENTA,create,Magenta,
-NAVY,create,Navy,
-NAVY BLUE,create,Navy Blue,
-RASPBERRY,create,Raspberry,
-ROSE,create,Rose,
-ROSE GOLD,create,Rose Gold,
-ROSEWOOD BROWN,create,Rosewood Brown,
-SILVER,create,Silver,
-TAUPE,create,Taupe,
-VIOLET,create,Violet,
-WALNUT BROWN,create,Walnut Brown,
-WHITE/ROSE GOLD,create,White/Rose Gold,
-RASPBERRY,create,raspberry,
+fr,todo,us
+BLACK,,Black
+BLUE,,Blue
+KAKI,,Kaki
+GREY,,Grey;Gray
+BEIGE,,Beige
+BROWN,,Brown
+BURGUNDY,,Burgundy
+FUSHIA,,Fuschia;Fushia
+GOLD,,Gold
+GREEN,,Green
+MULTICOLOR,,Multicolor
+ORANGE,,Orange
+PINK,,Pink
+PURPLE,,Purple
+RED,,Red
+TRANSPARENT,,Transparent
+TRANSPARENT,,Trasnparent
+WHITE,,White
+YELLOW,,Yellow
+LILAC,,Lilac
+TURQUOISE,,Turquoise
+CLEAR,create,Clear
+CLEAR/SILVER,create,Clear/Silver
+DARK GREEN,create,Dark Green
+DARK GREY,create,Dark Grey
+DARK PINK,create,Dark Pink
+DENIM,create,Denim
+GOLD/PINK,create,Gold/Pink
+GREY/PINK,create,Grey/Pink
+IRIDESCENT,create,Iridescent
+LEOPARD,create,Leopard
+LIGHT BLUE,create,Light Blue
+LIGHT PINK,create,Light Pink
+MLT,create,MLT
+MAGENTA,create,Magenta
+NAVY,create,Navy
+NAVY BLUE,create,Navy Blue
+RASPBERRY,create,Raspberry
+ROSE,create,Rose
+ROSE GOLD,create,Rose Gold
+ROSEWOOD BROWN,create,Rosewood Brown
+SILVER,create,Silver
+TAUPE,create,Taupe
+VIOLET,create,Violet
+WALNUT BROWN,create,Walnut Brown
+WHITE/ROSE GOLD,create,White/Rose Gold
+RASPBERRY,create,raspberry

@@ -86,13 +86,13 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris17",
+            db="cg-mobile-paris-merge",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,
             url="http://127.0.0.1"
         )
-
+print(con_odoo_dest)
 def migrate_attributes():
     files = [
         ("product_device.csv", "product.device"),
@@ -131,22 +131,37 @@ def add_fix_field(datas, fix_field):
         datas[k] = v
     return datas
 
+def find_in_df(us_value, df):
+    print(us_value, df)
+    filtered_df = df[df["us"].str.contains(us_value, na=False)]["fr"]
+    print('filtered_df', filtered_df.loc[0])
+    return filtered_df.loc[0]
+
+
 def add_converted_field(datas, convert_field):
+    for field_dest, v in convert_field.items():
+        field_origin = v[0]
+        df = v[1]
+        model = v[2]
+        filtered_df = find_in_df(datas[field_origin][1], df)
+        rec_id = con_odoo_dest.search(model, [[('name', '=', filtered_df)]])[0]['id']
+        del datas[field_origin]
+        datas[field_dest] = rec_id
     return datas
 
 def main():
 
-    migrate_attributes()
+    # migrate_attributes()
 
     convert_field = {
         # "categ_id": (["device_type_id", "product_category_id"],),
-        "device_id": ("device_model_id", "product_device.csv"),
+        "device_id": ("device_model_id", pd.read_csv("product_device.csv"), "product.device"),
 
-        "form_id": ("product_sub_category_id", "product_form.csv"),
-        "material_id": ("product_material_id", "product_material.csv"),
-        "color_id": ("product_color_id", "product_color.csv"),
-        "licence_id": ("product_brand_id", "product_licence.csv"),
-        "brand_id": ("device_brand_id", "product_brand.csv"),
+        "form_id": ("product_sub_category_id", pd.read_csv("product_form.csv"), "product.form"),
+        "material_id": ("product_material_id", pd.read_csv("product_material.csv"), "product.material"),
+        "color_id": ("product_color_id", pd.read_csv("product_color.csv"), "product.color"),
+        "licence_id": ("product_brand_id", pd.read_csv("product_licence.csv"), "product.licence"),
+        "brand_id": ("device_brand_id", pd.read_csv("product_brand.csv"), "product.brand"),
         "collection_id": ("product_collection_id", False),
     }
     fix_field = {'detailed_type': 'product'}
@@ -172,10 +187,12 @@ def main():
         p_us_id = con_odoo_us.search_read(
             model="product.template",
             domain=[[('barcode', '=', p_id)]],
-            fields=common_fields
+            fields=common_fields + [value[0] for value in convert_field.values()]
         )[0]
+        print(p_us_id)
         data = remove_id_key(p_us_id)
         data = add_fix_field(data, fix_field)
-        # data = add_converted_field(data, convert_field)
+        data = add_converted_field(data, convert_field)
         print(data)
+        lol
 main()
