@@ -78,7 +78,7 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris17",
+            db="cg-mobile-paris-merge",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,
@@ -91,11 +91,16 @@ print(con_odoo_dest)
 
 def main():
     # REPRISE DES VENDEURS
+    fixed_value_field = {'lang': 'en_US', 'company_id': 2, 'company_type': 'company'}
+    fixed_field = ['name', 'street', 'street2', 'zip', 'country_id', 'phone', 'mobile', 'email', 'ref']
+    other_field = ['state_id', 'property_product_pricelist']
     vendor_bill_ids = con_odoo_us.search_read(
         "res.partner",
-        [[('supplier_rank','>', 0)]],
+        [[('supplier_rank','>', 0)]], fields=fixed_field + other_field
     )
-    print(vendor_bill_ids)
 
+    print(len(vendor_bill_ids))
+    for v in vendor_bill_ids:
+        print(v)
 
 main()
