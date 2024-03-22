@@ -14,6 +14,11 @@ class ConOdoo:
         self.ODOO_OBJECT = xmlrpc.client.ServerProxy(self.URL_OBJECT)
         self.UID = self.ODOO_COMMON.authenticate(self.DB, self.USER, self.PASS, {})
 
+    def create(self, model, datas):
+        return self.ODOO_OBJECT.execute_kw(
+            self.DB, self.UID, self.PASS, model, 'create', datas
+        )
+
     def write(self, model, ids, datas):
         return self.ODOO_OBJECT.execute_kw(self.DB, self.UID, self.PASS, model, 'write', [ids, datas])
 
@@ -78,7 +83,7 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris-merge",
+            db="cg-mobile-paris17",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,
@@ -90,7 +95,39 @@ print(con_odoo_us)
 print(con_odoo_dest)
 
 def main():
-    # REPRISE DES LISTE DE PRIX
-    con_odoo_us.search_read("res.country.state", []
-                            field=['name', 'code', 'ice_mobility_code', 'country_id'])
+    # REPRISE PARTNER
+    state_ids = con_odoo_us.search_read(
+        "res.country.state",
+        [[['name', '!=', '']]],
+        fields=['name', 'code', 'ice_mobility_code', 'country_id']
+    )
+    for state_id in state_ids:
+        state_dest = con_odoo_dest.search_read(
+            'res.country.state', [[['name', '=', state_id['name']]]],
+        )
+
+        print(state_id)
+        print(state_dest)
+
+        vals = {
+            "code": state_id["code"],
+            "ice_mobility_code": state_id["ice_mobility_code"],
+        }
+        if state_dest:
+            con_odoo_dest.write("res.country.state", state_dest[0]["id"], vals)
+        else:
+
+            vals['name'] = state_id["name"]
+            vals['country_id'] = con_odoo_dest.search(
+                "res.country",
+                [[['name', '=', state_id['country_id'][1]]]]
+            )[0]
+            print(vals)
+            try:
+                con_odoo_dest.create("res.country.state", [vals])
+            except:
+                pass
+
+
+
 main()
