@@ -78,18 +78,24 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris-merge",
+            db="cg-mobile-paris17",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,
             url="http://127.0.0.1"
         )
 
+print(con_odoo_fr)
+print(con_odoo_us)
+print(con_odoo_dest)
 
 def main():
     # REPRISE DES VENDEURS
-    con_odoo_us.search_read("res.partner",[[('vendor_bill_id', '!=', False)]])
-
+    vendor_bill_ids = con_odoo_us.search_read(
+        "res.partner",
+        [[('supplier_rank','>', 0)]],
+    )
+    print(vendor_bill_ids)
 
 
 main()
