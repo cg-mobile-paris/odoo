@@ -14,6 +14,11 @@ class ConOdoo:
         self.ODOO_OBJECT = xmlrpc.client.ServerProxy(self.URL_OBJECT)
         self.UID = self.ODOO_COMMON.authenticate(self.DB, self.USER, self.PASS, {})
 
+    def create(self, model, datas):
+        return self.ODOO_OBJECT.execute_kw(
+            self.DB, self.UID, self.PASS, model, 'create', [datas]
+        )
+
     def write(self, model, ids, datas):
         return self.ODOO_OBJECT.execute_kw(self.DB, self.UID, self.PASS, model, 'write', [ids, datas])
 
@@ -90,17 +95,59 @@ print(con_odoo_us)
 print(con_odoo_dest)
 
 def main():
-    # REPRISE DES VENDEURS
-    fixed_value_field = {'lang': 'en_US', 'company_id': 2, 'company_type': 'company'}
-    fixed_field = ['name', 'street', 'street2', 'zip', 'country_id', 'phone', 'mobile', 'email', 'ref']
-    other_field = ['state_id', 'property_product_pricelist']
-    vendor_bill_ids = con_odoo_us.search_read(
-        "res.partner",
-        [[('supplier_rank','>', 0)]], fields=fixed_field + other_field
-    )
+    #  'CG Mobile PriceList'
+    pricelist_names = ['PriceList (B2B)']
+    # REPRISE DES LISTE DE PRIX
+    for pricelist_name in pricelist_names:
+        price_list_datas = []
 
-    print(len(vendor_bill_ids))
-    for v in vendor_bill_ids:
-        print(v)
+        pricelist_us_d = con_odoo_us.search_read(
+            model='product.pricelist',
+            domain=[[('name', '=', pricelist_name)]],
+            fields=['name']
+        )
+        items = con_odoo_us.search_read(
+            model='product.pricelist.item',
+            domain=[[('pricelist_id', '=', pricelist_us_d[0]['id'])]],
+            fields=['pricelist_id', 'product_id', 'currency_id', 'company_id', 'compute_price', 'min_quantity', 'date_start', 'date_end', 'fixed_price']
+        )
+        n_items = len(items)
+        for i, item in enumerate(items):
+            print(item)
+            perc = round((i * 100) / n_items, 2)
+            print(perc, "% /", n_items)
+            product_us_id = con_odoo_us.read(
+                "product.product",
+                [item['product_id'][0]],
+                ['barcode', 'product_tmpl_id']
+            )
+            barecode_us = product_us_id[0]['barcode']
+            product_id = con_odoo_dest.search(
+                "product.product",
+                [[('barcode', '=', barecode_us)]],
+            )
+            if product_id:
+                vals = {
+                    "product_id": product_id[0],
+                    "currency_id": 2,
+                    "company_id": 2,
+                    "compute_price": item["compute_price"],
+                    "min_quantity": item["min_quantity"],
+                    "date_start": item["date_start"],
+                    "date_end": item["date_end"],
+                    "fixed_price": item["fixed_price"],
 
+                }
+                print(vals)
+                price_list_datas.append((0, 0, vals))
+        con_odoo_dest.create("product.pricelist",
+                             {
+                                        "item_ids": price_list_datas,
+                                        "name": pricelist_name,
+                                        "currency_id": 2,
+                                        "company_id": 2,
+                              })
+
+# fields = ['product_id', 'currency_id', 'company_id', 'compute_price',
+#           'min_quantity', 'date_start', 'date_end', 'fixed_price']
 main()

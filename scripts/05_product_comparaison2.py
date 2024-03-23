@@ -16,7 +16,7 @@ class ConOdoo:
 
     def create(self, model, datas):
         return self.ODOO_OBJECT.execute_kw(
-            self.DB, self.UID, self.PASS, model, 'create', datas
+            self.DB, self.UID, self.PASS, model, 'create', [datas]
         )
 
 
@@ -68,14 +68,13 @@ class ConOdoo:
         )
 
 
-con_odoo_fr = ConOdoo(
-            db="cg-mobile-preprod-12287988",
-            user="admin@cg-mobile.com",
-            password="admin@cg-mobile.com",
-            port=443,
-            url="https://cg-mobile-preprod-12287988.dev.odoo.com"
-        )
-
+# con_odoo_fr = ConOdoo(
+#             db="cg-mobile-preprod-12287988",
+#             user="admin@cg-mobile.com",
+#             password="admin@cg-mobile.com",
+#             port=443,
+#             url="https://cg-mobile-preprod-12287988.dev.odoo.com"
+#         )
 
 con_odoo_us = ConOdoo(
             db="cgmobile-master-preprod-11601718",
@@ -86,7 +85,7 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris-merge",
+            db="cg-mobile-paris17",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,
@@ -113,7 +112,7 @@ def migrate_attributes():
             if not data_exist:
                 con_odoo_dest.create(
                     model=file[1],
-                    datas=[{'name': r['fr']}]
+                    datas={'name': r['fr']}
                 )
 
 def create_list(datas, field):
@@ -152,15 +151,29 @@ def add_converted_field(datas, convert_field):
             del datas[field_origin]
     return datas
 
+def get_partner(name):
+    partner_id = con_odoo_dest.search("res.partner", domain=[[["name", "=", name]]])
+    if partner_id:
+        return partner_id[0]
+    else:
+        print('name', name)
+        return con_odoo_dest.create(
+            "res.partner",
+            {'name': name, 'vat': False}
+        )
+
 def add_supplier_infos(data, fixed_vals_us):
     supplier_datas = []
     if data["seller_ids"]:
+        print(data["seller_ids"])
         supplierinfo_ids = con_odoo_us.read(model="product.supplierinfo", ids=data["seller_ids"],
             fields=["name", "product_tmpl_id", "currency_id", "price", "delay"]
         )
         for s in supplierinfo_ids:
+            print('add_supplier_infos', s)
             vals = {
-                "name": "xxx",
+                "partner_id": get_partner(s['name'][1]),
+                "product_name": fixed_vals_us['company_name'],
                 "currency_id": fixed_vals_us['currency_id'],
                 "price": s['price'],
                 "delay": s['delay'],
@@ -169,8 +182,6 @@ def add_supplier_infos(data, fixed_vals_us):
             supplier_datas.append((0, 0, vals))
     data['seller_ids'] = supplier_datas
     return data
-
-
 
 def main():
     fixed_vals_us = {
@@ -186,6 +197,9 @@ def main():
         'res_partner_id': 1,
     }
     # migrate_attributes()
+    fix_field = {'detailed_type': 'product'}
+    common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'list_price', 'standard_price',
+                     'standard_price', 'list_price', 'sale_ok', 'purchase_ok']
 
     convert_field = {
         # "categ_id": (["device_type_id", "product_category_id"],),
@@ -201,36 +215,30 @@ def main():
     common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'list_price', 'standard_price',
                      'standard_price', 'list_price', 'sale_ok', 'purchase_ok']
 
-    product_fr_ids = con_odoo_fr.search_read(model="product.template", domain=[[('detailed_type', '=', 'product')]], fields=['barcode'])
     product_us_ids = con_odoo_us.search_read(model="product.template", domain=[[('type', '=', 'product')]], fields=['barcode'])
-    barcode_fr = create_list(product_fr_ids, "barcode")
-    barcode_us = create_list(product_us_ids, "barcode")
 
-    print('barcode_fr', len(barcode_fr))
-    print('barcode_us', len(barcode_us))
-    diff_fr_us = set(barcode_fr) - set(barcode_us)
-    diff_us_fr = set(barcode_us) - set(barcode_fr)
-    common_us_fr = set(barcode_us) & set(barcode_fr)
-    print('diff_fr_us', len(diff_fr_us))
-    print('diff_us_fr', len(diff_us_fr))
-    print('common_us_fr', len(common_us_fr))
-
-    # 14 vers 15 / US vers FR
-    # PRODUCT.TEMPLATE
-    len_diff_us_fr = len(diff_us_fr)
-    for i, p_id in enumerate(diff_us_fr):
-        perc = round((i * 100) / len_diff_us_fr,2)
+    for i, p_id in enumerate(product_us_ids):
+        perc = round((i * 100) / len(product_us_ids),2)
         print(perc, "%")
-        p_us_id = con_odoo_us.search_read(
+        print(common_fields + [value[0] for value in convert_field.values()] + ["seller_ids"])
+        p_us_id = con_odoo_us.read(
             model="product.template",
-            domain=[[('barcode', '=', p_id)]],
+            ids=[p_id['id']],
             fields=common_fields + [value[0] for value in convert_field.values()] + ["seller_ids"]
         )[0]
+
         print(p_us_id)
         data = remove_id_key(p_us_id)
         data = add_fix_field(data, fix_field)
         data = add_converted_field(data, convert_field)
         data = add_supplier_infos(data, fixed_vals_us)
-        print(data)
-
+        product_exist = con_odoo_dest.search("product.template", domain=[[('barcode', '=', data['barcode'])]])
+        print('product_exist', product_exist)
+        if not product_exist:
+            print('create')
+            print(data)
+            try:
+                con_odoo_dest.create("product.template", data)
+            except:
+                pass
 main()
