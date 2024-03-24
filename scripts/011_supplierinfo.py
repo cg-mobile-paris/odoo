@@ -95,59 +95,40 @@ print(con_odoo_us)
 print(con_odoo_dest)
 
 def main():
-    #  'CG Mobile PriceList'
-    pricelist_names = ['PriceList (B2B)']
-    # REPRISE DES LISTE DE PRIX
-    for pricelist_name in pricelist_names:
-        price_list_datas = []
-
-        pricelist_us_d = con_odoo_us.search_read(
-            model='product.pricelist',
-            domain=[[('name', '=', pricelist_name)]],
-            fields=['name']
+    vendor = "CG Mobile France SAS"
+    supplier_infos = con_odoo_us.search_read(
+        "product.supplierinfo", [[['name', '=', 1143]]],
+        ['name', 'delay', 'product_tmpl_id', 'min_qty', 'price', 'company_id']
+    )
+    for s in supplier_infos:
+        print(s)
+        # on prend le barcode de l'id us
+        product_us_id = con_odoo_us.read(
+            "product.template",
+            [s['product_tmpl_id'][0]],
+            ['barcode']
         )
-        items = con_odoo_us.search_read(
-            model='product.pricelist.item',
-            domain=[[('pricelist_id', '=', pricelist_us_d[0]['id'])]],
-            fields=['pricelist_id', 'product_id', 'currency_id', 'company_id', 'compute_price', 'min_quantity', 'date_start', 'date_end', 'fixed_price']
-        )
-        n_items = len(items)
-        for i, item in enumerate(items):
-            print(item)
-            perc = round((i * 100) / n_items, 2)
-            print(perc, "% /", n_items)
-            product_us_id = con_odoo_us.read(
-                "product.product",
-                [item['product_id'][0]],
-                ['barcode', 'product_tmpl_id']
-            )
-            barecode_us = product_us_id[0]['barcode']
+        barcode_us = product_us_id[0]['barcode']
+        if barcode_us:
             product_id = con_odoo_dest.search(
-                "product.product",
-                [[('barcode', '=', barecode_us)]],
+                "product.template",
+                [[('barcode', '=', barcode_us)]],
             )
             if product_id:
+                print('barcode_us', barcode_us)
+                print('product_id', product_id)
                 vals = {
-                    "product_id": product_id[0],
-                    "currency_id": 2,
+                    "product_tmpl_id": product_id[0],
+                    "partner_id": 1,
+                    "delay": s["delay"],
+                    "min_qty": s["min_qty"],
+                    "price": s["price"],
                     "company_id": 2,
-                    "compute_price": item["compute_price"],
-                    "min_quantity": item["min_quantity"],
-                    "date_start": item["date_start"],
-                    "date_end": item["date_end"],
-                    "fixed_price": item["fixed_price"],
-
                 }
                 print(vals)
-                price_list_datas.append((0, 0, vals))
-        con_odoo_dest.create("product.pricelist",
-                             {
-                                        "item_ids": price_list_datas,
-                                        "name": pricelist_name,
-                                        "currency_id": 2,
-                                        "company_id": 2,
-                              })
+                con_odoo_dest.create(
+                    "product.supplierinfo",
+                    [vals]
+                )
 
-# fields = ['product_id', 'currency_id', 'company_id', 'compute_price',
-#           'min_quantity', 'date_start', 'date_end', 'fixed_price']
 main()

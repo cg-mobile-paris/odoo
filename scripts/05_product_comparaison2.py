@@ -231,7 +231,7 @@ def main():
         data = remove_id_key(p_us_id)
         data = add_fix_field(data, fix_field)
         data = add_converted_field(data, convert_field)
-        data = add_supplier_infos(data, fixed_vals_us)
+        # data = add_supplier_infos(data, fixed_vals_us)
         product_exist = con_odoo_dest.search("product.template", domain=[[('barcode', '=', data['barcode'])]])
         print('product_exist', product_exist)
         if not product_exist:
