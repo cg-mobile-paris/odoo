@@ -96,6 +96,7 @@ print(con_odoo_dest)
 
 def search_ref(model, name):
     res = con_odoo_dest.search(model, [[['name','=', name]]])
+    print(model, name, res)
     if res:
         return res[0]
     else:
@@ -122,6 +123,7 @@ def main():
             "zip": v["zip"],
             "country_id": search_ref("res.country", v["country_id"]),
             "state_id": search_ref("res.country.state", v["state_id"]),
+            "property_product_pricelist": search_ref("product.pricelist", v["property_product_pricelist"][1]),
             "phone": v["phone"],
             "mobile": v["mobile"],
             "email": v["email"],
