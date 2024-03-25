@@ -14,6 +14,11 @@ class ConOdoo:
         self.ODOO_OBJECT = xmlrpc.client.ServerProxy(self.URL_OBJECT)
         self.UID = self.ODOO_COMMON.authenticate(self.DB, self.USER, self.PASS, {})
 
+    def create(self, model, datas):
+        return self.ODOO_OBJECT.execute_kw(
+            self.DB, self.UID, self.PASS, model, 'create', datas
+        )
+
     def write(self, model, ids, datas):
         return self.ODOO_OBJECT.execute_kw(self.DB, self.UID, self.PASS, model, 'write', [ids, datas])
 
@@ -89,10 +94,17 @@ print(con_odoo_fr)
 print(con_odoo_us)
 print(con_odoo_dest)
 
+def search_ref(model, name):
+    res = con_odoo_dest.search(model, [[['name','=', name]]])
+    if res:
+        return res[0]
+    else:
+        return False
+
 def main():
     # REPRISE DES VENDEURS
     fixed_value_field = {'lang': 'en_US', 'company_id': 2, 'company_type': 'company'}
-    fixed_field = ['name', 'street', 'street2', 'zip', 'country_id', 'phone', 'mobile', 'email', 'ref']
+    fixed_field = ['name', 'street', 'street2', 'zip', 'country_id', 'phone', 'mobile', 'email', 'ref', 'city']
     other_field = ['state_id', 'property_product_pricelist']
     vendor_bill_ids = con_odoo_us.search_read(
         "res.partner",
@@ -101,6 +113,26 @@ def main():
 
     print(len(vendor_bill_ids))
     for v in vendor_bill_ids:
+        # print(v['property_product_pricelist'][1])
         print(v)
-
+        vals = {
+            "name": v["name"],
+            "street": v["street"],
+            "street2": v["street2"],
+            "zip": v["zip"],
+            "country_id": search_ref("res.country", v["country_id"]),
+            "state_id": search_ref("res.country.state", v["state_id"]),
+            "phone": v["phone"],
+            "mobile": v["mobile"],
+            "email": v["email"],
+            "ref": v["ref"],
+            "city": v["city"],
+        }
+        vals.update(fixed_value_field)
+        print(vals)
+        ref = search_ref("res.partner", v["name"])
+        if not ref:
+            con_odoo_dest.create("res.partner", [vals])
+        else:
+            con_odoo_dest.write("res.partner", ref,  vals)
 main()
