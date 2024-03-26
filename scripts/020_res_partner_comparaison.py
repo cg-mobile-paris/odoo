@@ -1,5 +1,5 @@
 import xmlrpc.client
-
+import pandas as pd
 
 class ConOdoo:
     def __init__(self, url, port, db, user, password):
@@ -66,14 +66,6 @@ class ConOdoo:
 
 
 
-con_odoo_fr = ConOdoo(
-            db="cg-mobile-preprod-12287988",
-            user="admin@cg-mobile.com",
-            password="admin@cg-mobile.com",
-            port=443,
-            url="https://cg-mobile-preprod-12287988.dev.odoo.com"
-        )
-
 con_odoo_us = ConOdoo(
             db="cgmobile-master-preprod-11601718",
             user="platform@cg-mobile.com",
@@ -89,10 +81,9 @@ con_odoo_dest = ConOdoo(
             port=8069,
             url="http://127.0.0.1"
         )
-
-print(con_odoo_fr)
-print(con_odoo_us)
-print(con_odoo_dest)
+#
+# print(con_odoo_us)
+# print(con_odoo_dest)
 
 def search_ref(model, name):
     res = con_odoo_dest.search(model, [[['name','=', name]]])
@@ -102,7 +93,7 @@ def search_ref(model, name):
     else:
         return False
 
-def main():
+def main_vendor():
     # REPRISE DES VENDEURS
     fixed_value_field = {'lang': 'en_US', 'company_id': 2, 'company_type': 'company'}
     fixed_field = ['name', 'street', 'street2', 'zip', 'country_id', 'phone', 'mobile', 'email', 'ref', 'city']
@@ -111,7 +102,6 @@ def main():
         "res.partner",
         [[('supplier_rank','>', 0)]], fields=fixed_field + other_field
     )
-
     print(len(vendor_bill_ids))
     for v in vendor_bill_ids:
         # print(v['property_product_pricelist'][1])
@@ -137,4 +127,100 @@ def main():
             con_odoo_dest.create("res.partner", [vals])
         else:
             con_odoo_dest.write("res.partner", ref,  vals)
-main()
+
+def main_b2b_file():
+    contact_df = pd.read_csv("b2b-contacts.csv")
+
+    # REPRISE DES VENDEURS
+    fixed_value_field = {'lang': 'en_US', 'company_id': 2, 'company_type': 'company'}
+    fixed_field = ['name', 'street', 'street2', 'zip', 'country_id', 'phone', 'mobile', 'email', 'ref', 'city', 'type', 'company_type']
+    other_field = ['state_id', 'property_product_pricelist']
+
+    for i, c in contact_df.iterrows():
+        contact_id = con_odoo_us.search_read(
+            "res.partner",
+            [[('name','=', c['Display Name'])]], fields=fixed_field + other_field + ['child_ids']
+        )
+        if not contact_id:
+            pass
+        else:
+            v = contact_id[0]
+            vals = {
+                "name": v["name"],
+                "street": v["street"],
+                "street2": v["street2"],
+                "zip": v["zip"],
+                "country_id": search_ref("res.country", v["country_id"]),
+                "state_id": search_ref("res.country.state", v["state_id"]),
+                "property_product_pricelist": search_ref("product.pricelist", v["property_product_pricelist"][1]),
+                "phone": v["phone"],
+                "mobile": v["mobile"],
+                "email": v["email"],
+                "ref": v["ref"],
+                "city": v["city"],
+                "company_type": "company",
+            }
+            vals.update(fixed_value_field)
+
+            child_ids = con_odoo_us.search_read(
+                "res.partner",
+                [[('id', 'in', v["child_ids"])]],
+                fields=fixed_field + other_field + ['child_ids'])
+
+            vals_child = []
+
+            for c in child_ids:
+                vals_c = {
+                    "name": c["name"],
+                    "street": c["street"],
+                    "street2": c["street2"],
+                    "zip": c["zip"],
+                    "country_id": search_ref("res.country", c["country_id"]),
+                    "state_id": search_ref("res.country.state", c["state_id"]),
+                    "property_product_pricelist": search_ref("product.pricelist", v["property_product_pricelist"][1]),
+                    "phone": c["phone"],
+                    "mobile": c["mobile"],
+                    "email": c["email"],
+                    "ref": c["ref"],
+                    "city": c["city"],
+                    "type": c["type"],
+                    "company_type": "person",
+                }
+                vals_child.append((0, 0, vals_c))
+
+            vals.update({"child_ids": vals_child})
+            print(vals)
+            ref = search_ref("res.partner", v["name"])
+            if not ref:
+                con_odoo_dest.create("res.partner", [vals])
+            else:
+                con_odoo_dest.write("res.partner", ref, vals)
+
+
+    # print(len(vendor_bill_ids))
+    # for v in vendor_bill_ids:
+    #     # print(v['property_product_pricelist'][1])
+    #     print(v)
+    #     vals = {
+    #         "name": v["name"],
+    #         "street": v["street"],
+    #         "street2": v["street2"],
+    #         "zip": v["zip"],
+    #         "country_id": search_ref("res.country", v["country_id"]),
+    #         "state_id": search_ref("res.country.state", v["state_id"]),
+    #         "property_product_pricelist": search_ref("product.pricelist", v["property_product_pricelist"][1]),
+    #         "phone": v["phone"],
+    #         "mobile": v["mobile"],
+    #         "email": v["email"],
+    #         "ref": v["ref"],
+    #         "city": v["city"],
+    #     }
+    #     vals.update(fixed_value_field)
+    #     print(vals)
+    #     ref = search_ref("res.partner", v["name"])
+    #     if not ref:
+    #         con_odoo_dest.create("res.partner", [vals])
+    #     else:
+    #         con_odoo_dest.write("res.partner", ref,  vals)
+    #
+main_b2b_file()
