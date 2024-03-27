@@ -51,18 +51,18 @@ class SaleOrder(models.Model):
         return super(SaleOrder, self).action_cancel()
     
 
-    # override create method to add default values for fiscal position
-    def create(self, vals):
-        if isinstance(vals, list):
-            values = vals
-        else:
-            values = [vals]
-        
-        for val in values:
-            if val.get('team_id'):
-                team = self.env['crm.team'].browse(val['team_id'])
-                if team.fiscal_position_id:
-                    val['fiscal_position_id'] = team.fiscal_position_id.id
-
-        return super(SaleOrder, self).create(vals)
+    # # override create method to add default values for fiscal position
+    # def create(self, vals):
+    #     if isinstance(vals, list):
+    #         values = vals
+    #     else:
+    #         values = [vals]
+    #
+    #     for val in values:
+    #         if val.get('team_id'):
+    #             team = self.env['crm.team'].browse(val['team_id'])
+    #             if team.fiscal_position_id:
+    #                 val['fiscal_position_id'] = team.fiscal_position_id.id
+    #
+    #     return super(SaleOrder, self).create(vals)
 
