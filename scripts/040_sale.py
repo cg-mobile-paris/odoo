@@ -186,11 +186,11 @@ def main():
                 }
                 print(so_vals)
                 #TODO voir si on prend saleperson, team, pricelist, paymenterm...
-                try :
-                    so_id_create = con_odoo_dest.create("sale.order", [so_vals])
-                    con_odoo_dest.write("sale.order", so_id_create,
-                                        {"invoice_status": "invoiced",
-                                               "delivery_status": "done"})
-                except Exception as e:
-                    print(e.faultString, so_vals)
+                # try :
+                so_id_create = con_odoo_dest.create("sale.order", [so_vals])
+                con_odoo_dest.write("sale.order", so_id_create,
+                                    {"invoice_status": "invoiced",
+                                           "delivery_status": "done"})
+                # except Exception as e:
+                #     print(e.faultString, so_vals)
 main()
