@@ -74,9 +74,17 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris-merge",
+            db="cg-mobile-paris17",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
+            port=8069,
+            url="http://127.0.0.1"
+        )
+
+con_odoo_dest2 = ConOdoo(
+            db="todoo-it",
+            user="admin",
+            password="Bonsoir18#!!",
             port=8069,
             url="http://127.0.0.1"
         )
@@ -120,21 +128,24 @@ def main():
         )
         print(contact_dest_id)
 
-        ship_id = con_odoo_dest.search_read(
+        ship_id = con_odoo_dest.search(
             "res.partner",
             [[('parent_id', '=', contact_dest_id[0]), ('type', '=', 'delivery')]],
-            fields=['child_ids']
         )
-        invoice_id = con_odoo_dest.search_read(
+        invoice_id = con_odoo_dest.search(
             "res.partner",
             [[('parent_id', '=', contact_dest_id[0]), ('type', '=', 'invoice')]],
-            fields=['child_ids']
         )
+        print('ship', ship_id)
+        print('invoice', invoice_id)
         if not ship_id:
             ship_id = contact_dest_id[0]
+        else:
+            ship_id = ship_id[0]
         if not invoice_id:
             invoice_id = contact_dest_id[0]
-
+        else:
+            invoice_id = invoice_id[0]
 
         sale_ids = con_odoo_us.search_read(
             "sale.order",
@@ -146,9 +157,6 @@ def main():
                    'pricelist_id', 'payment_term_id', 'company_id',
                    'client_order_ref', 'order_line'])
 
-
-        print(sale_ids)
-
         for sale_id in sale_ids:
             if not con_odoo_dest.search("sale.order", [[['name', '=', sale_id["name"]]]]):
                 so_vals_line_list = []
@@ -158,7 +166,6 @@ def main():
                     fields=['product_id', 'name', 'product_uom_qty',
                             'qty_delivered', 'qty_invoiced', 'price_unit', ]
                 )
-                print("  ", sale_order_line_ids)
 
                 for sale_line_id in sale_order_line_ids:
                     so_vals_line = (0, 0, {
@@ -167,11 +174,12 @@ def main():
                         "product_uom_qty": sale_line_id["product_uom_qty"],
                         "qty_delivered": sale_line_id["qty_delivered"],
                         "qty_invoiced": sale_line_id["qty_invoiced"],
-                        "delivery_status": "done",
+                        # "delivery_status": "done",
                         "invoice_status": "invoiced",
                         "currency_id": 2,
                         "company_id": 2,
-                        "state": "sale"
+                        "state": "sale",
+                        "price_unit": sale_line_id["price_unit"]
                     })
                     so_vals_line_list.append(so_vals_line)
 
@@ -186,11 +194,11 @@ def main():
                 }
                 print(so_vals)
                 #TODO voir si on prend saleperson, team, pricelist, paymenterm...
-                # try :
-                so_id_create = con_odoo_dest.create("sale.order", [so_vals])
-                con_odoo_dest.write("sale.order", so_id_create,
+                try :
+                    so_id_create = con_odoo_dest.create("sale.order", [so_vals])
+                    con_odoo_dest.write("sale.order", so_id_create,
                                     {"invoice_status": "invoiced",
                                            "delivery_status": "done"})
-                # except Exception as e:
-                #     print(e.faultString, so_vals)
+                except Exception as e:
+                    print(e)
 main()
