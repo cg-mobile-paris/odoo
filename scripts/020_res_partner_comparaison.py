@@ -75,7 +75,7 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris17",
+            db="cg-mobile-paris-merge",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,

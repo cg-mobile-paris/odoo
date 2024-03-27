@@ -1,5 +1,5 @@
 import xmlrpc.client
-
+import pandas as pd
 
 class ConOdoo:
     def __init__(self, url, port, db, user, password):
@@ -104,67 +104,93 @@ def find_product_us(product_id_us):
 
 
 def main():
-    # REPRISE DES ACHATS
-    # GET CG Mobile France SAS ID 127.0.0.1
     cg_mobile_fr_id = 1
     cg_mobile_fr_in_us_id = 1143
-    # GET Purchase with cg_mobile_fr_in_us_id
-    po_fields = ['partner_ref', 'currency_id', 'date_approve', 'date_planned',
-                 'delivery_status', 'invoice_status', 'origin', 'name',
-                'order_line',
-                'company_id', 'picking_type_id']
-    product_line_fields = ['product_id', 'name', 'product_qty', 'price_unit']
+    contact_df = pd.read_csv("b2b-contacts.csv")
 
-    po_ids = con_odoo_us.search_read(
-        "purchase.order",
-        [[
-            ['partner_id', '=', cg_mobile_fr_in_us_id],
-            ['state', '=', 'purchase'],
-            ['delivery_status', '=', 'done'],
-            ['invoice_status', '=', 'invoiced'],
-          ]],
-        fields=po_fields
-    )
-    # print(po_ids)
-    for po_id in po_ids:
-        if not con_odoo_dest.search("purchase.order", [[['name', '=', po_id["name"]]]]):
-            po_vals_line_list = []
-            pl_ids = con_odoo_us.read(
-                "purchase.order.line",
-                po_id['order_line'],
-                fields=product_line_fields
-            )
-            for pl_id in pl_ids:
-                po_vals_line = (0, 0, {
-                    "product_id": find_product_us(pl_id["product_id"][0]),
-                    "name": pl_id["name"],
-                    "product_qty": pl_id["product_qty"],
-                    "qty_received": pl_id["product_qty"],
-                    "qty_invoiced": pl_id["product_qty"],
-                    "qty_to_invoice": 0.0,
-                    "price_unit": pl_id["price_unit"],
-                    "state": "purchase"
-                })
-                po_vals_line_list.append(po_vals_line)
-            po_vals = {
-                "name": po_id["name"],
-                "partner_ref": po_id["partner_ref"],
-                "partner_id": cg_mobile_fr_id,
-                "origin": po_id["origin"],
-                "currency_id": 2,
-                "date_approve": po_id["date_approve"],
-                "date_planned": po_id["date_planned"],
-                "delivery_status": po_id["delivery_status"],
-                "invoice_status": po_id["invoice_status"],
-                "company_id": 2,
-                "order_line": po_vals_line_list,
-                "state": "purchase"
-            }
 
-            try :
-                po_id_create = con_odoo_dest.create("purchase.order", [po_vals])
-                con_odoo_dest.write("purchase.order", po_id_create, {"invoice_status": "invoiced"})
-            except:
-                print(po_vals)
+    for i, c in contact_df.iterrows():
+        contact_us_id = con_odoo_us.search(
+            "res.partner",
+            [[('name', '=', c['Display Name'])]]
+        )
+        contact_dest_id = con_odoo_dest.search(
+            "res.partner",
+            [[('name', '=', c['Display Name'])]],
+        )
+        print(contact_dest_id)
 
+        ship_id = con_odoo_dest.search_read(
+            "res.partner",
+            [[('parent_id', '=', contact_dest_id[0]), ('type', '=', 'delivery')]],
+            fields=['child_ids']
+        )
+        invoice_id = con_odoo_dest.search_read(
+            "res.partner",
+            [[('parent_id', '=', contact_dest_id[0]), ('type', '=', 'invoice')]],
+            fields=['child_ids']
+        )
+        if not ship_id:
+            ship_id = contact_dest_id[0]
+        if not invoice_id:
+            invoice_id = contact_dest_id[0]
+
+
+        sale_ids = con_odoo_us.search_read(
+            "sale.order",
+            domain=[[('partner_id', '=', contact_us_id),
+                     ('delivery_status', '=', 'done'),
+                     ('invoice_status', '=', 'invoiced')]],
+            fields=['name', 'partner_id', 'partner_shipping_id',
+                   'partner_invoice_id', 'date_order',
+                   'pricelist_id', 'payment_term_id', 'company_id',
+                   'client_order_ref', 'order_line'])
+
+
+        print(sale_ids)
+
+        for sale_id in sale_ids:
+            if not con_odoo_dest.search("sale.order", [[['name', '=', sale_id["name"]]]]):
+                so_vals_line_list = []
+                sale_order_line_ids = con_odoo_us.read(
+                    "sale.order.line",
+                    sale_id['order_line'],
+                    fields=['product_id', 'name', 'product_uom_qty',
+                            'qty_delivered', 'qty_invoiced', 'price_unit', ]
+                )
+                print("  ", sale_order_line_ids)
+
+                for sale_line_id in sale_order_line_ids:
+                    so_vals_line = (0, 0, {
+                        "product_id": find_product_us(sale_line_id["product_id"][0]),
+                        "name": sale_line_id["name"],
+                        "product_uom_qty": sale_line_id["product_uom_qty"],
+                        "qty_delivered": sale_line_id["qty_delivered"],
+                        "qty_invoiced": sale_line_id["qty_invoiced"],
+                        "delivery_status": "done",
+                        "invoice_status": "invoiced",
+                        "currency_id": 2,
+                        "company_id": 2,
+                        "state": "sale"
+                    })
+                    so_vals_line_list.append(so_vals_line)
+
+                so_vals = {
+                    "name": sale_id["name"],
+                    "partner_id": contact_dest_id[0],
+                    "partner_shipping_id": ship_id,
+                    "partner_invoice_id": invoice_id,
+                    "date_order": sale_id["date_order"],
+                    "client_order_ref": sale_id["client_order_ref"],
+                    "order_line": so_vals_line_list,
+                }
+                print(so_vals)
+                #TODO voir si on prend saleperson, team, pricelist, paymenterm...
+                try :
+                    so_id_create = con_odoo_dest.create("sale.order", [so_vals])
+                    con_odoo_dest.write("sale.order", so_id_create,
+                                        {"invoice_status": "invoiced",
+                                               "delivery_status": "done"})
+                except Exception as e:
+                    print(e.faultString, so_vals)
 main()

@@ -85,7 +85,7 @@ con_odoo_us = ConOdoo(
         )
 
 con_odoo_dest = ConOdoo(
-            db="cg-mobile-paris17",
+            db="cg-mobile-paris-merge",
             user="admin@cg-mobile.com",
             password="admin@cg-mobile.com",
             port=8069,
@@ -197,9 +197,9 @@ def main():
         'res_partner_id': 1,
     }
     # migrate_attributes()
-    fix_field = {'detailed_type': 'product'}
-    common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'list_price', 'standard_price',
-                     'standard_price', 'list_price', 'sale_ok', 'purchase_ok']
+    # fix_field = {'detailed_type': 'product'}
+    # common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'list_price', 'standard_price',
+    #                  'standard_price', 'list_price', 'sale_ok', 'purchase_ok']
 
     convert_field = {
         # "categ_id": (["device_type_id", "product_category_id"],),
@@ -215,30 +215,32 @@ def main():
     common_fields = ['name', 'invoice_policy', 'barcode', 'upc_code', 'list_price', 'standard_price',
                      'standard_price', 'list_price', 'sale_ok', 'purchase_ok']
 
-    product_us_ids = con_odoo_us.search_read(model="product.template", domain=[[('type', '=', 'product')]], fields=['barcode'])
+    # product_us_ids = con_odoo_us.search_read(model="product.template", domain=[[('type', '=', 'product')]], fields=['barcode'])
+    product_us_ids = con_odoo_us.search_read(model="product.template", domain=[[('type', '=', 'product')]],
+                                             fields=['barcode'] + common_fields + [value[0] for value in convert_field.values()])
 
     for i, p_id in enumerate(product_us_ids):
         perc = round((i * 100) / len(product_us_ids),2)
         print(perc, "%")
-        print(common_fields + [value[0] for value in convert_field.values()] + ["seller_ids"])
-        p_us_id = con_odoo_us.read(
-            model="product.template",
-            ids=[p_id['id']],
-            fields=common_fields + [value[0] for value in convert_field.values()] + ["seller_ids"]
-        )[0]
-
-        print(p_us_id)
+        print(common_fields + [value[0] for value in convert_field.values()])
+        # p_us_id = con_odoo_us.read(
+        #     model="product.template",
+        #     ids=[p_id['id']],
+        #     fields=common_fields + [value[0] for value in convert_field.values()]
+        # )[0]
+        p_us_id = p_id
+        # print(p_us_id)
         data = remove_id_key(p_us_id)
         data = add_fix_field(data, fix_field)
         data = add_converted_field(data, convert_field)
         # data = add_supplier_infos(data, fixed_vals_us)
         product_exist = con_odoo_dest.search("product.template", domain=[[('barcode', '=', data['barcode'])]])
-        print('product_exist', product_exist)
+        # print('product_exist', product_exist)
         if not product_exist:
             print('create')
             print(data)
             try:
                 con_odoo_dest.create("product.template", data)
-            except:
-                pass
+            except Exception as ex:
+                print(ex.faultString)
 main()
